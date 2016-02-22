@@ -1,23 +1,26 @@
-# FresherNote
+# TrollEverywhere
 
-[Heroku link][heroku] **NB:** This should be a link to your production site
+[TrollEverywhere][heroku] is an polling app
 
-[heroku]: http://www.herokuapp.com
+[heroku]: https://trolleverywhere.com/
 
 ## Minimum Viable Product
 
-FresherNote is a web application inspired by Evernote built using Ruby on Rails
-and React.js. FresherNote allows users to:
+TrollEverywhere is a web application inspired by Poll Everywhere,
+built using Ruby on Rails and React.js. TrollEverywhere allows users to:
 
 <!-- This is a Markdown checklist. Use it to keep track of your
 progress. Put an x between the brackets for a checkmark: [x] -->
 
 - [ ] Create an account
 - [ ] Log in / Log out
-- [ ] Create, read, edit, and delete notes
-- [ ] Organize notes within Notebooks
-- [ ] Tag notes with multiple tags
-- [ ] Apply complex styling to notes while editing
+- [ ] Create, read, edit, and delete polls
+- [ ] Create, read, edit, and delete questions
+- [ ] Create, read, edit, and delete responses
+- [ ] Control start and stop of polling
+- [ ] Receive a unique URL where others may respond to a poll
+- [ ] Vote on responses
+- [ ] Review votes
 
 ## Design Docs
 * [View Wireframes][views]
@@ -44,31 +47,31 @@ progress. Put an x between the brackets for a checkmark: [x] -->
 - [ ] user signup/signin pages
 - [ ] blank landing page after signin
 
-### Phase 2: Notes Model, API, and basic APIUtil (1.5 days)
+### Phase 2: Poll Model, API, and basic APIUtil (1.5 days)
 
-**Objective:** Notes can be created, read, edited and destroyed through
+**Objective:** Polls can be created, read, edited and destroyed through
 the API.
 
-- [ ] create `Note` model
+- [ ] create `Poll` model
 - [ ] seed the database with a small amount of test data
-- [ ] CRUD API for notes (`NotesController`)
-- [ ] jBuilder views for notes
+- [ ] CRUD API for polls (`API::PollsController`)
+- [ ] jBuilder views for polls
 - [ ] setup Webpack & Flux scaffold
 - [ ] setup `APIUtil` to interact with the API
 - [ ] test out API interaction in the console.
 
 ### Phase 3: Flux Architecture and Router (1.5 days)
 
-**Objective:** Notes can be created, read, edited and destroyed with the
+**Objective:** Polls can be created, read, edited and destroyed with the
 user interface.
 
 - [ ] setup the flux loop with skeleton files
 - [ ] setup React Router
 - implement each note component, building out the flux loop as needed.
-  - [ ] `NotesIndex`
+  - [ ] `PollsIndex`
   - [ ] `NoteIndexItem`
   - [ ] `NoteForm`
-- [ ] save Notes to the DB when the form loses focus or is left idle
+- [ ] save Polls to the DB when the form loses focus or is left idle
   after editing.
 
 ### Phase 4: Start Styling (0.5 days)
@@ -79,36 +82,34 @@ user interface.
 - [ ] position elements on the page
 - [ ] add basic colors & styles
 
-### Phase 5: Notebooks (1 day)
+### Phase 5: Groups (1 day)
 
-**Objective:** Notes belong to Notebooks, and can be viewed by notebook.
+**Objective:** Polls belong to Groups, and can be viewed by group.
 
-- [ ] create `Notebook` model
+- [ ] create `Group` model
 - build out API, Flux loop, and components for:
-  - [ ] Notebook CRUD
-  - [ ] adding notes requires a notebook
-  - [ ] moving notes to a different notebook
-  - [ ] viewing notes by notebook
+  - [ ] Group CRUD
+  - [ ] adding polls requires a group
+  - [ ] moving polls to a different group
+  - [ ] viewing notes by group
 - Use CSS to style new views
 
-Phase 3 adds organization to the Notes. Notes belong to a Notebook,
+Phase 3 adds organization to the Polls. Polls belong to a Group,
 which has its own `Index` view.
 
-### Phase 6: Tags (1.5 days)
+### Phase 6: Votes (1.5 days)
 
-**Objective:** Notes can be tagged with multiple tags, and tags are searchable.
+**Objective:** Poll questions can be voted on.
 
-- [ ] create `Tag` model and join table
+- [ ] create `Vote` model
 - build out API, Flux loop, and components for:
-  - [ ] fetching tags for notebook
-  - [ ] adding tags to notebook
-  - [ ] creating tags while adding to notebooks
-  - [ ] searching notebooks by tag
+  - [ ] fetching Votes for response
+  - [ ] adding votes to response
 - [ ] Style new elements
 
-### Phase 7: Allow Complex Styling in Notes (0.5 days)
+### Phase 7: Allow Complex Styling in Polls (0.5 days)
 
-**objective:** Enable complex styling of notes.
+**objective:** Enable complex styling of polls.
 
 - [ ] Integrate `react-quill` (based on Quill.js).
 - [ ] Use Rails helpers to sanitize HTML before rendering.
@@ -123,11 +124,12 @@ which has its own `Index` view.
 - [ ] Add modals, transitions, and other styling flourishes.
 
 ### Bonus Features (TBD)
-- [ ] Search through notes for blocks of text
-- [ ] Pagination / infinite scroll for Notes Index
-- [ ] Set reminders on notes
-- [ ] Changelogs for Notes
-- [ ] Multiple sessions
+- [ ] Websockets!
+- [ ] Alternate URL for respondents
+- [ ] User groups
+- [ ] History
+- [ ] Twitter and sms integration
+- [ ] Improved question types
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md

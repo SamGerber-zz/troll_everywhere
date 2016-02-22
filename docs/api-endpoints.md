@@ -16,34 +16,34 @@
 
 ## JSON API
 
-### Notes
+### Polls
 
-- `GET /api/notes`
-  - Notes index/search
-  - accepts `tag_name` query param to list notes by tag
+- `GET /api/polls`
+  - polls index/search
+  - accepts `polls_name` query param to list polls by search phrase
   - accepts pagination params (if I get there)
-- `POST /api/notes`
-- `GET /api/notes/:id`
-- `PATCH /api/notes/:id`
-- `DELETE /api/notes/:id`
+- `POST /api/polls`
+- `GET /api/polls/:id`
+- `PATCH /api/polls/:id`
+- `DELETE /api/polls/:id`
 
-### Notebooks
+### Questions
 
-- `GET /api/notebooks`
-- `POST /api/notebooks`
-- `GET /api/notebooks/:id`
-- `PATCH /api/notebooks/:id`
-- `DELETE /api/notebooks/:id`
-- `GET /api/notebooks/:id/notes`
-  - index of all notes for a notebook
+- `GET /api/questions`
+- `POST /api/questions`
+- `GET /api/questions/:id`
+- `PATCH /api/questions/:id`
+- `DELETE /api/questions/:id`
+- `GET /api/questions/:id/notes`
+  - index of all responses for a question
   - accepts pagination params (if I get there)
 
-### Tags
+### Votes
 
-- A note's tags will be included in the note show template
-- `GET /api/tags`
+- A question's tags will be included in the question show template
+- `GET /api/votes`
   - includes query param for typeahead suggestions
-- `POST /api/notes/:note_id/tags`: add tag to note by name
-  - if note doesn't already exist, it will be created
-- `DELETE /api/notes/:note_id/tags/:tag_name`: remove tag from note by
+- `POST /api/questions/:question_id/votes`: add tag to question by name
+  - if question doesn't already exist, it will be created
+- `DELETE /api/questions/:question_id/votes/:tag_name`: remove tag from question by
   name

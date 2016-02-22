@@ -1,49 +1,49 @@
 # Flux Stores
 
-### NoteStore
+### QuestionStore
 
-Holds all persisted note data.
-
-##### Actions:
-- `receiveAllNotes`
-- `receiveSingleNote`
-- `removeNote`
-
-##### Listeners:
-- `NotesIndex` (passes to `NoteIndexItem` via props)
-- `NoteDetail`
-
-### NoteFormStore
-
-Holds un-persisted note data to send to the API.
+Holds all persisted poll data.
 
 ##### Actions:
-- `receiveNoteFormParams`
+- `receiveAllQuestions`
+- `receiveSingleQuestion`
+- `removeQuestion`
 
 ##### Listeners:
-- `NoteForm`
+- `QuestionsIndex` (passes to `QuestionIndexItem` via props)
+- `QuestionDetail`
 
-### NotebookStore
+### QuestionFormStore
 
-Holds all persisted notebook data.
+Holds un-persisted question data to send to the API.
 
 ##### Actions:
-- `receiveAllNotebooks`
-- `receiveSingleNotebook`
-- `removeNotebook`
+- `receiveQuestionFormParams`
 
 ##### Listeners:
-- `NotebookIndex`
+- `QuestionForm`
 
-### NotebookFormStore
+### PollStore
 
-Holds un-persisted notebook data to send to the API.
+Holds all persisted poll data.
 
 ##### Actions:
-- `receiveNotebookFormParams`
+- `receiveAllPolls`
+- `receiveSinglePoll`
+- `removePoll`
 
 ##### Listeners:
-- `NotebookForm`
+- `PollIndex`
+
+### PollFormStore
+
+Holds un-persisted poll data to send to the API.
+
+##### Actions:
+- `receivePollFormParams`
+
+##### Listeners:
+- `PollForm`
 
 ### SearchStore
 

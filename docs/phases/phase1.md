@@ -3,7 +3,7 @@
 ## Rails
 ### Models
 * User
-* Note
+* Quest
 
 ### Controllers
 * UsersController (create, new)

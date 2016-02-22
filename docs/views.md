@@ -1,22 +1,42 @@
 # View Wireframes
 
-## New User
-![new-user]
+## Pollster
 
-## New Session
-![new-session]
+### Splash
+![splash]
 
-## NotesIndex / NoteIndexItem / NoteForm
-![notes]
+### Polls
+![polls]
 
-## NotebooksIndex / NotebookIndexItem
-![notebooks]
+### Polls - edit
+![polls-edit]
 
-## NotebookForm
-![notebook-form]
+### Polls - new
+![polls-new]
 
-[new-user]: ./wireframes/new_user.png
-[new-session]: ./wireframes/new_session.png
-[notes]: ./wireframes/root_notes.png
-[notebooks]: ./wireframes/root_notebooks.png
-[notebook-form]: ./wireframes/notebook_form.png
+### Polls - setup
+![polls-setup]
+
+### Polls - test
+![polls-test]
+
+### Polls - poll
+![polls-poll]
+
+## Respondents
+
+### Vote
+![vote]
+
+### Vote with flyout
+![vote-with-flyout]
+
+[splash]: ./wireframes/view/splash.png
+[polls]: ./wireframes/view/polls.png
+[polls-edit]: ./wireframes/view/polls-edit.png
+[polls-new]: ./wireframes/view/polls-new.png
+[polls-setup]: ./wireframes/view/polls-setup.png
+[polls-test]: ./wireframes/view/polls-test.png
+[polls-poll]: ./wireframes/view/polls-poll.png
+[vote]:./wireframes/view/vote.png
+[vote-with-flyout]:./wireframes/view/vote-with-flyout.png

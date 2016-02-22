@@ -1,13 +1,15 @@
 ## Component Hierarchy
 
 * `App`
+  * `NavBar`
   * `SearchIndex`
-  * `NotebooksIndex`
-    * `NotebookIndexItem`
-  * `NotebookForm`
-  * `NotesIndex`
-    * `NoteForm`
-    * `NoteIndexItem`
-  * `NoteDetail`
-    * `NoteTags`
-    * `NoteEditArea`
+  * `GroupsIndex`
+    * `PollsIndex`
+      * `PollIndexItem`
+  * `PollForm`
+  * `QuestionsIndex`
+    * `QuestionForm`
+    * `QuestionIndexItem`
+  * `QuestionDetail`
+    * `Votes`
+    * `Vote Chart`
