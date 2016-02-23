@@ -1,0 +1,9 @@
+<h1><%= user.username %></h1>
+<br />
+<table>
+  <tr><td>Field</td><td>Value</td></tr>
+  <tr><td>Email:</td><td><%= user.email %></td></tr>
+  <tr><td>Url Suffix:</td><td><%= user.url_suffix %></td></tr>
+  <tr><td>User since:</td><td><%= user.created_at.to_date %></td></tr>
+  <tr><td>Account last updated:</td><td><%= user.updated_at %></td></tr>
+</table>

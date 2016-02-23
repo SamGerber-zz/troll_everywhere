@@ -1,0 +1,10 @@
+<h1>Update <%= @user.username %>'s account'!</h1>
+
+<% form_options = {
+     user: @user,
+     action_path: user_url(@user),
+     http_method: "PATCH",
+     button_text: "Save Changes!"
+} %>
+
+<%= render "users/form", form_options: form_options %>

@@ -1,0 +1,32 @@
+<% user = form_options[:user] %>
+<% action_path = form_options[:action_path] %>
+<% http_method = form_options[:http_method] %>
+<% button_text = form_options[:button_text] %>
+
+<form action="<%= action_path %>" method="post">
+  <input type="hidden" name="_method" value="<%= http_method %>">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label>Username
+    <input type="text"
+           name="user[username]"
+           value="<%= user.username %>"
+           placeholder="username">
+  </label>
+  <br />
+
+  <label>Email
+    <input type="text"
+           name="user[email]"
+           value="<%= user.email %>""
+           placeholder="you@example.com">
+  </label>
+  <br />
+
+  <label>Password
+    <input type="password" name="user[password]" value="">
+  </label>
+  <br />
+
+  <input type="submit" value="<%= button_text %>">
+</form>

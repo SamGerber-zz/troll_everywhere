@@ -1,0 +1,8 @@
+<% flash.each do |status, messages| %>
+  <h2><%= status.to_s.capitalize %></h2>
+  <ul>
+    <% messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>

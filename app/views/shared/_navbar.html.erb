@@ -1,0 +1,19 @@
+<% if user_is_logged_in? %>
+  <table>
+    <tr>
+      <td>Logged in as: <%= current_user.username %></td>
+      <td><%= button_to "Sign Out", session_url, method: :delete %></td>
+      <td><%= link_to "Edit Account", edit_user_url(current_user) %></td>
+      <td><%= link_to "View All Your Polls", "#" %></td>
+    </tr>
+  </table>
+<% else %>
+<table>
+  <tr>
+    <td> Not logged in</td>
+    <td><%= link_to "Sign In", new_session_url %></td>
+    <td><%= link_to "Sign Up", new_user_url %></td>
+  </tr>
+</table>
+
+<% end %>
