@@ -25,6 +25,6 @@ class Poll < ActiveRecord::Base
     source: :votes
 
   belongs_to :author,
-    className: "User",
+    class_name: "User",
     foreign_key: :author_id
 end
