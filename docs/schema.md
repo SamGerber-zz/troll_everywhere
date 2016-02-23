@@ -10,12 +10,6 @@ password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
 url_suffix      | string    | not null, indexed, unique
 
-## surveys
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-title       | string    | not null
-
 ## polls
 column name | data type | details
 ------------|-----------|-----------------------
