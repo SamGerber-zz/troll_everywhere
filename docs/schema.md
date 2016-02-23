@@ -16,7 +16,6 @@ column name | data type | details
 id          | integer   | not null, primary key
 title       | string    | not null
 author_id   | integer   | not null, foreign key (references users), indexed
-survey_id   | integer   | foreign key (references users), indexed
 token       | string    | not null, indexed, unique
 
 ## questions
