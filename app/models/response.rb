@@ -13,6 +13,7 @@
 
 class Response < ActiveRecord::Base
   validates :question, presence: true
+  validates :author, presence: true
   validates :image_url, url: {no_local: true, allow_blank: true}
 
   has_many :votes
