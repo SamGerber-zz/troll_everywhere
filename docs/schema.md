@@ -32,6 +32,7 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 question_id | integer   | not null, foreign key (references questions), indexed
+author_id   | integer   | not null, foreign key (references users), indexed
 body        | string    |
 image_url   | string    |
 
@@ -40,4 +41,5 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 response_id | string    | not null, foreign key (references responses), indexed
+voter_id    | string    | not null, foreign key (references users), indexed
 direction   | string(1) | not null, in ('U', 'D')
