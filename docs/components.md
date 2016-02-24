@@ -1,15 +1,5 @@
 ## Component Hierarchy
 
-* `App`
-  * `NavBar`
-  * `SearchIndex`
-  * `GroupsIndex`
-    * `PollsIndex`
-      * `PollIndexItem`
-  * `PollForm`
-  * `QuestionsIndex`
-    * `QuestionForm`
-    * `QuestionIndexItem`
-  * `QuestionDetail`
-    * `Votes`
-    * `Vote Chart`
+| PollingApp | VotingApp |
+|------------|-----------|
+|[hierarchy](./wireframes/polling/component_hierarchy.md)  |[hierarchy](./wireframes/voting/component_hierarchy.md) |
