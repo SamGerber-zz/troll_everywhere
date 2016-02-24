@@ -5,8 +5,11 @@
 ### Users
 
 - `GET /users/new`
+- `GET /users/:id`
+- `GET /users/:id/edit`
 - `POST /users`
 - `PATCH /users`
+- `DELETE /users`
 
 ### Session
 
@@ -16,34 +19,44 @@
 
 ## JSON API
 
+### Users
+
+- `GET /api/users/:id`
+- `GET /api/users/new`
+- `POST /api/users`
+- `GET /api/users/edit/:id`
+- `PATCH /api/users/:id`
+- `DELETE /api/users/:id`
+
 ### Polls
 
 - `GET /api/polls`
   - polls index/search
   - accepts `polls_name` query param to list polls by search phrase
   - accepts pagination params (if I get there)
-- `POST /api/polls`
 - `GET /api/polls/:id`
+- `GET /api/polls/:id/questions`
+- `GET /api/polls/new`
+- `POST /api/polls`
+- `GET /api/polls/edit/:id`
 - `PATCH /api/polls/:id`
 - `DELETE /api/polls/:id`
 
 ### Questions
 
 - `GET /api/questions`
-- `POST /api/questions`
 - `GET /api/questions/:id`
 - `PATCH /api/questions/:id`
 - `DELETE /api/questions/:id`
-- `GET /api/questions/:id/notes`
+- `POST /api/questions`
+- `GET /api/questions/:id/responses`
   - index of all responses for a question
   - accepts pagination params (if I get there)
 
 ### Votes
-
-- A question's tags will be included in the question show template
 - `GET /api/votes`
-  - includes query param for typeahead suggestions
-- `POST /api/questions/:question_id/votes`: add tag to question by name
-  - if question doesn't already exist, it will be created
-- `DELETE /api/questions/:question_id/votes/:tag_name`: remove tag from question by
-  name
+- `GET /api/votes/:id`
+- `PATCH /api/votes/:id`
+- `DELETE /api/votes/:id`
+- `POST /api/votes`
+- `GET /api/votes/
