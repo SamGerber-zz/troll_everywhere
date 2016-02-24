@@ -14,8 +14,8 @@ class Vote < ActiveRecord::Base
   validates :response, presence: true
   validates :voter, presence: true
   validates :is_up_vote,
-    inclusion: {:in => [true, false]},
-    message: "should be true or false."
+    inclusion: {in:  [true, false],
+      message: "should be true or false."}
 
   belongs_to :response
 
