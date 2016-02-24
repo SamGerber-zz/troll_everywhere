@@ -10,9 +10,31 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require_reset
  *= require_tree .
  *= require_self
  */
+
+
+ html, body, section, article,
+ h1, h2, p, strong, em, a, ul, menu {
+   margin: 0;
+   border: 0;
+   padding: 0;
+   outline: 0;
+   box-sizing: inherit;
+   font: inherit;
+   text-decoration: inherit;
+   text-align: inherit;
+   color: inherit;
+   background: transparent;
+ }
+
+ .group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
 .troll {
   background-image: url("http://media.bizzmarkblog.com/2015/03/troll.jpg");
@@ -61,4 +83,60 @@
   40%, 60% {
     transform: translate3d(4px, 0, 0);
   }
+}
+
+.main-navbar {
+  position: relative;
+  z-index: 1;
+  border: 3px solid red;
+  height: auto;
+  padding-bottom: 0;
+  overflow: visible;
+  line-height: 40px;
+}
+
+.main-navbar-left-menu {
+  float: left;
+}
+
+.main-navbar-right-menu {
+  float: right;
+}
+
+.nav-item {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-menu {
+  display: none;
+  position: absolute;
+  left: -1px;
+  font-size: 14px;
+  white-space: nowrap;
+  background: #fff;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+  display: block;
+}
+
+.nav-dropdown-item {
+  display: block;
+  float: left;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  width: 100%;
+}
+
+.main-navbar menuitem:hover {
+  background: #999;
 }
