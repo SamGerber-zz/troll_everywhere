@@ -37,10 +37,16 @@ class ApplicationController < ActionController::Base
     end
 
     def ensure_user_is_logged_in
-      redirect_to new_session_url unless user_is_logged_in?
+      unless user_is_logged_in?
+        flash[:errors] = ["You must log in to view that page."]
+        redirect_to new_session_url
+      end
     end
 
     def ensure_user_is_logged_out
-      redirect_to root_url if user_is_logged_in?
+      if user_is_logged_in?
+        flash[:messages] = ["You are already logged in as #{current_user}."]
+        redirect_to root_url
+      end
     end
 end
