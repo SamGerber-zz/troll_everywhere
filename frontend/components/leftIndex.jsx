@@ -14,16 +14,16 @@ var LeftIndex = React.createClass({
   render: function() {
     var LeftItems = leftItems.map(function(el, i) {
       return (
-        <menuitem key={i} className="nav-item">
+        <li key={i} className="nav-item">
           <a className="nav-link" href="#">{el}</a>
-        </menuitem>
+        </li>
       );
     }, this);
 
     return (
-      <menu className="main-navbar-left-menu">
+      <ul className="main-navbar-left-menu">
         {LeftItems}
-      </menu>
+      </ul>
     );
   }
 

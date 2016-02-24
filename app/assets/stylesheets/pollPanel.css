@@ -1,0 +1,40 @@
+.poll-panel {
+  position: relative;
+  margin: 0 auto;
+  background: #fff;
+  width: 100%;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.poll-panel:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 240px;
+  width: 1px;
+  background: #ccc;
+}
+
+.poll-panel-side-bar {
+  float: left;
+  width: 200px;
+  min-height: 200px;
+  padding: 20px;
+}
+
+.poll-panel-menu-bar {
+  float: left;
+  width: calc(100% - 286px);
+  padding: 20px;
+}
+
+.poll-groups-index {
+  float: left;
+  width: calc(100% - 286px);
+  min-height: 200px;
+  padding: 20px;
+}

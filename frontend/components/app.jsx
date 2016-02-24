@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var NavBar = require('./navBar');
+var PollPanel = require('./pollPanel');
 
 var App = React.createClass({
 
@@ -8,6 +9,7 @@ var App = React.createClass({
     return (
       <div>
         <NavBar />
+        <PollPanel />
       </div>
     );
   }
