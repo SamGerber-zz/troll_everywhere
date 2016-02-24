@@ -3,7 +3,7 @@ class ErrorsController < ActionController::Base
     if env["REQUEST_PATH"] =~ /^\/api/ #TODO \A instead of ^ ??
       render :json => {:error => "not-found"}.to_json, :status => 404
     else
-      render :text => "404 Not found", :status => 404 # You can render your own template here
+      render :text => "404 Not found", :status => 404 #TODO You can render your own template here
     end
   end
 
@@ -11,7 +11,7 @@ class ErrorsController < ActionController::Base
     if env["REQUEST_PATH"] =~ /^\/api/ #TODO \A instead of ^ ??
       render :json => {:error => "internal-server-error"}.to_json, :status => 500
     else
-      render :text => "500 Internal Server Error", :status => 500 # You can render your own template here
+      render :text => "500 Internal Server Error", :status => 500 #TODO You can render your own template here
     end
   end
 end
