@@ -1,2 +1,2 @@
-class Api::VotesController < ApplicationController
+class Api::VotesController < Api::JSONApplicationController
 end

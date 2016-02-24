@@ -1,2 +1,2 @@
-class Api::ResponsesController < ApplicationController
+class Api::ResponsesController < Api::JSONApplicationController
 end

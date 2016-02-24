@@ -1,2 +1,2 @@
-class Api::QuestionsController < ApplicationController
+class Api::QuestionsController < Api::JSONApplicationController
 end
