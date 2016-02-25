@@ -1,0 +1,4 @@
+module.exports = {
+  POLLS_RECEIVED: "POLLS_RECEIVED",
+  POLL_RECEIVED: "POLL_RECEIVED",
+};
