@@ -5,6 +5,9 @@ var PollPanel = require('./pollPanel/pollPanel');
 var Footer = require('./footer/footer');
 
 var App = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
 
   render: function() {
     return (
@@ -16,14 +19,6 @@ var App = React.createClass({
     );
   }
 
-});
-
-document.addEventListener("DOMContentLoaded", function(){
-  var root = document.getElementById("content");
-  ReactDOM.render(
-    <App />,
-    root
-  );
 });
 
 module.exports = App;
