@@ -19,7 +19,9 @@ class Vote < ActiveRecord::Base
 
   belongs_to :response
 
-  belongs_to :voter
+  belongs_to :voter,
+    class_name: "User",
+    foreign_key: :voter_id
 
   has_one :question,
     through: :response,
