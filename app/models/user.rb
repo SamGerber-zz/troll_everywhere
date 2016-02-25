@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
 
   attr_reader :password
 
+  has_many :polls,
+    foreign_key: :author_id
+
+
   def reset_session_token!
     self.session_token = self.class.generate_token
     self.save!
