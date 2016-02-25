@@ -1,0 +1,21 @@
+.poll-panel-poll-group {
+  display: block;
+  background: lightblue;
+  font-weight: bold;
+  line-height: 40px;
+}
+
+.poll-panel-poll {
+  display: block;
+  line-height: 30px;
+}
+
+.poll-panel-poll-left li, .poll-panel-poll-right li, .poll-panel-poll-group li {
+  float: left;
+  margin: 0 10px;
+}
+
+.poll-panel-poll-right, .poll-panel-poll-group-count {
+  float: right;
+  margin: 0 10px;
+}
