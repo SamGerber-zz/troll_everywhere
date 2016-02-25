@@ -41,6 +41,17 @@ class User < ActiveRecord::Base
   has_many :polls,
     foreign_key: :author_id
 
+  has_many :questions,
+    through: :polls,
+    source: :questions
+
+  has_many :responses,
+    through: :questions,
+    source: :responses
+
+  has_many :votes,
+    foreign_key: :voter_id
+
 
   def reset_session_token!
     self.session_token = self.class.generate_token
