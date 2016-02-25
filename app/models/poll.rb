@@ -14,6 +14,16 @@ class Poll < ActiveRecord::Base
   validates :title, :author, :token, presence: true
   validates :token, uniqueness: true
 
+  before_validation :ensure_token
+
+  def self.generate_token(length = 16)
+    token = SecureRandom.urlsafe_base64(length)
+    while Poll.find_by(token: token)
+      token = SecureRandom.urlsafe_base64(length)
+    end
+    token
+  end
+
   has_many :questions
 
   has_many :responses,
@@ -27,4 +37,8 @@ class Poll < ActiveRecord::Base
   belongs_to :author,
     class_name: "User",
     foreign_key: :author_id
+
+  def ensure_token
+    self.token ||= self.class.generate_token(4)
+  end
 end
