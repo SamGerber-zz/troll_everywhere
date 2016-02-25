@@ -1,5 +1,6 @@
 var React = require('react');
 var Poll = require('./poll');
+var Group = require('./group');
 
 var polls = [
   "poll 1",
@@ -12,14 +13,14 @@ var PollGroup = React.createClass({
     var Polls = polls.map(function(el, i){
       return (
         <li key={i} className="poll-panel-poll" >
-          <Poll poll={el}/>
+          <Poll poll={el} />
         </li>
       );
     });
 
     return (
       <ul className="poll-panel-poll-index group">
-        {this.props.group}
+        <Group group={this.props.group} />
         {Polls}
       </ul>
     );
