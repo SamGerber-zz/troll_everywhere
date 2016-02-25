@@ -1,5 +1,4 @@
 var React = require('react');
-// var LeftItem = require('./leftItem');
 
 var leftItems = [
   "TrollEverywhere",

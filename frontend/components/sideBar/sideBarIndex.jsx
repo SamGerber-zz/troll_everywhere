@@ -1,5 +1,5 @@
 var React = require('react');
-var SideBarItem = require('./sideBarIndex');
+// var SideBarItem = require('./sideBarItem');
 
 var sideBarItems = [
   "My Polls",

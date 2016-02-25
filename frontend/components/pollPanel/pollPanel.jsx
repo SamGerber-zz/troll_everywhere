@@ -1,6 +1,6 @@
 var React = require('react');
-var SideBar = require('./sideBar');
-var PollMenuBar = require('./pollMenuBar');
+var SideBar = require('../sideBar/sideBar');
+var PollMenuBar = require('../menuBar/pollMenuBar');
 var PollIndex = require('./pollIndex');
 
 var PollPanel = React.createClass({

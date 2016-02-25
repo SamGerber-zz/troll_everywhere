@@ -1,5 +1,4 @@
 var React = require('react');
-// var RightItem = require('./rightItem');
 
 var rightItems = [
   "Pricing & Upgrades",

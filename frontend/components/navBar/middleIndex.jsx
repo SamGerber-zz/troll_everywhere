@@ -1,5 +1,4 @@
 var React = require('react');
-// var MiddleItem = require('./middleItem');
 
 var middleItems = [
 
