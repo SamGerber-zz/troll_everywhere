@@ -1,0 +1,26 @@
+var Dispatcher = require('../dispatcher');
+var VoteConstants = require('../constants/voteConstants.js');
+var ApiUtil = require('../util/apiUtil.js');
+
+var VoteActions = {
+  receiveAllVotes: function (votes) {
+    Dispatcher.dispatch({
+      actionType: VoteConstants.VOTES_RECEIVED,
+      votes: votes
+    });
+  },
+
+  receiveSingleVote: function (vote) {
+    Dispatcher.dispatch({
+      actionType: VoteConstants.VOTE_RECEIVED,
+      vote: vote
+    });
+  },
+
+  createVote: function(responseId, vote, callback){
+    var callbacks = [this.receiveSingleVote, callback];
+    ApiUtil.createVote(responseId, vote, callbacks);
+  }
+};
+
+module.exports = VoteActions;
