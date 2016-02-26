@@ -12,7 +12,7 @@ var QuestionForm = React.createClass({
   blankAttributes: {
     title: '',
     body: '',
-    image_url: '',
+    image_url: ''
   },
 
   getInitialState: function () {
@@ -24,9 +24,10 @@ var QuestionForm = React.createClass({
     console.log("New Question!");
     var question = this.state;
     var pollId = this.props.params.id;
-    QuestionActions.createQuestion(pollId, question, function(questionResponse){
-      this.context.router.push("/questions/" + questionResponse.id + "/responses/new/");
-    });
+    QuestionActions.createQuestion(pollId, question, function(message){
+      var newResponseUrl = "/questions/" + message.id + "/responses/new/";
+      this.context.router.push(newResponseUrl);
+    }.bind(this));
     this.setState(this.blankAttributes);
   },
 
