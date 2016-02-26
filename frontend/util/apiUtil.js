@@ -91,5 +91,34 @@ module.exports = {
         runAllCallbacks(callbacks, message);
       }
     });
+  },
+
+  fetchAllVotes: function (responseId, callbacks) {
+    $.ajax({
+      url: "api/responses/" + responseId + "/votes/",
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
+  fetchSingleVote: function (responseId, callbacks) {
+    $.ajax({
+      url: "api/responses/" + responseId,
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
+  createVote: function (responseId, vote, callbacks) {
+    $.ajax({
+      url: "api/responses/"+responseId+"/votes",
+      method: "POST",
+      data: {vote: vote},
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
   }
 };
