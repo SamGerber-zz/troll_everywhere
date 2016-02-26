@@ -9,17 +9,17 @@ module.exports = {
   fetchAllPolls: function (userId, callbacks) {
     $.ajax({
       url: "api/users/" + userId + "/polls/",
-      success: function (response) {
-        runAllCallbacks(callbacks, response);
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
       }
     });
   },
 
   fetchSinglePoll: function (id, callbacks) {
     $.ajax({
-      url: "api/poll/" + id,
-      success: function (response) {
-        runAllCallbacks(callbacks, response);
+      url: "api/polls/" + id,
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
       }
     });
   },
@@ -29,8 +29,8 @@ module.exports = {
       url: "api/polls",
       method: "POST",
       data: {poll: poll},
-      success: function (response) {
-        runAllCallbacks(callbacks, response);
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
       }
     });
   },
@@ -38,17 +38,17 @@ module.exports = {
   fetchAllQuestions: function (pollId, callbacks) {
     $.ajax({
       url: "api/polls/" + pollId + "/questions/",
-      success: function (response) {
-        runAllCallbacks(callbacks, response);
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
       }
     });
   },
 
   fetchSingleQuestion: function (questionId, callbacks) {
     $.ajax({
-      url: "api/question/" + questionId,
-      success: function (response) {
-        runAllCallbacks(callbacks, response);
+      url: "api/questions/" + questionId,
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
       }
     });
   },
@@ -58,8 +58,37 @@ module.exports = {
       url: "api/polls/"+pollId+"/questions",
       method: "POST",
       data: {question: question},
-      success: function (response) {
-        runAllCallbacks(callbacks, response);
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
+  fetchAllResponses: function (questionId, callbacks) {
+    $.ajax({
+      url: "api/questions/" + questionId + "/responses/",
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
+  fetchSingleResponse: function (questionId, callbacks) {
+    $.ajax({
+      url: "api/responses/" + questionId,
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
+  createResponse: function (questionId, response, callbacks) {
+    $.ajax({
+      url: "api/questions/"+questionId+"/responses",
+      method: "POST",
+      data: {response: response},
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
       }
     });
   }
