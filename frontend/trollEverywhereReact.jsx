@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function(){
   var root = document.getElementById("content");
   ReactDOM.render((
     <Router history={hashHistory}>
-      <Route path="/" component={App}></Route>
+      <Route path="/polls" component={App}></Route>
       <Route path="/polls/new" component={newPoll}></Route>
       <Route path="/polls/:id/questions/new/" component={newQuestion}></Route>
       <Route path="/questions/:id/responses/new/" component={newResponse}></Route>

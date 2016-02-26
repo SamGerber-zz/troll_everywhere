@@ -1,19 +1,14 @@
 var React = require('react');
 var PollItem = require('./pollItem');
 
-var pollItems = [
-  "Ungrouped",
-  "Group 1"
-];
 
 var PollIndex = React.createClass({
 
   render: function() {
-
-    var PollItems = pollItems.map(function(el, i) {
+    var PollItems = this.props.polls.map(function(poll) {
       return (
-        <li key={i} className="poll-item">
-          <PollItem group={el} />
+        <li key={poll.id} className="poll-item">
+          <PollItem pollId={poll.id} />
         </li>
       );
     }, this);

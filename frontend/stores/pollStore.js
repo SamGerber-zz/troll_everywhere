@@ -1,9 +1,10 @@
 var Store = require('flux/utils').Store;
-var AppDispatcher = require('../dispatcher/dispatcher.js');
+var AppDispatcher = require('../dispatcher.js');
 var PollConstants = require('../constants/pollConstants.js');
 var PollStore = new Store(AppDispatcher);
 
 var _polls = {};
+
 
 var resetPolls = function (polls) {
   _polls = {};
@@ -12,7 +13,7 @@ var resetPolls = function (polls) {
   });
 };
 
-var resetPoll = function (poll) {
+var updatePoll = function (poll) {
   _polls[poll.id] = poll;
 };
 
@@ -35,7 +36,7 @@ PollStore.__onDispatch = function (payload) {
       PollStore.__emitChange();
       break;
     case PollConstants.POLL_RECEIVED:
-      resetPoll(payload.poll);
+      updatePoll(payload.poll);
       PollStore.__emitChange();
       break;
   }

@@ -20,7 +20,14 @@ var QuestionActions = {
   createQuestion: function(pollId, question, callback){
     var callbacks = [this.receiveSingleQuestion, callback];
     ApiUtil.createQuestion(pollId, question, callbacks);
+  },
+
+  fetchAllQuestionsForPollWithId: function(pollId, callback) {
+    var callbacks = [this.receiveAllQuestions, callback];
+    ApiUtil.fetchAllQuestionsForPollWithId(pollId, callbacks);
   }
+
+
 };
 
 module.exports = QuestionActions;

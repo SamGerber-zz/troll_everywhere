@@ -20,6 +20,16 @@ var ApiActions = {
   createPoll: function(poll, callback){
     var callbacks = [this.receiveSinglePoll, callback];
     ApiUtil.createPoll(poll, callbacks);
+  },
+
+  fetchAllPolls: function(userId, callback){
+    var callbacks = [this.receiveAllPolls, callback];
+    ApiUtil.fetchAllPolls(userId, callbacks);
+  },
+
+  fetchSinglePoll: function(PollId, callback){
+    var callbacks = [this.receiveSinglePoll, callback];
+    ApiUtil.fetchSinglePoll(PollId, callbacks);
   }
 };
 

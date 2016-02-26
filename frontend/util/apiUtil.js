@@ -1,6 +1,6 @@
 var runAllCallbacks = function (callbacks, response) {
   for (var i = 0; i < callbacks.length; i++) {
-    callbacks[i](response);
+    callbacks[i] && callbacks[i](response); //TODO this is messy
   }
 };
 
@@ -36,6 +36,15 @@ module.exports = {
   },
 
   fetchAllQuestions: function (pollId, callbacks) {
+    $.ajax({
+      url: "api/polls/" + pollId + "/questions/",
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
+  fetchAllQuestionsForPollWithId: function (pollId, callbacks) {
     $.ajax({
       url: "api/polls/" + pollId + "/questions/",
       success: function (message) {

@@ -3,33 +3,19 @@ var React = require('react');
 var Poll = React.createClass({
 
   render: function() {
-
     return (
-      <div className="poll-panel-poll group">
-        <ul className="poll-panel-poll-left">
-          <li className="poll-panel-poll-type">💡</li>
-          <li className="poll-panel-poll-checkbox">
-            <input type="checkbox" className="poll-panel-poll-checkbox"/>
+      <div className="poll-panel-poll-group group">
+        <ul>
+          <li className="poll-panel-poll-group-expand">▼</li>
+          <li className="poll-panel-poll-group-checkbox">
+            <input type="checkbox" className="poll-panel-poll-group-checkbox"/>
           </li>
-          <li className="poll-panel-poll-name">{this.props.poll}</li>
+          <li className="poll-panel-poll-group-name">{this.props.poll.title}</li>
         </ul>
-        <ul className="poll-panel-poll-right">
-          <li className="poll-panel-poll-edit">
-            <a className="poll-panel-poll-link" href="#">edit</a>
-          </li>
-          <li className="poll-panel-poll-copy">
-            <a className="poll-panel-poll-link" href="#">copy</a>
-          </li>
-          <li className="poll-panel-poll-share">
-            <a className="poll-panel-poll-link" href="#">share</a>
-          </li>
-          <li className="poll-panel-poll-responses">
-            <a className="poll-panel-poll-link" href="#">8 Responses</a>
-          </li>
-          <li className="poll-panel-poll-name">🔒</li>
-        </ul>
+        <span className="poll-panel-poll-group-count">
+          {this.props.questionCount} questions
+        </span>
       </div>
-
     );
   }
 
