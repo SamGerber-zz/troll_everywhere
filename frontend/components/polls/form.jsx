@@ -10,7 +10,7 @@ var PollForm = React.createClass({
   },
 
   blankAttributes: {
-    title: '',
+    title: ''
   },
 
   getInitialState: function () {
@@ -21,8 +21,9 @@ var PollForm = React.createClass({
     e.preventDefault();
     console.log("New Poll!");
     var poll = this.state;
-    PollActions.createPoll(poll, function(pollResponse){
-      this.context.router.push("/polls/" + pollResponse.id + "/questions/new/");
+    PollActions.createPoll(poll, function(message){
+      var newQuestionUrl = "/polls/" + message.id + "/questions/new/";
+      this.context.router.push(newQuestionUrl);
     }.bind(this));
     this.setState(this.blankAttributes);
   },
