@@ -1,7 +1,6 @@
 var React = require('react');
 
 var leftItems = [
-  "Polls",
   "Participants",
   "Reports"
 ];
@@ -23,13 +22,20 @@ var LeftIndex = React.createClass({
 
     return (
       <ul className="main-navbar-left-menu">
-        <li key={3} className="nav-item">
+        <li key={2} className="nav-item">
           <a className="nav-link" href="#">TrollEverywhere</a>
         </li>
-        <li key={4} className="nav-item" onClick={function(e){
-          this.context.router.push("/polls/new/");
-        }.bind(this)}>
+        <li key={3} className="nav-item" onClick={function(e){
+            e.preventDefault();
+            this.context.router.push("/polls/new/");
+          }.bind(this)}>
           <a className="nav-link" href="#">New Poll</a>
+        </li>
+        <li key={4} className="nav-item" onClick={function(e){
+            e.preventDefault();
+            this.context.router.push("/polls/");
+          }.bind(this)}>
+          <a className="nav-link" href="#">Polls</a>
         </li>
         {LeftItems}
       </ul>
