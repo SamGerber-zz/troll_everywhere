@@ -70,7 +70,7 @@ class Api::PollsController < Api::JSONApplicationController
 
     def get_poll_from_path
       poll = Poll.find_by(id: params[:id])
-      if poll.author == current_user
+      if poll && poll.author == current_user
         return poll
       else
         return nil

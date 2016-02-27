@@ -9,6 +9,9 @@
   display: block;
   line-height: 30px;
 }
+.hidden-question {
+  display: none;
+}
 
 .poll-panel-poll-left li, .poll-panel-poll-right li, .poll-panel-poll-group li {
   float: left;

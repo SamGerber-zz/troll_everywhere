@@ -21,7 +21,15 @@ var PollItem = React.createClass({
   },
 
   getInitialState: function () {
-    return this.getStateFromStore();
+    var poll = PollStore.find(this.props.pollId);
+    if (poll.questions) {
+      var questions = QuestionFilterStore.filter(poll.questions);
+    }
+    return ({
+      poll: poll,
+      questions: questions,
+      expanded: true
+    });
   },
 
   componentDidMount: function () {
@@ -47,12 +55,21 @@ var PollItem = React.createClass({
     this.setState(this.getStateFromStore());
   },
 
+  _onPollClick: function(e) {
+    e.preventDefault();
+    this.setState({ expanded: !this.state.expanded });
+  },
+
   render: function() {
     var Questions = [];
     if (this.state.questions) {
+      var className = "poll-panel-poll";
+      if (!this.state.expanded) {
+        className += " hidden-question";
+      }
       Questions = this.state.questions.map(function(question){
         return (
-          <li key={question.id} className="poll-panel-poll" >
+          <li key={question.id} className={className} >
             <Question question={question} />
           </li>
         );
@@ -61,7 +78,10 @@ var PollItem = React.createClass({
 
     return (
       <ul className="poll-panel-poll-index group">
-        <Poll poll={this.state.poll} questionCount={Questions.length} />
+        <Poll poll={this.state.poll}
+              questionCount={Questions.length}
+              expanded={this.state.expanded}
+              clickHandler={this._onPollClick} />
         {Questions}
       </ul>
     );

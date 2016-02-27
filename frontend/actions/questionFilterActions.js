@@ -27,7 +27,37 @@ var QuestionFilterActions = {
       actionType: QuestionFilterConstants.UPDATE_QUESTION_FILTER,
       questionFilter: questionFilter
     });
-  }
+  },
+
+  toggleSingleCheck: function(question){
+    Dispatcher.dispatch({
+      actionType: QuestionFilterConstants.TOGGLE_SINGLE_CHECK,
+      questionId: question.id
+    });
+  },
+
+  toggleChecks: function(questions){
+    var questionIds = questions.map(function (question) {
+      return question.id;
+    });
+
+    Dispatcher.dispatch({
+      actionType: QuestionFilterConstants.TOGGLE_CHECKS,
+      questionIds: questionIds
+    });
+  },
+
+  checkAll: function(questions){
+    var questionIds = questions.map(function (question) {
+      return question.id;
+    });
+
+    Dispatcher.dispatch({
+      actionType: QuestionFilterConstants.CHECK_ALL,
+      questionIds: questionIds
+    });
+  },
+
 };
 
 module.exports = QuestionFilterActions;

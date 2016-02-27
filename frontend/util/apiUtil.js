@@ -26,7 +26,7 @@ module.exports = {
 
   createPoll: function (poll, callbacks) {
     $.ajax({
-      url: "api/polls",
+      url: "api/users/me/polls",
       method: "POST",
       data: {poll: poll},
       success: function (message) {
