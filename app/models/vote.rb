@@ -17,21 +17,26 @@ class Vote < ActiveRecord::Base
     inclusion: {in:  [true, false],
       message: "should be true or false."}
 
-  belongs_to :response
+  belongs_to :response,
+    inverse_of: :votes
 
   belongs_to :voter,
     class_name: "User",
-    foreign_key: :voter_id
+    foreign_key: :voter_id,
+    inverse_of: :votes
 
   has_one :question,
     through: :response,
-    source: :question
+    source: :question,
+    inverse_of: :votes
 
   has_one :poll,
     through: :question,
-    source: :poll
+    source: :poll,
+    inverse_of: :votes
 
   has_one :poll_author,
     through: :poll,
-    source: :author
+    source: :author,
+    inverse_of: :others_votes
 end

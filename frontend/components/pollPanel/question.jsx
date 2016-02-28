@@ -29,7 +29,6 @@ var Question = React.createClass({
 
   _onCheckBoxChange: function(e) {
     QuestionFilterActions.toggleSingleCheck(this.props.question);
-    console.log(QuestionFilterStore.isCheckedQuestion(this.props.question));
   },
 
   render: function() {

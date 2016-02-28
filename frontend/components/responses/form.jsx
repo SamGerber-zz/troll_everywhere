@@ -20,9 +20,9 @@ var ResponseForm = React.createClass({
 
   createResponse: function (e) {
     e.preventDefault();
-    console.log("New Response!");
     var response = this.state;
-    var questionId = this.props.params.id;
+    var questionId = this.props.params.questionId;
+    var responseId = this.props.params.responseId;
     ResponseActions.createResponse(questionId, response, function(message){
       var ResponseIndexUrl = "/questions/" + questionId + "/responses/";
       this.context.router.push(ResponseIndexUrl);

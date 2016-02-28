@@ -24,19 +24,25 @@ class Poll < ActiveRecord::Base
     token
   end
 
-  has_many :questions
+  has_many :questions,
+    inverse_of: :poll
+
+  accepts_nested_attributes_for :questions, allow_destroy: true
 
   has_many :responses,
     through: :questions,
-    source: :responses
+    source: :responses,
+    inverse_of: :poll
 
   has_many :votes,
     through: :responses,
-    source: :votes
+    source: :votes,
+    inverse_of: :poll
 
   belongs_to :author,
     class_name: "User",
-    foreign_key: :author_id
+    foreign_key: :author_id,
+    inverse_of: :polls
 
   def ensure_token
     self.token ||= self.class.generate_token(4)

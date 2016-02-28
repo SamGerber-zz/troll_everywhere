@@ -37,7 +37,6 @@ var Poll = React.createClass({
     } else {
       QuestionFilterActions.checkAll(this.props.poll.questions);
     }
-    console.log(QuestionFilterStore.areCheckedQuestions(this.props.poll.questions));
   },
 
   render: function() {

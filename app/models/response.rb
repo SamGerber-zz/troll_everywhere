@@ -16,13 +16,18 @@ class Response < ActiveRecord::Base
   validates :author, presence: true
   validates :image_url, url: {no_local: true, allow_blank: true}
 
-  has_many :votes
+  before_validation :ensure_author
 
-  belongs_to :question
+  has_many :votes
+  accepts_nested_attributes_for :votes, allow_destroy: true
+
+  belongs_to :question,
+    inverse_of: :responses
 
   belongs_to :author,
     class_name: "User",
-    foreign_key: :author_id
+    foreign_key: :author_id,
+    inverse_of: :responses
 
   has_one :poll,
     through: :question,
@@ -31,4 +36,8 @@ class Response < ActiveRecord::Base
   has_one :poll_author,
     through: :poll,
     source: :author
+
+  def ensure_author
+    self.author ||= self.question.poll.author
+  end
 end

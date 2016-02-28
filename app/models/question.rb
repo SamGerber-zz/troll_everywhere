@@ -15,15 +15,21 @@ class Question < ActiveRecord::Base
   validates :title, :poll, presence: true
   validates :image_url, url: {no_local: true, allow_blank: true}
 
-  has_many :responses
+  has_many :responses,
+    inverse_of: :question
+  accepts_nested_attributes_for :responses, allow_destroy: true
 
   has_many :votes,
     through: :responses,
-    source: :votes
+    source: :votes,
+    inverse_of: :question
 
-  belongs_to :poll
+  belongs_to :poll,
+    inverse_of: :questions
+
 
   has_one :author,
     through: :poll,
-    source: :author
+    source: :author,
+    inverse_of: :questions
 end

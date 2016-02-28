@@ -78,7 +78,6 @@ QuestionFiltersStore.areCheckedQuestions = function (questions) {
   for (var i = 0; i < questions.length; i++) {
     var question = questions[i];
     if (!_checkedQuestionIds[question.id]) {
-      console.log(false);
       return false;
     }
   }

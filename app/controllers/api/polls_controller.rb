@@ -65,7 +65,17 @@ class Api::PollsController < Api::JSONApplicationController
 
     private
     def poll_params
-      params.require(:poll).permit(:title)
+      params.require(:poll).permit(:title, questions_attributes: [
+        :title,
+        :body,
+        :image_url,
+        :author_id,
+        responses_attributes: [
+          :body,
+          :image_url,
+          :author_id
+          ]
+      ])
     end
 
     def get_poll_from_path

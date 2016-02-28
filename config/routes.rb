@@ -4,16 +4,10 @@
 #                      root GET    /                                                   static_pages#root
 #                           GET    /404(.:format)                                      errors#not_found
 #                           GET    /500(.:format)                                      errors#exception
-#                     users POST   /users(.:format)                                    users#create
-#                  new_user GET    /users/new(.:format)                                users#new
-#                 edit_user GET    /users/:id/edit(.:format)                           users#edit
-#                      user GET    /users/:id(.:format)                                users#show
-#                           PATCH  /users/:id(.:format)                                users#update
-#                           PUT    /users/:id(.:format)                                users#update
-#                           DELETE /users/:id(.:format)                                users#destroy
-#                   session POST   /session(.:format)                                  sessions#create
-#               new_session GET    /session/new(.:format)                              sessions#new
-#                           DELETE /session(.:format)                                  sessions#destroy
+#               api_session POST   /api/session(.:format)                              api/sessions#create {:format=>:json}
+#           new_api_session GET    /api/session/new(.:format)                          api/sessions#new {:format=>:json}
+#                           GET    /api/session(.:format)                              api/sessions#show {:format=>:json}
+#                           DELETE /api/session(.:format)                              api/sessions#destroy {:format=>:json}
 #            api_user_polls GET    /api/users/:user_id/polls(.:format)                 api/polls#index {:format=>:json}
 #                           POST   /api/users/:user_id/polls(.:format)                 api/polls#create {:format=>:json}
 #         new_api_user_poll GET    /api/users/:user_id/polls/new(.:format)             api/polls#new {:format=>:json}
@@ -53,6 +47,7 @@
 #                           PATCH  /api/votes/:id(.:format)                            api/votes#update {:format=>:json}
 #                           PUT    /api/votes/:id(.:format)                            api/votes#update {:format=>:json}
 #                           DELETE /api/votes/:id(.:format)                            api/votes#destroy {:format=>:json}
+#                           GET    /*path(.:format)                                    static_pages#root
 #
 
 Rails.application.routes.draw do
@@ -61,10 +56,11 @@ Rails.application.routes.draw do
   get "/404" => "errors#not_found"
   get "/500" => "errors#exception"
 
-  resources :users, except: [:index]
-  resource :session, only: [:new, :create, :destroy]
+  # resources :users, except: [:index]
+  # resource :session, only: [:new, :create, :destroy]
 
   namespace :api, defaults: {format: :json} do
+    resource :session, only: [:new, :show, :create, :destroy]
     resources :users, except: [:index] do
       resources :polls, only: [:new, :create, :index]
     end
@@ -79,4 +75,5 @@ Rails.application.routes.draw do
     end
     resources :votes, except: [:new, :create, :index]
   end
+  get "/*path" => "static_pages#root"
 end

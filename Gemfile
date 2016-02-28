@@ -41,6 +41,9 @@ gem 'rails_12factor', '0.0.2', group: :production
 # This gem adds the capability of validating URLs to ActiveRecord.
 gem "validate_url"
 
+# bootstrap-sass is a Sass-powered version of Bootstrap 3, 
+# ready to drop right into your Sass powered applications.
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

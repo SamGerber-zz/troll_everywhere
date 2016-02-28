@@ -1,6 +1,7 @@
 var React = require('react');
 var LinkedStateMixin = require('react-addons-linked-state-mixin');
-var PollActions = require('../../actions/pollActions');
+var PollFormActions = require('../../actions/pollFormActions');
+var PollFormStore = require('../../stores/pollFormStore');
 
 var PollForm = React.createClass({
   mixins: [LinkedStateMixin],
@@ -9,28 +10,30 @@ var PollForm = React.createClass({
     router: React.PropTypes.object.isRequired
   },
 
-  blankAttributes: {
-    title: ''
+  getStateFromStore: function() {
+    return (
+      { poll: PollFormStore.poll }
+    );
   },
 
   getInitialState: function () {
-    return this.blankAttributes;
+    return this.getStateFromStore;
   },
 
   createPoll: function (e) {
     e.preventDefault();
-    console.log("New Poll!");
     var poll = this.state;
-    PollActions.createPoll(poll, function(message){
-      var newQuestionUrl = "/polls/" + message.id + "/questions/new/";
+    PollFormActions.submitPollForm(function(message){
+      var newQuestionUrl = "/polls/" + message.id;
       this.context.router.push(newQuestionUrl);
     }.bind(this));
-    this.setState(this.blankAttributes);
+    this.setState(this.getStateFromStore);
   },
 
   render: function() {
     return (
       <form className="new-poll-form" onSubmit={this.createPoll}>
+        <PollFieldSet title={this.state.poll.title} />
         <label htmlFor='poll_title'>
           <span>Title: </span>
             <input type="text"
@@ -38,6 +41,8 @@ var PollForm = React.createClass({
                    valueLink={this.linkState("title")}
                    placeholder="My New Poll" />
         </label>
+
+
         <button>Create Poll</button>
       </form>
     );

@@ -10,15 +10,11 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_reset
- *= require_navbar
- *= require_tree .
- *= require_self
  */
 
- html {
-   font-family: sans-serif;
- }
+ // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 .troll {
   background-image: url("http://media.bizzmarkblog.com/2015/03/troll.jpg");
@@ -67,4 +63,51 @@
   40%, 60% {
     transform: translate3d(4px, 0, 0);
   }
+}
+
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin, .form-signup {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signup .form-signup-heading {
+  margin-bottom: 10px;
+}
+
+.form-signin .form-control,
+.form-signup .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus,
+.form-signup .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"],
+.form-signup input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signup input[type="email"] {
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+.form-signin input[type="password"],
+.form-signup input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }

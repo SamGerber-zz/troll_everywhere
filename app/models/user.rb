@@ -33,24 +33,34 @@ class User < ActiveRecord::Base
 
   def self.find_by_credentials(credentials)
     user = self.find_by(username: credentials[:username])
-    user if user && user.password_digest
+    !user && user = self.find_by(email: credentials[:username])
+    user if user && user.is_password?(credentials[:password])
   end
 
   attr_reader :password
 
   has_many :polls,
-    foreign_key: :author_id
+    foreign_key: :author_id,
+    inverse_of: :author
 
   has_many :questions,
     through: :polls,
-    source: :questions
+    source: :questions,
+    inverse_of: :author
 
   has_many :responses,
     through: :questions,
-    source: :responses
+    source: :responses,
+    inverse_of: :author
 
   has_many :votes,
-    foreign_key: :voter_id
+    foreign_key: :voter_id,
+    inverse_of: :voter
+
+  has_many :others_votes,
+    through: :responses,
+    source: :votes,
+    inverse_of: :poll_author
 
 
   def reset_session_token!
@@ -73,6 +83,6 @@ class User < ActiveRecord::Base
   end
 
   def is_password?(password)
-    BCrypt::Password.create(password_digest).is_password?(String(password))
+    BCrypt::Password.new(password_digest).is_password?(String(password))
   end
 end
