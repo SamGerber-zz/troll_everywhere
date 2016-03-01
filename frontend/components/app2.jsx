@@ -24,7 +24,6 @@ var App2 = React.createClass({
   componentWillMount: function() {
     this.token = SessionStore.addListener(this.updateSession);
     SessionActions.loginUser();
-    PollActions.fetchAllPolls(SessionStore.currentUser().id)
   },
 
   componentWillUnmount: function() {

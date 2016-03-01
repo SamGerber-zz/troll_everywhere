@@ -25,6 +25,8 @@ var PollPanel = React.createClass({
 
     this.QuestionFilterStoreToken = QuestionFilterStore
       .addListener(this._onQuestionFilterStoreChange);
+      
+    PollActions.fetchAllPolls(SessionStore.currentUser().id);
   },
 
   _onPollStoreChange: function () {
