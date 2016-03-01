@@ -3,7 +3,7 @@ var React = require('react');
 var pollMenuBarItems = [
   "✓",
   "🔒Lock",
-  "Unlock",
+  "🔓Unlock",
   "> Group",
   "Ungroup",
   "Slides",

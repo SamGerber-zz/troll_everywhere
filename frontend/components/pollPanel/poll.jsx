@@ -40,23 +40,38 @@ var Poll = React.createClass({
   },
 
   render: function() {
-    var expandIcon = this.props.expanded ? "▼" : "▶";
+    var expandIcon = this.props.expanded ? "triangle-bottom" : "triangle-right";
     return (
-      <div className="poll-panel-poll-group group"
-           onClick={this.props.clickHandler}>
-        <ul>
-          <li className="poll-panel-poll-group-expand">{expandIcon}</li>
-          <li className="poll-panel-poll-group-checkbox">
-            <input type="checkbox"
-                   className="poll-panel-poll-group-checkbox"
-                   checked={this.state.checked}
-                   onClick={this._onCheckBoxChange}/>
-          </li>
-          <li className="poll-panel-poll-group-name">{this.props.poll.title}</li>
-        </ul>
-        <span className="poll-panel-poll-group-count">
-          {this.props.questionCount} questions
-        </span>
+      <div className="btn-toolbar" onClick={this.props.clickHandler}>
+        <div className="row">
+          <div className="col-xs-4 col-s-3 col-md-2">
+            <div className="btn-group form-inline">
+              <div className="btn btn-link">
+                <span className={"glyphicon glyphicon-" + expandIcon} aria-hidden="true"></span>
+              </div>
+              <div className="btn btn-link">
+                <input type="checkbox"
+                       className="checkbox"
+                       checked={this.state.checked}
+                       onClick={this._onCheckBoxChange}/>
+               </div>
+            </div>
+          </div>
+          <div className="col-xs-4 col-s-6 col-md-8">
+            <div className="btn-group btn-group-justified form-inline">
+              <span className="form-control-static">
+                <strong>{this.props.poll.title}</strong>
+              </span>
+            </div>
+          </div>
+          <div className="col-xs-4 col-s-3 col-md-2">
+            <div className="btn-group pull-right form-inline">
+              <span className="form-control-static">
+                <strong>{this.props.questionCount}</strong> questions
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,5 +1,4 @@
 var React = require('react');
-var SideBarIndex = require('./sideBarIndex');
 
 var SideBar = React.createClass({
 
@@ -9,17 +8,26 @@ var SideBar = React.createClass({
 
   render: function() {
     return (
-      <nav className="poll-panel-side-bar">
-        <a className="poll-panel-side-bar-link" href="#" onClick={function(e){
-            e.preventDefault();
-            this.context.router.push("/polls/new/");
-          }.bind(this)}>
-          New Poll
-        </a>
-        
-        <SideBarIndex />
-        <p>Pro Tip?</p>
-      </nav>
+      <div className="col-sm-3 col-md-2 sidebar">
+        <ul className="nav nav-sidebar">
+          <li className="active">
+            <a href="#" onClick={function(e){
+                e.preventDefault();
+                this.context.router.push("/polls");
+              }.bind(this)}>
+              My Polls
+              <span className="sr-only">(current)</span>
+            </a>
+          </li>
+          <li><a href="#">Account Polls</a></li>
+        </ul>
+        <ul className="nav nav-sidebar">
+          <div className="well bg-info">
+            <h4>Pro Tip:</h4>
+            <p>If you say you're cooler than me, does that make me hotter than you?</p>
+          </div>
+        </ul>
+      </div>
     );
   }
 

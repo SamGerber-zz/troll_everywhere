@@ -16,12 +16,12 @@ class Api::QuestionsController < Api::JSONApplicationController
   end
 
   def show
-    @question = get_question_from_path
+    @question = Question.find_by(id: params[:id])
 
     if @question
       render :show
     else
-      render json: { errors: ["You may not view this question"] }, status: 403
+      render json: { errors: ["No such question"] }, status: 403
     end
   end
 

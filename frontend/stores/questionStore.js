@@ -29,6 +29,14 @@ QuestionStore.all = function () {
   return questions;
 };
 
+QuestionStore.allIds = function () {
+  var questions = Object.keys(_questions).map(function(id){
+    return _questions[id].id;
+  });
+
+  return questions;
+};
+
 QuestionStore.forPollWithId = function (pollId) {
   var questions = Object.keys(_questions).map(function(id){
     if (_questions[id].poll_id === pollId) {

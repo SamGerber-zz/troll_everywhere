@@ -58,7 +58,6 @@ var ApiActions = {
   },
 
   submitPollForm: function(callback){
-    debugger;
     var poll = PollFormStore.getPollWithNestedAttributes();
     var callbacks = [PollActions.receiveSinglePoll, callback];
     ApiUtil.createPoll(poll, callbacks);

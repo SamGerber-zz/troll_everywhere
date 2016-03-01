@@ -7,15 +7,13 @@ var PollIndex = React.createClass({
   render: function() {
     var PollItems = this.props.polls.map(function(poll) {
       return (
-        <li key={poll.id} className="poll-item">
-          <PollItem pollId={poll.id} />
-        </li>
+        <PollItem key={poll.id} pollId={poll.id} />
       );
     }, this);
 
 
     return (
-      <ul className="poll-groups-index group">
+      <ul className="list-group">
         {PollItems}
       </ul>
     );

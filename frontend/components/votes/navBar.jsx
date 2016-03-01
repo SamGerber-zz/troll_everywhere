@@ -1,32 +1,30 @@
 var React = require('react');
-var DropDown = require('./navComponents/dropDown.jsx');
-var NewPoll = require('./navComponents/newPoll.jsx');
-var Polls = require('./navComponents/polls.jsx');
+var VoteActions = require('../../actions/voteActions');
+var DropDown = require('../navBar/navComponents/dropDown');
 
-var loggedOutNavBar = React.createClass({
+var NavBar = React.createClass({
+
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
 
   render: function() {
     return (
-      <nav className="navbar navbar-default navbar-fixed-top">
+      <nav className="navbar navbar-default">
         <div className="container-fluid">
-          <div className="navbar-header">
+          <div className="navbar-header col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#logged-in-navbar" aria-expanded="false">
               <span className="sr-only">Toggle navigation</span>
               <span className="glyphicon glyphicon-option-horizontal"></span>
             </button>
             <a className="navbar-brand" href="#">TrollEverywhere</a>
           </div>
-
-          <div className="collapse navbar-collapse" id="logged-in-navbar">
-            <ul className="nav navbar-nav">
-              <NewPoll />
-              <Polls />
-              <li><a href="#">Take a Tour</a></li>
-              <li><a href="#">Help & FAQ</a></li>
-            </ul>
+          <div className="col-xs-0 col-sm-0 col-md-6 col-lg-6">
+            <div className="nav navbar-nav navbar-brand text-center">
+              Something something Presentation
+            </div>
+          </div>
+          <div className="collapse navbar-collapse col-xs-3 col-sm-3 col-md-3 col-lg-3 pull-right" id="logged-in-navbar">
             <ul className="nav navbar-nav navbar-right">
               <DropDown />
             </ul>
@@ -35,7 +33,6 @@ var loggedOutNavBar = React.createClass({
       </nav>
     );
   }
-
 });
 
-module.exports = loggedOutNavBar;
+module.exports = NavBar;

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223233328) do
+ActiveRecord::Schema.define(version: 20160301101756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20160223233328) do
     t.string   "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "is_locked",  null: false
   end
 
   add_index "questions", ["poll_id"], name: "index_questions_on_poll_id", using: :btree
@@ -52,13 +53,14 @@ ActiveRecord::Schema.define(version: 20160223233328) do
   add_index "responses", ["question_id"], name: "index_responses_on_question_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",        null: false
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
-    t.string   "session_token",   null: false
-    t.string   "url_suffix",      null: false
+    t.string   "username",           null: false
+    t.string   "email",              null: false
+    t.string   "password_digest",    null: false
+    t.string   "session_token",      null: false
+    t.string   "url_suffix",         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "active_question_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
@@ -78,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160223233328) do
   add_foreign_key "questions", "polls"
   add_foreign_key "responses", "questions"
   add_foreign_key "responses", "users", column: "author_id"
+  add_foreign_key "users", "questions", column: "active_question_id"
   add_foreign_key "votes", "responses"
   add_foreign_key "votes", "users", column: "voter_id"
 end

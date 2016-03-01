@@ -31,6 +31,16 @@ var checkAll = function (questionIds) {
   });
 };
 
+var checkEverything = function () {
+  QuestionStore.allIds().forEach(function(questionId){
+    _checkedQuestionIds[questionId] = true;
+  });
+};
+
+var checkNothing = function () {
+  _checkedQuestionIds = {};
+};
+
 
 QuestionFiltersStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
@@ -57,6 +67,14 @@ QuestionFiltersStore.__onDispatch = function (payload) {
     break;
   case QuestionFiltersConstants.CHECK_ALL:
     checkAll(payload.questionIds);
+    QuestionFiltersStore.__emitChange();
+    break;
+  case QuestionFiltersConstants.CHECK_EVERYTHING:
+    checkEverything();
+    QuestionFiltersStore.__emitChange();
+    break;
+  case QuestionFiltersConstants.CHECK_NOTHING:
+    checkNothing();
     QuestionFiltersStore.__emitChange();
     break;
   }

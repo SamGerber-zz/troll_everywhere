@@ -1,6 +1,7 @@
 var React = require('react');
 var QuestionFilterStore = require('../../stores/questionFilterStore');
 var QuestionFilterActions = require('../../actions/questionFilterActions');
+var QuestionActions = require('../../actions/questionActions');
 
 var Question = React.createClass({
 
@@ -31,38 +32,66 @@ var Question = React.createClass({
     QuestionFilterActions.toggleSingleCheck(this.props.question);
   },
 
+  _onShare: function(e) {
+    e.preventDefault();
+    QuestionActions.updateActiveQuestion(this.props.question);
+  },
+
   render: function() {
     var votes = this.props.question.vote_count;
-
+    var lock = this.props.question.is_locked ? "lock" : "none";
+    var share = this.props.question.is_active ? "unchecked" : "share" ;
     return (
-      <div className="poll-panel-poll group">
-        <ul className="poll-panel-poll-left">
-          <li className="poll-panel-poll-type">💡</li>
-          <li className="poll-panel-poll-checkbox">
-            <input type="checkbox"
-                   className="poll-panel-poll-checkbox"
-                   checked={this.state.checked}
-                   onChange={this._onCheckBoxChange}/>
-          </li>
-          <li className="poll-panel-poll-name">{this.props.question.title}</li>
-        </ul>
-        <ul className="poll-panel-poll-right">
-          <li className="poll-panel-poll-responses">
-            <a className="poll-panel-poll-link" href="#">{votes} Votes</a>
-          </li>
-          <li className="poll-panel-poll-edit">
-            <a className="poll-panel-poll-link" href="#">edit</a>
-          </li>
-          <li className="poll-panel-poll-copy">
-            <a className="poll-panel-poll-link" href="#">copy</a>
-          </li>
-          <li className="poll-panel-poll-share">
-            <a className="poll-panel-poll-link" href="#">share</a>
-          </li>
-          <li className="poll-panel-poll-name">🔒</li>
-        </ul>
-      </div>
+      <div className="btn-toolbar">
+        <div className="row">
+          <div className="col-xs-4 col-s-3 col-md-2">
+            <div className="btn-group">
+              <div className="btn btn-link btn-xs">
+                <span className={"glyphicon glyphicon-"+lock}
+                      aria-hidden="true">
+                </span>
+              </div>
 
+              <div className="btn btn-link btn-xs">
+                <input type="checkbox"
+                       className="poll-panel-poll-checkbox"
+                       checked={this.state.checked}
+                       onChange={this._onCheckBoxChange}/>
+              </div>
+            </div>
+          </div>
+          <div className="col-xs-4 col-s-6 col-md-8">
+            <div className="btn-group btn-group-justified"
+                 onClick={this.props.clickHandler}>
+              <button className="btn-link" >
+                {this.props.question.title}
+              </button>
+            </div>
+          </div>
+          <div className="col-xs-4 col-s-3 col-md-2">
+            <div className="btn-group btn-group-justified">
+              <div className="btn btn-xs">
+                <span className={"glyphicon glyphicon-edit"}
+                      aria-hidden="true">
+                </span>
+              </div>
+              <div className="btn btn-xs">
+                <span className={"glyphicon glyphicon-copy"}
+                      aria-hidden="true">
+                </span>
+              </div>
+              <div className="btn btn-xs" onClick={this._onShare}>
+                <span className={"glyphicon glyphicon-"+share}
+                      aria-hidden="true">
+                </span>
+              </div>
+              <div className="btn btn-link btn-xs" onClick={this.props.clickHandler}>
+                {votes} votes
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 

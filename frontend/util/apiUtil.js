@@ -56,7 +56,7 @@ module.exports = {
     });
   },
 
-  fetchSingleQuestion: function (questionId, callbacks) {
+  fetchQuestionWithId: function (questionId, callbacks) {
     $.ajax({
       url: "/api/questions/" + questionId,
       success: function (message) {
@@ -152,6 +152,9 @@ module.exports = {
       data: {},
       success: function (message) {
         runAllCallbacks(callbacks, message);
+      },
+      failure: function (message) {
+        runAllCallbacks(callbacks, message);
       }
     });
   },
@@ -166,6 +169,16 @@ module.exports = {
       }
     });
   },
+  updateCurrentUser: function (userParams, callbacks) {
+      $.ajax({
+        url: "/api/users/"+SessionStore.currentUser().id+"/",
+        method: "PATCH",
+        data: {user: userParams},
+        success: function (message) {
+          runAllCallbacks(callbacks, parseInt(message.id));
+        }
+      });
+    },
 
   logout: function (callbacks) {
     $.ajax({

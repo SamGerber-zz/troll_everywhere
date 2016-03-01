@@ -57,6 +57,16 @@ var QuestionFilterActions = {
       questionIds: questionIds
     });
   },
+  checkEverything: function(){
+    Dispatcher.dispatch({
+      actionType: QuestionFilterConstants.CHECK_EVERYTHING,
+    });
+  },
+  checkNothing: function(){
+    Dispatcher.dispatch({
+      actionType: QuestionFilterConstants.CHECK_NOTHING,
+    });
+  },
 
 };
 

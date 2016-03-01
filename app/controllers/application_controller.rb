@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
 
     private
     def user_params
-      params.require(:user).permit(:username, :email, :password)
+      params.require(:user).permit(:username, :email, :password, :active_question_id)
     end
 
     def ensure_user_is_logged_in

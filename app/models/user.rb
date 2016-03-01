@@ -2,14 +2,15 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  username        :string           not null
-#  email           :string           not null
-#  password_digest :string           not null
-#  session_token   :string           not null
-#  url_suffix      :string           not null
-#  created_at      :datetime
-#  updated_at      :datetime
+#  id                 :integer          not null, primary key
+#  username           :string           not null
+#  email              :string           not null
+#  password_digest    :string           not null
+#  session_token      :string           not null
+#  url_suffix         :string           not null
+#  created_at         :datetime
+#  updated_at         :datetime
+#  active_question_id :integer
 #
 
 class User < ActiveRecord::Base
@@ -62,6 +63,10 @@ class User < ActiveRecord::Base
     source: :votes,
     inverse_of: :poll_author
 
+  belongs_to :active_question,
+    class_name: "Question",
+    foreign_key: :active_question_id,
+    inverse_of: :active_for_user
 
   def reset_session_token!
     self.session_token = self.class.generate_token

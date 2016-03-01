@@ -21,16 +21,23 @@ var QuestionSearch = React.createClass({
   render: function() {
 
     return (
-        <form className="poll-search" role="search">
+        <form className="form-inline navbar-right" role="search">
+          <div className="form-group">
           <label htmlFor='question_search'>
-            <input type="text"
-                   id="poll_search"
-                   value={this.state.searchText}
-                   onChange={this._searchTextChanged}
-                   className="poll-search-input"
-                   placeholder="Filter Questions" />
+            <div className="input-group">
+              <div className="input-group-addon">
+                <span className="glyphicon glyphicon-search" aria-hidden="true" />
+              </div>
+              <input type="search"
+                     id="poll_search"
+                     value={this.state.searchText}
+                     onChange={this._searchTextChanged}
+                     className="form-control"
+                     placeholder="Filter Questions" />
+            </div>
           </label>
-        </form>
+        </div>
+      </form>
     );
   }
 

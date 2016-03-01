@@ -6,7 +6,7 @@ var NavBar = React.createClass({
 
   render: function() {
     return (
-      <nav className="main-navbar group">
+      <nav className="main-navbar group navbar-fixed-top">
         <LeftIndex />
         <RightIndex />
       </nav>

@@ -75,5 +75,6 @@ Rails.application.routes.draw do
     end
     resources :votes, except: [:new, :create, :index]
   end
+  get "/presentation/*token" => "static_pages#root"
   get "/*path" => "static_pages#root"
 end

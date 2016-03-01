@@ -22,7 +22,7 @@ var signUpForm = React.createClass({
     if (location.state && location.state.nextPathname) {
       this.context.router.replace(location.state.nextPathname);
     } else {
-      this.context.router.replace('/');
+      this.context.router.replace('/polls/new');
     }
   },
 
@@ -39,6 +39,17 @@ var signUpForm = React.createClass({
     SessionActions.registerUser(this._user(), this._callback);
   },
 
+  loginAsGuest: function (e) {
+    e.preventDefault();
+
+    var guestUser = {
+      username: 'Esteemed_Guest',
+      password: 'asdasdasd'
+    };
+
+    SessionActions.loginUser(guestUser, this.context.router.replace.bind(null, '/polls/'));
+  },
+
   render: function() {
     return (
       <div className="container">
@@ -51,6 +62,7 @@ var signUpForm = React.createClass({
           <label htmlFor="inputPassword" className="sr-only">Password</label>
           <input type="password" id="inputPassword" ref="password" className="form-control" placeholder="Password" required />
             <button className="btn btn-lg btn-primary btn-block" onClick={this.registerUser}>Sign up</button>
+            <button className="btn btn-lg btn-primary btn-block" onClick={this.loginAsGuest}>Guest</button>
         </form>
       </div>
     );

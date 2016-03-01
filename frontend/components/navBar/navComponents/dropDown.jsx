@@ -14,8 +14,7 @@ var DropDown = React.createClass({
 
   _logOut: function (e) {
     e.preventDefault();
-    SessionActions.logout();
-    // this.context.router.push('/settings');
+    SessionActions.logout(this.context.router.push.bind(this, '/login'));
   },
 
   render: function() {

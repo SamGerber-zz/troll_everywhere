@@ -60,15 +60,17 @@ var PollForm = React.createClass({
 
     return (
       <div className="row">
-        <div className="col-xs-12 col-sm-12 col-md-8 col-lg-6 center-block">
+        <div className="col-xs-0 col-sm-0 col-md-2 col-lg-3"></div>
+        <div className="col-xs-12 col-sm-12 col-md-8 col-lg-6">
           <form className="new-poll-form">
             <label htmlFor='poll_title'>
-              <span>Title: </span>
+              <h2>Poll Title:
                 <input type="text"
                        id="poll_title"
                        value={this.state.title}
                        placeholder="The title for your poll"
                        onChange={this._updateTitle}/>
+              </h2>
             </label>
             <div className="well">
               {questions}
@@ -78,6 +80,7 @@ var PollForm = React.createClass({
             </button>
           </form>
         </div>
+        <div className="col-xs-0 col-sm-0 col-md-2 col-lg-3"></div>
       </div>
     );
   }

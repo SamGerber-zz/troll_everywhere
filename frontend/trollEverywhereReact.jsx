@@ -7,6 +7,7 @@ var Link = require('react-router').Link;
 var browserHistory = require('react-router').browserHistory;
 
 var App = require("./components/app");
+var Splash = require("./components/splash/splash");
 var App2 = require("./components/app2");
 var newPoll = require("./components/polls/pollForm.jsx");
 var newQuestion = require("./components/questions/form.jsx");
@@ -16,6 +17,10 @@ var LoginForm = require("./components/session/loginForm.jsx");
 var SignUpForm = require("./components/session/signUpForm.jsx");
 var SessionStore = require("./stores/sessionStore");
 var SessionActions = require("./actions/sessionActions");
+var VoteForm = require('./components/votes/voteForm.jsx');
+var QuestionView = require('./components/questions/questionView.jsx');
+
+var root;
 
 
 
@@ -28,23 +33,24 @@ function requireAuth(nextState, replace) {
   }
 }
 
-
-SessionActions.getCurrentUser(function(){
-  // document.addEventListener("DOMContentLoaded", function() {
-    var root = document.getElementById("content");
-
+document.addEventListener("DOMContentLoaded", function() {
+  SessionActions.getCurrentUser(function(){
+    root = document.getElementById("content");
     ReactDOM.render((
       <Router history={browserHistory}>
         <Route path="/" component={App2}>
+          <Route path="splash" component={Splash}></Route>
           <Route path="login" component={LoginForm}></Route>
           <Route path="signup" component={SignUpForm}></Route>
           <Route path="polls" component={App} onEnter={requireAuth}></Route>
           <Route path="polls/new" component={newPoll} onEnter={requireAuth}></Route>
           <Route path="polls/:id/questions/new/" component={newQuestion} onEnter={requireAuth}></Route>
+          <Route path="questions/:id" component={QuestionView}></Route>
           <Route path="questions/:id/responses/new/" component={newResponse} onEnter={requireAuth}></Route>
           <Route path="responses/:id/votes/new/" component={newVote} onEnter={requireAuth}></Route>
         </Route>
+        <Route path="/questions/:id/vote" component={VoteForm} onEnter={requireAuth}></Route>
       </Router>
     ), root);
-  // });
+  });
 });

@@ -5,6 +5,7 @@ var LoggedOutNavBar = require('./navBar/loggedOutNavBar');
 var LoggedInNavBar = require('./navBar/loggedInNavBar');
 var SessionStore = require("../stores/sessionStore");
 var SessionActions = require("../actions/sessionActions");
+var PollActions = require("../actions/pollActions");
 
 var App2 = React.createClass({
 
@@ -23,6 +24,7 @@ var App2 = React.createClass({
   componentWillMount: function() {
     this.token = SessionStore.addListener(this.updateSession);
     SessionActions.loginUser();
+    PollActions.fetchAllPolls(SessionStore.currentUser().id)
   },
 
   componentWillUnmount: function() {

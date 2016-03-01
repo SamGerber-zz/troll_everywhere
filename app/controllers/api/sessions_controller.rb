@@ -13,7 +13,7 @@ class Api::SessionsController < ApplicationController
       if @user
         render :show
       else
-        render json: { errors: ["Not Logged In"] }, status: 422
+        render json: { errors: ["Not Logged In"] }, status: 200
       end
     end
 
@@ -23,7 +23,7 @@ class Api::SessionsController < ApplicationController
         login_user!(@user)
         render :show
       else
-        render json: { errors: ["Invalid credentials"] }, status: 422
+        render json: { errors: ["Invalid credentials"] }, status: 200
       end
     end
 
