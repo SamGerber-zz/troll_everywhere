@@ -33,12 +33,13 @@ function requireAuth(nextState, replace) {
   }
 }
 
-SessionActions.getCurrentUser(function(){
-  document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
+  SessionActions.getCurrentUser(function(){
     root = document.getElementById("content");
     ReactDOM.render((
       <Router history={browserHistory}>
         <Route path="/" component={App2}>
+          <IndexRoute component={SignUpForm}/>
           <Route path="splash" component={Splash}></Route>
           <Route path="login" component={LoginForm}></Route>
           <Route path="signup" component={SignUpForm}></Route>

@@ -4,7 +4,6 @@ var QuestionActions = require('../../actions/questionActions');
 var QuestionStore = require('../../stores/questionStore');
 var VoteStore = require('../../stores/voteStore');
 var Response = require('./response');
-var Chart = require('./chart');
 
 var QuestionView = React.createClass({
 
