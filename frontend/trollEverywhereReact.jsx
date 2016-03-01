@@ -33,8 +33,8 @@ function requireAuth(nextState, replace) {
   }
 }
 
-SessionActions.getCurrentUser(function(){
-  document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function() {
+  SessionActions.getCurrentUser(function(){
     root = document.getElementById("content");
     ReactDOM.render((
       <Router history={browserHistory}>
