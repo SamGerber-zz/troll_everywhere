@@ -50,8 +50,6 @@ var PollItem = React.createClass({
 
     this.QuestionFilterStoreToken = QuestionFilterStore
       .addListener(this._onQuestionFilterStoreChange);
-
-    PollActions.fetchSinglePoll(this.props.pollId);
   },
 
   componentWillUnmount: function () {

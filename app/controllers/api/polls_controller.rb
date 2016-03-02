@@ -27,8 +27,8 @@ class Api::PollsController < Api::JSONApplicationController
   end
 
   def index
-    @polls = current_user.polls
-
+    @polls = current_user.polls.includes(:questions, :responses, :votes, questions: [:active_for_user])
+    
     if @polls
       render :index
     else
@@ -69,6 +69,7 @@ class Api::PollsController < Api::JSONApplicationController
         :title,
         :body,
         :image_url,
+        :is_locked,
         :author_id,
         responses_attributes: [
           :body,
@@ -79,7 +80,7 @@ class Api::PollsController < Api::JSONApplicationController
     end
 
     def get_poll_from_path
-      poll = Poll.find_by(id: params[:id])
+      poll = Poll.includes(:author).find_by(id: params[:id])
       if poll && poll.author == current_user
         return poll
       else

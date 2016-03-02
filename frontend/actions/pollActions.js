@@ -4,6 +4,7 @@ var ApiUtil = require('../util/apiUtil.js');
 
 var ApiActions = {
   receiveAllPolls: function (polls) {
+    console.log("Receiving Polls...");
     Dispatcher.dispatch({
       actionType: PollConstants.POLLS_RECEIVED,
       polls: polls
@@ -23,12 +24,13 @@ var ApiActions = {
   },
 
   fetchAllPolls: function(userId, callback){
-    var callbacks = [this.receiveAllPolls, callback];
+    console.log("Fetching Polls...");
+    var callbacks = [ApiActions.receiveAllPolls, callback];
     ApiUtil.fetchAllPolls(userId, callbacks);
   },
 
   fetchSinglePoll: function(PollId, callback){
-    var callbacks = [this.receiveSinglePoll, callback];
+    var callbacks = [ApiActions.receiveSinglePoll, callback];
     ApiUtil.fetchSinglePoll(PollId, callbacks);
   }
 };

@@ -12,7 +12,7 @@ var Question = React.createClass({
 
   getStateFromStore: function () {
     return ({
-      checked: QuestionFilterStore.isCheckedQuestion(this.props.question)
+      checked: QuestionFilterStore.isCheckedQuestion(this.props.question),
     });
   },
 
@@ -43,7 +43,10 @@ var Question = React.createClass({
   },
 
   render: function() {
-    var votes = this.props.question.vote_count;
+    var votes = this.props.question.responses && this.props.question.responses.reduce(function(previousValue, response) {
+            return previousValue + response.votes.length;
+    }, 0);
+
     var lock = this.props.question.is_locked ? "lock" : "none";
     var share = this.props.question.is_active ? "unchecked" : "share" ;
     return (

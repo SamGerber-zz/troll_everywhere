@@ -42,4 +42,6 @@ PollStore.__onDispatch = function (payload) {
   }
 };
 
+window.PollStore = PollStore;
+
 module.exports = PollStore;

@@ -11,7 +11,7 @@ class Api::ResponsesController < Api::JSONApplicationController
       question_id: params[:question_id],
       author_id: current_user.id
     }.merge(response_params)
-    
+
     @response = Response.new(merged_response_params)
     if @response.save
       render :show
@@ -31,7 +31,7 @@ class Api::ResponsesController < Api::JSONApplicationController
   end
 
   def index
-    @responses = Poll.find_by(id: params[:question_id]).responses
+    @responses = Poll.includes(:questions, :votes, :author, response: [:author, :poll_author]).find_by(id: params[:question_id]).responses
 
     if @responses
       render :index
@@ -73,7 +73,7 @@ class Api::ResponsesController < Api::JSONApplicationController
     end
 
     def get_response_from_path
-      response = Response.find_by(id: params[:id])
+      response = Response.includes(:votes, :author, :poll_author).find_by(id: params[:id])
       if [response.author, response.poll_author].include?(current_user)
         return response
       else
