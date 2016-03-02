@@ -12,7 +12,11 @@ var newPollLink = React.createClass({
 
   render: function() {
     return (
-      <li><a href="" onClick={this._newPollForm} ><span className="glyphicon glyphicon-plus" /></a></li>
+      <li>
+        <a href="/polls/new" onClick={this._newPollForm} >
+          <span className="glyphicon glyphicon-plus" />
+        </a>
+      </li>
     );
   }
 

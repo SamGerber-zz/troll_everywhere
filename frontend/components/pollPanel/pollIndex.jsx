@@ -1,4 +1,7 @@
+/* React Libraries */
 var React = require('react');
+
+/* React Components */
 var PollItem = require('./pollItem');
 
 

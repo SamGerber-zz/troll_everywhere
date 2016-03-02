@@ -1,4 +1,9 @@
+/* React Libraries */
 var React = require('react');
+
+
+
+
 
 var pollsLink = React.createClass({
   contextTypes: {
@@ -12,7 +17,11 @@ var pollsLink = React.createClass({
 
   render: function() {
     return (
-      <li><a href="" onClick={this._pollsIndex} ><span className="glyphicon glyphicon-list" /></a></li>
+      <li>
+        <a href="/polls" onClick={this._pollsIndex} >
+          <span className="glyphicon glyphicon-list" />
+        </a>
+      </li>
     );
   }
 

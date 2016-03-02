@@ -40,6 +40,17 @@ var QuestionActions = {
     ApiUtil.updateCurrentUser(userParams, callbacks);
   },
 
+  lockQuestions: function(questionIds, callback) {
+    var callbacks = [PollActions.fetchAllPolls, callback];
+    var questionParams = { is_locked: true };
+    ApiUtil.updateQuestions(questionIds, questionParams, callbacks);
+  },
+
+  unlockQuestions: function(questionIds, callback) {
+    var callbacks = [PollActions.fetchAllPolls, callback];
+    var questionParams = { is_locked: false };
+    ApiUtil.updateQuestions(questionIds, questionParams, callbacks);
+  }
 
 };
 

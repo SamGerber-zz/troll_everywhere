@@ -1,6 +1,13 @@
+/* React Libraries */
 var React = require('react');
+
+/* React Flux Stores */
 var SessionStore = require('../../../stores/sessionStore.js');
+
+/* React Flux Action Creators */
 var SessionActions = require('../../../actions/sessionActions.js');
+
+
 
 var DropDown = React.createClass({
   contextTypes: {
@@ -21,13 +28,21 @@ var DropDown = React.createClass({
     var username = SessionStore.currentUser().username;
     return (
       <li className="dropdown">
-         <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{username}<span className="caret"></span></a>
-         <ul className="dropdown-menu">
-           <li><a href="#" onClick={this._goToSettings}>Settings</a></li>
-           <li role="separator" className="divider"></li>
-           <li><a href="#" onClick={this._logOut}>Logout</a></li>
-         </ul>
-       </li>
+        <a href="#"
+          className="dropdown-toggle"
+          data-toggle="dropdown"
+          role="button"
+          aria-haspopup="true"
+          aria-expanded="false">
+          {username}
+          <span className="caret"></span>
+        </a>
+        <ul className="dropdown-menu">
+          <li><a href="/settings" onClick={this._goToSettings}>Settings</a></li>
+          <li role="separator" className="divider"></li>
+          <li><a href="/login" onClick={this._logOut}>Logout</a></li>
+        </ul>
+      </li>
     );
   }
 

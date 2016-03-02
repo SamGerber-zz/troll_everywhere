@@ -1,11 +1,20 @@
+/* React Libraries */
 var React = require('react');
+
+/* React Components */
+var Question = require('./question');
+var Poll = require('./poll');
+
+/* React Flux Stores */
 var QuestionStore = require('../../stores/questionStore.js');
 var PollStore = require('../../stores/pollStore.js');
 var QuestionFilterStore = require('../../stores/questionFilterStore.js');
+
+/* React Flux Action Creators */
 var QuestionActions = require('../../actions/questionActions.js');
 var PollActions = require('../../actions/pollActions.js');
-var Question = require('./question');
-var Poll = require('./poll');
+
+
 
 var PollItem = React.createClass({
   contextTypes: {
@@ -82,7 +91,10 @@ var PollItem = React.createClass({
         return (
           <li key={question.id}
               className={className+isActive}>
-            <Question question={question} clickHandler={this._onQuestionClick.bind(null, question.id)} />
+            <Question question={question}
+                      clickHandler={
+                        this._onQuestionClick.bind(null, question.id)
+                      } />
           </li>
         );
       }, this);

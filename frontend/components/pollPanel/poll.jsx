@@ -1,5 +1,10 @@
+/* React Libraries */
 var React = require('react');
+
+/* React Flux Stores */
 var QuestionFilterStore = require('../../stores/questionFilterStore');
+
+/* React Flux Action Creators */
 var QuestionFilterActions = require('../../actions/questionFilterActions');
 
 var Poll = React.createClass({
@@ -47,7 +52,9 @@ var Poll = React.createClass({
           <div className="col-xs-4 col-s-3 col-md-2">
             <div className="btn-group form-inline">
               <div className="btn btn-link">
-                <span className={"glyphicon glyphicon-" + expandIcon} aria-hidden="true"></span>
+                <span className={"glyphicon glyphicon-" + expandIcon}
+                      aria-hidden="true">
+                </span>
               </div>
               <div className="btn btn-link">
                 <input type="checkbox"

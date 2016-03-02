@@ -45,11 +45,11 @@ class Api::QuestionsController < Api::JSONApplicationController
   end
 
   def update
-    @question = get_question_from_path
-    if @question.update(question_params)
-      render :show
+    @questions = get_questions_from_path
+    if @questions.update_all(question_params)
+      render :index
     else
-      render json: { errors: @question.errors.full_messages }, status: 422
+      render json: { errors: @questions.errors.full_messages }, status: 422
     end
   end
 
@@ -64,7 +64,7 @@ class Api::QuestionsController < Api::JSONApplicationController
 
     private
     def question_params
-      params.require(:question).permit(:title, :body, :image_url)
+      params.require(:question).permit(:title, :body, :image_url, :is_locked)
     end
 
     def get_question_from_path
@@ -74,5 +74,11 @@ class Api::QuestionsController < Api::JSONApplicationController
       else
         return nil
       end
+    end
+
+    def get_questions_from_path
+      questions = []
+      question_ids = params[:id].split(',').map(&:to_i)
+      current_user.questions.where(id: question_ids)
     end
 end

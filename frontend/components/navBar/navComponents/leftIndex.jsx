@@ -1,9 +1,14 @@
+/* React Libraries */
 var React = require('react');
 
+//TODO
 var leftItems = [
   "Participants",
   "Reports"
 ];
+
+
+
 
 var LeftIndex = React.createClass({
 
@@ -29,13 +34,13 @@ var LeftIndex = React.createClass({
             e.preventDefault();
             this.context.router.push("/polls/new/");
           }.bind(this)}>
-          <a className="nav-link" href="#">New Poll</a>
+          <a className="nav-link" href="/polls/new">New Poll</a>
         </li>
         <li key={4} className="nav-item" onClick={function(e){
             e.preventDefault();
             this.context.router.push("/polls/");
           }.bind(this)}>
-          <a className="nav-link" href="#">Polls</a>
+          <a className="nav-link" href="/polls">Polls</a>
         </li>
         {LeftItems}
       </ul>

@@ -1,4 +1,8 @@
+/* React Libraries */
 var React = require('react');
+
+
+
 
 var LoginLink = React.createClass({
   contextTypes: {
@@ -12,7 +16,7 @@ var LoginLink = React.createClass({
 
   render: function() {
     return (
-      <li><a href="" onClick={this._goToLogin}>Log in</a></li>
+      <li><a href="/login" onClick={this._goToLogin}>Log in</a></li>
     );
   }
 

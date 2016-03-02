@@ -1,13 +1,23 @@
+/* React Libraries */
 var React = require('react');
+
+/* React Components */
 var SideBar = require('../sideBar/sideBar');
 var PollMenuBar = require('./menuBar/pollMenuBar');
 var PollIndex = require('./pollIndex');
+
+/* React Flux Stores */
 var PollStore = require('../../stores/pollStore.js');
 var QuestionStore = require('../../stores/questionStore.js');
 var SessionStore = require('../../stores/sessionStore.js');
 var QuestionFilterStore = require('../../stores/questionFilterStore.js');
+
+/* React Flux Action Creators */
 var PollActions = require('../../actions/pollActions.js');
 var QuestionActions = require('../../actions/questionActions.js');
+
+
+
 
 var PollPanel = React.createClass({
 
@@ -25,7 +35,7 @@ var PollPanel = React.createClass({
 
     this.QuestionFilterStoreToken = QuestionFilterStore
       .addListener(this._onQuestionFilterStoreChange);
-      
+
     PollActions.fetchAllPolls(SessionStore.currentUser().id);
   },
 

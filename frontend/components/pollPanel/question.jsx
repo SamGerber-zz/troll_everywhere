@@ -1,5 +1,10 @@
+/* React Libraries */
 var React = require('react');
+
+/* React Flux Stores */
 var QuestionFilterStore = require('../../stores/questionFilterStore');
+
+/* React Flux Action Creators */
 var QuestionFilterActions = require('../../actions/questionFilterActions');
 var QuestionActions = require('../../actions/questionActions');
 
@@ -85,7 +90,8 @@ var Question = React.createClass({
                       aria-hidden="true">
                 </span>
               </div>
-              <div className="btn btn-link btn-xs" onClick={this.props.clickHandler}>
+              <div className="btn btn-link btn-xs"
+                   onClick={this.props.clickHandler}>
                 {votes} votes
               </div>
             </div>

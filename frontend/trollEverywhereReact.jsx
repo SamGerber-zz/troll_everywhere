@@ -6,9 +6,8 @@ var IndexRoute = require('react-router').IndexRoute;
 var Link = require('react-router').Link;
 var browserHistory = require('react-router').browserHistory;
 
-var App = require("./components/app");
 var Splash = require("./components/splash/splash");
-var App2 = require("./components/app2");
+var App = require("./components/app");
 var newPoll = require("./components/polls/pollForm.jsx");
 var newQuestion = require("./components/questions/form.jsx");
 var newResponse = require("./components/responses/form.jsx");
@@ -19,6 +18,7 @@ var SessionStore = require("./stores/sessionStore");
 var SessionActions = require("./actions/sessionActions");
 var VoteForm = require('./components/votes/voteForm.jsx');
 var QuestionView = require('./components/questions/questionView.jsx');
+var PollPanel = require('./components/pollPanel/pollPanel');
 
 var root;
 
@@ -38,12 +38,12 @@ document.addEventListener("DOMContentLoaded", function() {
     root = document.getElementById("content");
     ReactDOM.render((
       <Router history={browserHistory}>
-        <Route path="/" component={App2}>
+        <Route path="/" component={App}>
           <IndexRoute component={SignUpForm}/>
           <Route path="splash" component={Splash}></Route>
           <Route path="login" component={LoginForm}></Route>
           <Route path="signup" component={SignUpForm}></Route>
-          <Route path="polls" component={App} onEnter={requireAuth}></Route>
+          <Route path="polls" component={PollPanel} onEnter={requireAuth}></Route>
           <Route path="polls/new" component={newPoll} onEnter={requireAuth}></Route>
           <Route path="polls/:id/questions/new/" component={newQuestion} onEnter={requireAuth}></Route>
           <Route path="questions/:id" component={QuestionView}></Route>

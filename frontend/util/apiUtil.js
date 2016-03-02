@@ -76,6 +76,17 @@ module.exports = {
     });
   },
 
+  updateQuestions: function (questionIds, questionParams, callbacks) {
+    $.ajax({
+      url: "/api/questions/" + questionIds.join(','),
+      method: "PATCH",
+      data: {question: questionParams},
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
   fetchAllResponses: function (questionId, callbacks) {
     $.ajax({
       url: "/api/questions/" + questionId + "/responses/",
