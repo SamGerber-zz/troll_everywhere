@@ -47,6 +47,7 @@
 #                           PATCH  /api/votes/:id(.:format)                            api/votes#update {:format=>:json}
 #                           PUT    /api/votes/:id(.:format)                            api/votes#update {:format=>:json}
 #                           DELETE /api/votes/:id(.:format)                            api/votes#destroy {:format=>:json}
+#                           GET    /presentation/*token(.:format)                      presentations#show
 #                           GET    /*path(.:format)                                    static_pages#root
 #
 
@@ -61,6 +62,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resource :session, only: [:new, :show, :create, :destroy]
+    resources :presentations, only: [:show]
     resources :users, except: [:index] do
       resources :polls, only: [:new, :create, :index]
     end
@@ -75,6 +77,5 @@ Rails.application.routes.draw do
     end
     resources :votes, except: [:new, :create, :index]
   end
-  get "/presentation/*token" => "static_pages#root"
   get "/*path" => "static_pages#root"
 end

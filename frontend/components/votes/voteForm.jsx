@@ -1,9 +1,12 @@
 var React = require('react');
 var VoteActions = require('../../actions/voteActions');
 var QuestionActions = require('../../actions/questionActions');
+var PresentationActions = require('../../actions/presentationActions');
 var QuestionStore = require('../../stores/questionStore');
+var SessionStore = require('../../stores/sessionStore');
 var VoteStore = require('../../stores/voteStore');
-var NavBar = require('./navBar');
+var LoggedInNavBar = require('../navBar/loggedInNavBar');
+var LoggedOutNavBar = require('../navBar/loggedOutNavBar');
 var Response = require('./response');
 
 var VoteForm = React.createClass({
@@ -13,7 +16,7 @@ var VoteForm = React.createClass({
   },
 
   _getStateFromStore: function() {
-    return { question: QuestionStore.find(this.props.params.id) };
+    return { question: QuestionStore.presentedQuestion() };
   },
 
   getInitialState: function () {
@@ -23,7 +26,7 @@ var VoteForm = React.createClass({
   componentWillMount: function() {
     this.questionToken = QuestionStore.addListener(this._onQuestionStoreChange);
     this.voteToken = VoteStore.addListener(this._onVoteStoreChange);
-    QuestionActions.fetchQuestionWithId(this.props.params.id);
+    PresentationActions.fetchPresentation(this.props.params.id);
   },
 
   componentWillUnmount: function() {
@@ -36,7 +39,7 @@ var VoteForm = React.createClass({
   },
 
   _onVoteStoreChange: function() {
-    QuestionActions.fetchQuestionWithId(this.props.params.id);
+    PresentationActions.fetchPresentation(this.props.params.id);
   },
 
   createVote: function (direction, e) {
@@ -52,9 +55,9 @@ var VoteForm = React.createClass({
   },
 
   render: function() {
-
-    var responses;
-    if(this.state.question){
+    var responses, nav;
+    debugger;
+    if(this.state.question.responses){
       responses = this.state.question.responses.map(function(response){
         return(
           <Response key={response.id} response={response}/>
@@ -62,9 +65,11 @@ var VoteForm = React.createClass({
       });
     }
 
+    nav = SessionStore.isUserLoggedIn() ? <LoggedInNavBar/> : <LoggedOutNavBar/>;
+
     return (
       <div>
-        <NavBar />
+        {nav}
         <div className="row">
           <div className="col-xs-0 col-sm-0 col-md-2 col-lg-3"></div>
           <div className="col-xs-12 col-sm-12 col-md-8 col-lg-6">

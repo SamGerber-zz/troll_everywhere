@@ -29,6 +29,7 @@
     "react-addons-linked-state-mixin": "^0.14.7",
     "react-dom": "^0.14.2",
     "react-forms": "^2.0.0-beta1",
+    "react-modal": "^0.6.1",
     "react-router": "^2.0.0",
     "webpack": "^1.12.6"
   },

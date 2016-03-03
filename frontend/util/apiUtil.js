@@ -66,6 +66,15 @@ module.exports = {
     });
   },
 
+  fetchPresentationForUser: function (username, callbacks) {
+    $.ajax({
+      url: "/api/presentations/" + username,
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
   createQuestion: function (pollId, question, callbacks) {
     $.ajax({
       url: "/api/polls/"+pollId+"/questions",

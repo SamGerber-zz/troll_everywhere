@@ -49,9 +49,9 @@ document.addEventListener("DOMContentLoaded", function() {
           <Route path="polls/:id/questions/new/" component={newQuestion} onEnter={requireAuth}></Route>
           <Route path="questions/:id" component={QuestionView}></Route>
           <Route path="questions/:id/responses/new/" component={newResponse} onEnter={requireAuth}></Route>
-          <Route path="presentations/:id" component={QuestionView}></Route>
           <Route path="responses/:id/votes/new/" component={newVote} onEnter={requireAuth}></Route>
         </Route>
+        <Route path="/presentations/:id" component={VoteForm}></Route>
         <Route path="/questions/:id/vote" component={VoteForm} onEnter={requireAuth}></Route>
       </Router>
     ), root);

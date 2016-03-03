@@ -5,6 +5,7 @@ var PollConstants = require('../constants/pollConstants.js');
 var QuestionStore = new Store(AppDispatcher);
 
 var _questions = {};
+var _presentedQuestion = {};
 var _selectedQuestionIds = [];
 
 var resetQuestions = function (questions) {
@@ -18,8 +19,16 @@ var resetQuestion = function (question) {
   _questions[question.id] = question;
 };
 
+var resetPresentedQuestion = function (question) {
+  _presentedQuestion = question;
+};
+
 QuestionStore.selectedQuestionIds = function () {
   return _selectedQuestionIds;
+};
+
+QuestionStore.presentedQuestion = function () {
+  return _presentedQuestion;
 };
 
 QuestionStore.all = function () {
@@ -60,6 +69,10 @@ QuestionStore.__onDispatch = function (payload) {
       break;
     case QuestionConstants.QUESTION_RECEIVED:
       resetQuestion(payload.question);
+      QuestionStore.__emitChange();
+      break;
+    case QuestionConstants.PRESENTATION_RECEIVED:
+      resetPresentedQuestion(payload.question);
       QuestionStore.__emitChange();
       break;
     case PollConstants.POLLS_RECEIVED:
