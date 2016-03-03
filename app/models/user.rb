@@ -26,7 +26,11 @@ class User < ActiveRecord::Base
 
   validates :url_suffix, presence: true, uniqueness: true
 
-  before_validation :ensure_session_token, :ensure_url_suffix
+  validates :is_guest,
+    inclusion: {in:  [true, false],
+      message: "should be true or false."}
+
+  before_validation  :ensure_url_suffix, :ensure_guest, :ensure_session_token
 
   def self.generate_token(length = 16)
     SecureRandom.urlsafe_base64(length)
@@ -36,6 +40,29 @@ class User < ActiveRecord::Base
     user = self.find_by(username: credentials[:username])
     !user && user = self.find_by(email: credentials[:username])
     user if user && user.is_password?(credentials[:password])
+  end
+
+  def self.new_guest
+    begin
+      create! do |user|
+        username = [
+          "guest",
+          Faker::Number.number(8)
+        ].join
+        url_suffix = [
+          Faker::Commerce.color,
+          Faker::Team.creature,
+          Faker::Number.number(4)
+        ].join
+        user.username = username
+        user.url_suffix = url_suffix
+        user.email = "#{username}@example.com"
+        user.password = "dsadsadsa"
+        user.is_guest = true
+      end
+    rescue
+      retry
+    end
   end
 
   attr_reader :password
@@ -76,11 +103,11 @@ class User < ActiveRecord::Base
   end
 
   def ensure_session_token
-    self.session_token ||= reset_session_token!
+    self.session_token ||= self.reset_session_token!
   end
 
   def ensure_url_suffix
-    self.url_suffix ||= self.class.generate_token(4)
+    self.url_suffix ||= self.username
   end
 
   def password=(password)
@@ -90,5 +117,29 @@ class User < ActiveRecord::Base
 
   def is_password?(password)
     BCrypt::Password.new(password_digest).is_password?(String(password))
+  end
+
+  def name
+    guest? ? "Guest" : username
+  end
+
+  def guest?
+    is_guest
+  end
+
+  def ensure_guest
+    if self.is_guest.nil?
+      self.is_guest = false
+    else
+       self.is_guest
+    end
+    "this string is not false, so the before_validations will continue running"
+  end
+
+  def move_to(user)
+    polls.update_all(author_id: user.id)
+    responses.update_all(author_id: user.id)
+    votes.update_all(voter_id: user.id)
+    user.active_question_id = active_question_id
   end
 end

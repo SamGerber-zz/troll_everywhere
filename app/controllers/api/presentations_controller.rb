@@ -1,6 +1,7 @@
 class Api::PresentationsController < ApplicationController
   def show
     @question = get_presentation_from_params
+    current_user || login_user!(User.new_guest)
     if @question
       render "api/questions/show"
     else

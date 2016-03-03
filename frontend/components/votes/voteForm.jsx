@@ -56,7 +56,6 @@ var VoteForm = React.createClass({
 
   render: function() {
     var responses, nav;
-    debugger;
     if(this.state.question.responses){
       responses = this.state.question.responses.map(function(response){
         return(

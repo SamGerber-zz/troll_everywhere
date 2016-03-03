@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def user_is_guest?
+    current_user.is_guest?
+  end
+
   def user_is_logged_out?
     !current_user
   end

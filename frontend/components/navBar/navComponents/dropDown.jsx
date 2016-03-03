@@ -25,7 +25,7 @@ var DropDown = React.createClass({
   },
 
   render: function() {
-    var username = SessionStore.currentUser().username;
+    var name = SessionStore.currentUser().name;
     return (
       <li className="dropdown">
         <a href="#"
@@ -34,7 +34,7 @@ var DropDown = React.createClass({
           role="button"
           aria-haspopup="true"
           aria-expanded="false">
-          {username}
+          {name}
           <span className="caret"></span>
         </a>
         <ul className="dropdown-menu">
