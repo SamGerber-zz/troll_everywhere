@@ -10,7 +10,7 @@ class Api::PresentationsController < ApplicationController
   end
 
   def get_presentation_from_params
-    user = User.includes(:active_question).find_by(username: params[:id])
+    user = User.includes(:active_question).find_by(url_suffix: params[:id])
     if user
       return user.active_question
     else
