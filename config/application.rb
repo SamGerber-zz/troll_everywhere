@@ -32,6 +32,8 @@ module TrollEverywhere
     # Overwrite Rails' default exception handlers
     config.exceptions_app = self.routes
 
+    config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
+
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
   end
