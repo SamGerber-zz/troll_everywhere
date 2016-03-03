@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301101756) do
+ActiveRecord::Schema.define(version: 20160302235114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,10 @@ ActiveRecord::Schema.define(version: 20160301101756) do
     t.string   "token",      null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "ord"
   end
 
+  add_index "polls", ["author_id", "ord"], name: "deferred_ord_and_author_id", unique: true, using: :btree
   add_index "polls", ["author_id"], name: "index_polls_on_author_id", using: :btree
   add_index "polls", ["title"], name: "index_polls_on_title", using: :btree
 
@@ -35,8 +37,10 @@ ActiveRecord::Schema.define(version: 20160301101756) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean  "is_locked",  null: false
+    t.integer  "ord"
   end
 
+  add_index "questions", ["poll_id", "ord"], name: "deferred_ord_and_poll_id", unique: true, using: :btree
   add_index "questions", ["poll_id"], name: "index_questions_on_poll_id", using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
 
@@ -47,9 +51,11 @@ ActiveRecord::Schema.define(version: 20160301101756) do
     t.string   "image_url"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "ord"
   end
 
   add_index "responses", ["author_id"], name: "index_responses_on_author_id", using: :btree
+  add_index "responses", ["question_id", "ord"], name: "deferred_ord_and_question_id", unique: true, using: :btree
   add_index "responses", ["question_id"], name: "index_responses_on_question_id", using: :btree
 
   create_table "users", force: :cascade do |t|

@@ -1,6 +1,7 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher.js');
 var QuestionConstants = require('../constants/questionConstants.js');
+var PollConstants = require('../constants/pollConstants.js');
 var QuestionStore = new Store(AppDispatcher);
 
 var _questions = {};
@@ -61,7 +62,17 @@ QuestionStore.__onDispatch = function (payload) {
       resetQuestion(payload.question);
       QuestionStore.__emitChange();
       break;
+    case PollConstants.POLLS_RECEIVED:
+      var questions = [];
+      payload.polls.forEach(function(poll){
+        questions = questions.concat(poll.questions);
+      });
+      resetQuestions(questions);
+      QuestionStore.__emitChange();
+      break;
   }
 };
+
+window.QuestionStore = QuestionStore;
 
 module.exports = QuestionStore;

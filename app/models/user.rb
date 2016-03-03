@@ -41,6 +41,7 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   has_many :polls,
+    -> { order :ord },
     foreign_key: :author_id,
     inverse_of: :author
 
@@ -66,7 +67,7 @@ class User < ActiveRecord::Base
   belongs_to :active_question,
     class_name: "Question",
     foreign_key: :active_question_id,
-    inverse_of: :active_for_user
+    inverse_of: :active_user
 
   def reset_session_token!
     self.session_token = self.class.generate_token

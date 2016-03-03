@@ -27,7 +27,7 @@ class Api::PollsController < Api::JSONApplicationController
   end
 
   def index
-    @polls = current_user.polls.includes(:questions, :responses, :votes, questions: [:active_for_user])
+    @polls = current_user.polls.includes(:questions, :responses, :votes, questions: [:active_user])
     
     if @polls
       render :index

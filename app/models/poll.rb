@@ -8,13 +8,17 @@
 #  token      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  ord        :integer
 #
 
 class Poll < ActiveRecord::Base
-  validates :title, :author, :token, presence: true
+  validates :title, :author, :token, :ord, presence: true
   validates :token, uniqueness: true
+  validates :ord, uniqueness: { scope: :author_id,
+    message: "two polls by the same author may not have the same ord." }
 
-  before_validation :ensure_token
+  before_validation :ensure_token, :ensure_ord
+  after_destroy :mend_ord
 
   def self.generate_token(length = 16)
     token = SecureRandom.urlsafe_base64(length)
@@ -25,6 +29,7 @@ class Poll < ActiveRecord::Base
   end
 
   has_many :questions,
+    -> { order :ord },
     inverse_of: :poll
 
   accepts_nested_attributes_for :questions, allow_destroy: true
@@ -46,5 +51,37 @@ class Poll < ActiveRecord::Base
 
   def ensure_token
     self.token ||= self.class.generate_token(4)
+  end
+
+  def ensure_ord
+    polls = author.polls
+    self.ord ||= polls.count
+    transaction do
+      self.class.connection.execute(<<-SQL)
+      SET CONSTRAINTS deferred_ord_and_author_id DEFERRED;
+      UPDATE "polls" SET ord = ord + 1
+      WHERE "polls"."id" IN (
+        SELECT "polls"."id" FROM "polls"
+        WHERE "polls"."author_id" = #{self.author_id} AND (ord >= #{self.ord})
+        ORDER BY "polls"."ord" ASC
+      );
+      SQL
+    end
+  end
+
+  def mend_ord
+    polls = author.polls
+    self.ord ||= polls.count
+    transaction do
+      self.class.connection.execute(<<-SQL)
+      SET CONSTRAINTS deferred_ord_and_author_id DEFERRED;
+      UPDATE "polls" SET ord = ord - 1
+      WHERE "polls"."id" IN (
+        SELECT "polls"."id" FROM "polls"
+        WHERE "polls"."author_id" = #{self.author_id} AND (ord > #{self.ord})
+        ORDER BY "polls"."ord" ASC
+      );
+      SQL
+    end
   end
 end

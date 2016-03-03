@@ -23,7 +23,7 @@ var Response = React.createClass({
                  role="progressbar" aria-valuenow="20"
                  aria-valuemin="0" aria-valuemax="100"
                  style={{width: this.props.percentage + "%"}} >
-               {this.props.response.votes_count}
+               {this.props.response.votes.length}
             </div>
           </div>
         </div>

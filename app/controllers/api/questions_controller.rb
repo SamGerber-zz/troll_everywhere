@@ -16,7 +16,7 @@ class Api::QuestionsController < Api::JSONApplicationController
   end
 
   def show
-    @question = Question.includes(:poll, :author, :active_for_user).find_by(id: params[:id])
+    @question = Question.includes(:poll, :author, :responses, :votes, :active_user).find_by(id: params[:id])
 
     if @question
       render :show
@@ -26,7 +26,7 @@ class Api::QuestionsController < Api::JSONApplicationController
   end
 
   def index
-    @questions = Poll.includes(:questions, questions: [:active_for_user]).find_by(id: params[:poll_id]).questions
+    @questions = Poll.includes(:questions, questions: [:active_user]).find_by(id: params[:poll_id]).questions
 
     if @questions
       render :index

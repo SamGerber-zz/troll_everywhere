@@ -10,6 +10,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  is_locked  :boolean          not null
+#  ord        :integer
 #
 
 class Question < ActiveRecord::Base
@@ -18,11 +19,14 @@ class Question < ActiveRecord::Base
   validates :is_locked,
     inclusion: {in:  [true, false],
       message: "should be true or false."}
+  validates :ord, uniqueness: { scope: :poll_id,
+    message: "two questions in the same poll may not have the same ord." }
 
-  before_validation :ensure_locked
-
+  before_validation :ensure_locked, :ensure_ord
+  after_destroy :mend_ord
 
   has_many :responses,
+    -> { order :ord },
     inverse_of: :question
   accepts_nested_attributes_for :responses, allow_destroy: true
 
@@ -40,13 +44,45 @@ class Question < ActiveRecord::Base
     source: :author,
     inverse_of: :questions
 
-  has_one :active_for_user,
+  has_one :active_user,
     class_name: "User",
     foreign_key: :active_question_id,
     inverse_of: :active_question
 
   def is_active?
-    !!active_for_user
+    !!active_user
+  end
+
+  def ensure_ord
+    questions = poll.questions
+    self.ord ||= questions.count
+    transaction do
+      self.class.connection.execute(<<-SQL)
+      SET CONSTRAINTS deferred_ord_and_poll_id DEFERRED;
+      UPDATE "questions" SET ord = ord + 1
+      WHERE "questions"."id" IN (
+        SELECT "questions"."id" FROM "questions"
+        WHERE "questions"."poll_id" = #{self.poll_id} AND (ord >= #{self.ord})
+        ORDER BY "questions"."ord" ASC
+      );
+      SQL
+    end
+  end
+
+  def mend_ord
+    questions = poll.questions
+    self.ord ||= questions.count
+    transaction do
+      self.class.connection.execute(<<-SQL)
+      SET CONSTRAINTS deferred_ord_and_poll_id DEFERRED;
+      UPDATE "questions" SET ord = ord - 1
+      WHERE "questions"."id" IN (
+        SELECT "questions"."id" FROM "questions"
+        WHERE "questions"."poll_id" = #{self.poll_id} AND (ord > #{self.ord})
+        ORDER BY "questions"."ord" ASC
+      );
+      SQL
+    end
   end
 
     private

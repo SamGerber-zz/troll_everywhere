@@ -44,10 +44,10 @@ var QuestionView = React.createClass({
       var question = this.state.question;
       var maxVotes = 0;
       question.responses.forEach(function(response){
-        maxVotes = Math.max(response.votes_count, maxVotes);
+        maxVotes = Math.max(response.votes.length, maxVotes);
       });
       responses = question.responses.map(function(response){
-        percentage = Math.round(100 * response.votes_count / maxVotes);
+        percentage = Math.round(100 * response.votes.length / maxVotes);
         return(
           <Response key={response.id} response={response} percentage={percentage}/>
         );
