@@ -32,6 +32,7 @@ var QuestionView = React.createClass({
     this.questionToken = QuestionStore.addListener(this._onQuestionStoreChange);
     this.voteToken = VoteStore.addListener(this._onVoteStoreChange);
     QuestionActions.fetchQuestionWithId(this.props.params.id);
+    setInterval(QuestionActions.fetchQuestionWithId.bind(null, this.props.params.id), 1000);
   },
 
   componentWillUnmount: function() {

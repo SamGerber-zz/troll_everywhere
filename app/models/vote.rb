@@ -17,6 +17,8 @@ class Vote < ActiveRecord::Base
     inclusion: {in:  [true, false],
       message: "should be true or false."}
 
+  validate :question_is_not_locked
+
   belongs_to :response,
     inverse_of: :votes
 
@@ -39,4 +41,8 @@ class Vote < ActiveRecord::Base
     through: :poll,
     source: :author,
     inverse_of: :others_votes
+
+  def question_is_not_locked
+    errors[:base] << "Cannot vote on locked question" if question.is_locked
+  end
 end

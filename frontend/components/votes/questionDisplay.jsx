@@ -14,9 +14,11 @@ var QuestionDisplay = React.createClass({
     if(this.props.question.responses){
       var responses = this.props.question.responses.map(function(response){
         return(
-          <Response key={response.id} response={response}/>
+          <Response key={response.id}
+                    response={response}
+                    locked={this.props.question.is_locked}/>
         );
-      });
+      }, this);
     }
 
     return (

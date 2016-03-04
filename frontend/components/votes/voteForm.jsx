@@ -30,6 +30,7 @@ var VoteForm = React.createClass({
     this.questionToken = QuestionStore.addListener(this._onQuestionStoreChange);
     this.voteToken = VoteStore.addListener(this._onVoteStoreChange);
     PresentationActions.fetchPresentation(this.props.params.id);
+    setInterval(PresentationActions.fetchPresentation.bind(null, this.props.params.id), 1000);
   },
 
   componentWillUnmount: function() {

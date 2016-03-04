@@ -14,7 +14,7 @@ var PresentationActions = {
   },
 
   fetchPresentation: function(username, callback) {
-    var callbacks = [this.receiveSinglePresentation, callback];
+    var callbacks = [PresentationActions.receiveSinglePresentation, callback];
     ApiUtil.fetchPresentationForUser(username, callbacks);
   },
 };
