@@ -7,7 +7,10 @@ var SessionStore = require('../../stores/sessionStore');
 var VoteStore = require('../../stores/voteStore');
 var LoggedInNavBar = require('../navBar/loggedInNavBar');
 var LoggedOutNavBar = require('../navBar/loggedOutNavBar');
+var VoteNavBar = require('../navBar/voteNavBar');
 var Response = require('./response');
+var QuestionDisplay = require('./questionDisplay');
+var QuestionComingSoon = require('./questionComingSoon');
 
 var VoteForm = React.createClass({
 
@@ -55,13 +58,11 @@ var VoteForm = React.createClass({
   },
 
   render: function() {
-    var responses, nav;
-    if(this.state.question.responses){
-      responses = this.state.question.responses.map(function(response){
-        return(
-          <Response key={response.id} response={response}/>
-        );
-      });
+    var responses, nav, questionDisplay;
+    if(this.state.question.responses) {
+      questionDisplay = <QuestionDisplay question={this.state.question}/> ;
+    } else {
+      questionDisplay = <QuestionComingSoon hostName={this.props.params.id}/>;
     }
 
     nav = SessionStore.isUserLoggedIn() ? <LoggedInNavBar/> : <LoggedOutNavBar/>;
@@ -72,11 +73,7 @@ var VoteForm = React.createClass({
         <div className="row">
           <div className="col-xs-0 col-sm-0 col-md-2 col-lg-3"></div>
           <div className="col-xs-12 col-sm-12 col-md-8 col-lg-6">
-            <h3>{this.state.question && this.state.question.title}</h3>
-            <p>{this.state.question && this.state.question.body}</p>
-            <ul className="list-group">
-              {responses}
-            </ul>
+            {questionDisplay}
           </div>
           <div className="col-xs-0 col-sm-0 col-md-2 col-lg-3"></div>
         </div>

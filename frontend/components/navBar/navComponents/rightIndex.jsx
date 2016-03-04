@@ -1,5 +1,5 @@
 var React = require('react');
-var SessionStore = require('../../stores/sessionStore');
+var SessionStore = require('../../../stores/sessionStore');
 
 var rightItems = [
   "Pricing & Upgrades",
