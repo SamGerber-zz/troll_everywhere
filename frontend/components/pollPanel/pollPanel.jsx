@@ -71,19 +71,15 @@ var PollPanel = React.createClass({
         <div className="row">
           <SideBar />
           <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
-               id="poll-pane">
+               id="modal">
             <PollMenuBar polls={this.state.polls}/>
 
             <h1 className="page-header">
               Your Polls
-              <button className="btn btn-default"
-                      onClick={this._onNewButtonClick}>
-                <span className="glyphicon glyphicon-plus" />
-              </button>
+              <NewPollModal poll={{title: ''}} open={this.state.modalOpen}/>
             </h1>
 
             <PollIndex polls={this.state.polls} />
-            <NewPollModal poll={{title: ''}} open={this.state.modalOpen}/>
           </div>
         </div>
       </div>
