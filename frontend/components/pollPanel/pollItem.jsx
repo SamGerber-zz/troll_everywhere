@@ -84,12 +84,14 @@ var PollItem = React.createClass({
       if (!this.state.expanded) {
         className += " hide";
       }
-      Questions = this.state.questions.map(function(question){
+      Questions = this.state.questions.map(function(question, i){
         isActive = question.is_active ? " list-group-item-success" : "";
         return (
           <li key={question.id}
               className={className+isActive}>
             <Question question={question}
+                      questionOrd={i + 1}
+                      pollId={this.state.poll.id}
                       clickHandler={
                         this._onQuestionClick.bind(null, question.id)
                       } />

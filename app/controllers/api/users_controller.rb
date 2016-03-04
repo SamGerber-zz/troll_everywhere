@@ -1,7 +1,7 @@
 class Api::UsersController < Api::JSONApplicationController
 
-  skip_before_action :ensure_user_is_logged_in, only: [:new, :create]
-  before_action :ensure_user_is_logged_out, only: [:new, :create]
+  # skip_before_action :ensure_user_is_logged_in, only: [:new, :create]
+  # before_action :ensure_user_is_logged_out, only: [:new, :create]
 
   def new
     @user = User.new

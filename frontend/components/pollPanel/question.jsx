@@ -7,6 +7,7 @@ var QuestionFilterStore = require('../../stores/questionFilterStore');
 /* React Flux Action Creators */
 var QuestionFilterActions = require('../../actions/questionFilterActions');
 var QuestionActions = require('../../actions/questionActions');
+var PollActions = require('../../actions/pollActions');
 
 var Question = React.createClass({
 
@@ -40,6 +41,19 @@ var Question = React.createClass({
   _onShare: function(e) {
     e.preventDefault();
     QuestionActions.updateActiveQuestion(this.props.question);
+  },
+
+  _onCopy: function(e) {
+    e.preventDefault();
+    var q = this.props.question;
+    q.responses.forEach(function(response){
+      delete response.id;
+    });
+    q.responses_attributes = q.responses;
+    var pId = this.props.pollId;
+    q.ord = this.props.questionOrd;
+    QuestionActions.createQuestion(pId, q);
+    PollActions.fetchAllPolls();
   },
 
   render: function() {
@@ -83,7 +97,7 @@ var Question = React.createClass({
                       aria-hidden="true">
                 </span>
               </div>
-              <div className="btn btn-xs">
+              <div className="btn btn-xs" onClick={this._onCopy}>
                 <span className={"glyphicon glyphicon-copy"}
                       aria-hidden="true">
                 </span>

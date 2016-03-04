@@ -33,7 +33,7 @@ var ApiActions = {
 
   registerUser: function(user, callback){
     var currentUser = SessionStore.currentUser();
-    if (currentUser) {
+    if (currentUser && !currentUser.is_guest) {
       if(callback) {
         callback(currentUser);
       }

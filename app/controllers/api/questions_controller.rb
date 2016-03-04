@@ -64,7 +64,20 @@ class Api::QuestionsController < Api::JSONApplicationController
 
     private
     def question_params
-      params.require(:question).permit(:title, :body, :image_url, :is_locked)
+      params.require(:question).permit(
+        :title,
+        :body,
+        :image_url,
+        :is_locked,
+        :ord,
+        responses_attributes: [
+          :body,
+          :image_url,
+          :author_id,
+          :ord,
+          :question_id
+        ]
+      )
     end
 
     def get_question_from_path

@@ -55,17 +55,19 @@ class Question < ActiveRecord::Base
 
   def ensure_ord
     questions = poll.questions
-    self.ord ||= questions.count
-    transaction do
-      self.class.connection.execute(<<-SQL)
-      SET CONSTRAINTS deferred_ord_and_poll_id DEFERRED;
-      UPDATE "questions" SET ord = ord + 1
-      WHERE "questions"."id" IN (
-        SELECT "questions"."id" FROM "questions"
-        WHERE "questions"."poll_id" = #{self.poll_id} AND (ord >= #{self.ord})
-        ORDER BY "questions"."ord" ASC
-      );
-      SQL
+    self.ord ||= ( questions.map(&:ord).compact.max || -1 ) + 1
+    if self.poll_id
+      transaction do
+        self.class.connection.execute(<<-SQL)
+        SET CONSTRAINTS deferred_ord_and_poll_id DEFERRED;
+        UPDATE "questions" SET ord = ord + 1
+        WHERE "questions"."id" IN (
+          SELECT "questions"."id" FROM "questions"
+          WHERE "questions"."poll_id" = #{self.poll_id} AND (ord >= #{self.ord})
+          ORDER BY "questions"."ord" ASC
+        );
+        SQL
+      end
     end
   end
 

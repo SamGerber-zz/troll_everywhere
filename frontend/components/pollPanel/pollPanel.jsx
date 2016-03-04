@@ -5,6 +5,7 @@ var React = require('react');
 var SideBar = require('../sideBar/sideBar');
 var PollMenuBar = require('./menuBar/pollMenuBar');
 var PollIndex = require('./pollIndex');
+var NewPollModal = require('./newPollModal');
 
 /* React Flux Stores */
 var PollStore = require('../../stores/pollStore.js');
@@ -25,7 +26,8 @@ var PollPanel = React.createClass({
     return {
       polls: PollStore.all(),
       questionFilters: QuestionFilterStore.all(),
-      selectedQuestionIds: QuestionStore.selectedQuestionIds()
+      selectedQuestionIds: QuestionStore.selectedQuestionIds(),
+      modalOpen: false
     };
   },
 
@@ -57,17 +59,31 @@ var PollPanel = React.createClass({
     this.QuestionFilterStoreToken.remove();
   },
 
+  _onNewButtonClick: function(e) {
+    e.preventDefault();
+    console.log("push");
+    this.setState({ modalOpen: true });
+  },
+
   render: function() {
     return (
       <div className="container-fluid">
         <div className="row">
           <SideBar />
-          <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div className="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"
+               id="poll-pane">
             <PollMenuBar polls={this.state.polls}/>
 
-            <h1 className="page-header">Your Polls</h1>
-            <PollIndex polls={this.state.polls} />
+            <h1 className="page-header">
+              Your Polls
+              <button className="btn btn-default"
+                      onClick={this._onNewButtonClick}>
+                <span className="glyphicon glyphicon-plus" />
+              </button>
+            </h1>
 
+            <PollIndex polls={this.state.polls} />
+            <NewPollModal poll={{title: ''}} open={this.state.modalOpen}/>
           </div>
         </div>
       </div>

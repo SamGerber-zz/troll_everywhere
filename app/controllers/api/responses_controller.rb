@@ -69,7 +69,7 @@ class Api::ResponsesController < Api::JSONApplicationController
 
     private
     def response_params
-      params.require(:response).permit(:body, :image_url)
+      params.require(:response).permit(:body, :image_url, :ord)
     end
 
     def get_response_from_path

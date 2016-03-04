@@ -28,7 +28,7 @@ class Api::PollsController < Api::JSONApplicationController
 
   def index
     @polls = current_user.polls.includes(:questions, :responses, :votes, questions: [:active_user])
-    
+
     if @polls
       render :index
     else
@@ -65,16 +65,18 @@ class Api::PollsController < Api::JSONApplicationController
 
     private
     def poll_params
-      params.require(:poll).permit(:title, questions_attributes: [
+      params.require(:poll).permit(:title, :ord, questions_attributes: [
         :title,
         :body,
         :image_url,
         :is_locked,
         :author_id,
+        :ord,
         responses_attributes: [
           :body,
           :image_url,
-          :author_id
+          :author_id,
+          :ord
           ]
       ])
     end

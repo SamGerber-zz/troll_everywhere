@@ -55,17 +55,19 @@ class Poll < ActiveRecord::Base
 
   def ensure_ord
     polls = author.polls
-    self.ord ||= polls.count
-    transaction do
-      self.class.connection.execute(<<-SQL)
-      SET CONSTRAINTS deferred_ord_and_author_id DEFERRED;
-      UPDATE "polls" SET ord = ord + 1
-      WHERE "polls"."id" IN (
-        SELECT "polls"."id" FROM "polls"
-        WHERE "polls"."author_id" = #{self.author_id} AND (ord >= #{self.ord})
-        ORDER BY "polls"."ord" ASC
-      );
-      SQL
+    self.ord ||= (polls.map(&:ord).compact.max || -1) + 1
+    if self.author_id
+      transaction do
+        self.class.connection.execute(<<-SQL)
+        SET CONSTRAINTS deferred_ord_and_author_id DEFERRED;
+        UPDATE "polls" SET ord = ord + 1
+        WHERE "polls"."id" IN (
+          SELECT "polls"."id" FROM "polls"
+          WHERE "polls"."author_id" = #{self.author_id} AND (ord >= #{self.ord})
+          ORDER BY "polls"."ord" ASC
+        );
+        SQL
+      end
     end
   end
 

@@ -101,14 +101,14 @@ var QuestionView = React.createClass({
       shareText = (
         <h2>
           <span className="glyphicon glyphicon-blackboard"/>
-          Respond at <strong>trollhere.com/{SessionStore.currentUser().username}</strong>
+          Respond at <strong>trollhere.com/{SessionStore.currentUser().url_suffix}</strong>
         </h2>
       );
     } else if (this.state.question) {
       shareText = (
         <h2>
           <span className="glyphicon glyphicon-share" />
-          When question is active, respond at <strong>trollhere.com/{SessionStore.currentUser().username}</strong>
+          When question is active, respond at <strong>trollhere.com/{SessionStore.currentUser().url_suffix}</strong>
         </h2>
       );
     }

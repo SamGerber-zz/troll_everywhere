@@ -47,17 +47,19 @@ class Response < ActiveRecord::Base
 
   def ensure_ord
     responses = question.responses
-    self.ord ||= responses.count
-    transaction do
-      self.class.connection.execute(<<-SQL)
-      SET CONSTRAINTS deferred_ord_and_question_id DEFERRED;
-      UPDATE "responses" SET ord = ord + 1
-      WHERE "responses"."id" IN (
-        SELECT "responses"."id" FROM "responses"
-        WHERE "responses"."question_id" = #{self.question_id} AND (ord >= #{self.ord})
-        ORDER BY "responses"."ord" ASC
-      );
-      SQL
+    self.ord ||= ( responses.map(&:ord).compact.max || -1 ) + 1
+    if self.question_id
+      transaction do
+        self.class.connection.execute(<<-SQL)
+        SET CONSTRAINTS deferred_ord_and_question_id DEFERRED;
+        UPDATE "responses" SET ord = ord + 1
+        WHERE "responses"."id" IN (
+          SELECT "responses"."id" FROM "responses"
+          WHERE "responses"."question_id" = #{self.question_id} AND (ord >= #{self.ord})
+          ORDER BY "responses"."ord" ASC
+        );
+        SQL
+      end
     end
   end
 
