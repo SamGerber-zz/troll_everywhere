@@ -96,6 +96,16 @@ module.exports = {
       }
     });
   },
+  updateQuestion: function (question, callbacks) {
+    $.ajax({
+      url: "/api/questions/" + question.id,
+      method: "PATCH",
+      data: {question: question},
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
 
   fetchAllResponses: function (questionId, callbacks) {
     $.ajax({

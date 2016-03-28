@@ -7,6 +7,8 @@ var QuestionFilterStore = require('../../stores/questionFilterStore');
 /* React Flux Action Creators */
 var QuestionFilterActions = require('../../actions/questionFilterActions');
 
+var NewQuestionModal = require('./newQuestionModal');
+
 var Poll = React.createClass({
 
   getStateFromStore: function () {
@@ -64,14 +66,17 @@ var Poll = React.createClass({
                </div>
             </div>
           </div>
-          <div className="col-xs-4 col-s-6 col-md-8">
+          <div className="col-xs-4 col-s-5 col-md-6">
             <div className="btn-group btn-group-justified form-inline">
               <span className="form-control-static">
                 <strong>{this.props.poll.title}</strong>
               </span>
             </div>
           </div>
-          <div className="col-xs-4 col-s-3 col-md-2">
+          <div className="col-xs-2 col-s-2 col-md-2">
+            <NewQuestionModal poll={this.props.poll}/>
+          </div>
+          <div className="col-xs-2 col-s-2 col-md-2">
             <div className="btn-group pull-right form-inline">
               <span className="form-control-static">
                 <strong>{this.props.questionCount}</strong> questions

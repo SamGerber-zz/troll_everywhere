@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var IndexRoute = require('react-router').IndexRoute;
+var IndexRedirect = require('react-router').IndexRedirect;
 var Link = require('react-router').Link;
 var browserHistory = require('react-router').browserHistory;
 
@@ -28,7 +29,7 @@ var root;
 function requireAuth(nextState, replace) {
   if (!SessionStore.isUserLoggedIn()) {
     replace({
-      pathname: '/login',
+      pathname: '/welcome',
       state: { nextPathname: nextState.location.pathname }
     });
   }
@@ -40,10 +41,8 @@ document.addEventListener("DOMContentLoaded", function() {
     ReactDOM.render((
       <Router history={browserHistory}>
         <Route path="/" component={App}>
-          <IndexRoute component={SignUpForm}/>
-          <Route path="splash" component={Splash}></Route>
-          <Route path="login" component={LoginForm}></Route>
-          <Route path="signup" component={SignUpForm}></Route>
+          <IndexRedirect to="/welcome" />
+          <Route path="welcome" component={Splash}></Route>
           <Route path="polls" component={PollPanel} onEnter={requireAuth}></Route>
           <Route path="polls/new" component={newPoll} onEnter={requireAuth}></Route>
           <Route path="polls/:id/questions/new/" component={newQuestion} onEnter={requireAuth}></Route>

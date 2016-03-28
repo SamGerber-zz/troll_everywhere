@@ -28,14 +28,14 @@ var loggedOutNavBar = React.createClass({
               <span className="sr-only">Toggle navigation</span>
               <span className="glyphicon glyphicon-option-horizontal"></span>
             </button>
-            <a className="navbar-brand" href="/splash">TrollEverywhere</a>
+            <a className="navbar-brand" href="/welcome">TrollEverywhere</a>
           </div>
 
           <div className="collapse navbar-collapse" id="logged-in-navbar">
             <ul className="nav navbar-nav">
               <NewPoll />
               <Polls />
-              <li><a href="/splash">Take a Tour</a></li>
+              <li><a href="/welcome">Take a Tour</a></li>
               <li><a href="#">Help & FAQ</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">

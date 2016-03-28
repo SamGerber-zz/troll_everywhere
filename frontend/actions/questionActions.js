@@ -24,6 +24,15 @@ var QuestionActions = {
     ApiUtil.createQuestion(pollId, question, callbacks);
   },
 
+  clearResponses: function(question, callback){
+    var callbacks = [QuestionActions.receiveSingleQuestion, callback];
+      question.responses.forEach(function(response){
+      response["_destroy"] = true;
+    });
+    question['responses_attributes'] = question['responses'];
+    ApiUtil.updateQuestion(question, callbacks);
+  },
+
   fetchAllQuestionsForPollWithId: function(pollId, callback) {
     var callbacks = [QuestionActions.receiveAllQuestions, callback];
     ApiUtil.fetchAllQuestionsForPollWithId(pollId, callbacks);

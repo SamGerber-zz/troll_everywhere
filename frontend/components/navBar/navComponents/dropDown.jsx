@@ -21,7 +21,7 @@ var DropDown = React.createClass({
 
   _logOut: function (e) {
     e.preventDefault();
-    SessionActions.logout(this.context.router.push.bind(this, '/login'));
+    SessionActions.logout(this.context.router.push.bind(this, '/'));
   },
 
   render: function() {
@@ -40,7 +40,7 @@ var DropDown = React.createClass({
         <ul className="dropdown-menu">
           <li><a href="/settings" onClick={this._goToSettings}>Settings</a></li>
           <li role="separator" className="divider"></li>
-          <li><a href="/login" onClick={this._logOut}>Logout</a></li>
+          <li><a href="/" onClick={this._logOut}>Logout</a></li>
         </ul>
       </li>
     );

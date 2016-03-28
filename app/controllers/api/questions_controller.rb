@@ -71,11 +71,13 @@ class Api::QuestionsController < Api::JSONApplicationController
         :is_locked,
         :ord,
         responses_attributes: [
+          :id,
           :body,
           :image_url,
           :author_id,
           :ord,
-          :question_id
+          :question_id,
+          :_destroy
         ]
       )
     end

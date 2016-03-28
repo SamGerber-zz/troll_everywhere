@@ -83,7 +83,7 @@ var Question = React.createClass({
             </div>
           </div>
           <div className="col-xs-4 col-s-6 col-md-8">
-            <div className="btn-group btn-group-justified"
+            <div className="btn-group "
                  onClick={this.props.clickHandler}>
               <button className="btn-link" >
                 {this.props.question.title}

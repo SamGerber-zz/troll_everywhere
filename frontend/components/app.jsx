@@ -17,6 +17,10 @@ var SessionActions = require("../actions/sessionActions");
 
 var App = React.createClass({
 
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+
   getInitialState: function() {
     return {
       loggedIn: SessionStore.isUserLoggedIn()
@@ -42,9 +46,9 @@ var App = React.createClass({
     var user = SessionStore.currentUser(),
         navBar;
     if (this.state.loggedIn) {
-      navBar = <LoggedInNavBar user={user}/>;
+      navBar = <LoggedInNavBar user={user} location={this.props.location}/>;
     } else {
-      navBar = <LoggedOutNavBar user={user}/>;
+      navBar = <LoggedOutNavBar user={user} location={this.props.location}/>;
     }
 
     return (

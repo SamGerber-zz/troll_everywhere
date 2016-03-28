@@ -4,6 +4,8 @@ var React = require('react');
 /* React Components */
 var LoginLink = require('./navComponents/loginLink.jsx');
 var SignUpButton = require('./navComponents/signUpButton.jsx');
+var LoginModal = require('./navComponents/loginModal.jsx');
+var SignUpModal = require('./navComponents/signUpModal.jsx');
 
 
 
@@ -27,7 +29,7 @@ var loggedOutNavBar = React.createClass({
               <span className="sr-only">Toggle navigation</span>
               <span className="glyphicon glyphicon-option-horizontal"></span>
             </button>
-            <a className="navbar-brand" href="/splash">TrollEverywhere</a>
+            <a className="navbar-brand" href="/welcome">TrollEverywhere</a>
           </div>
           <div className="collapse navbar-collapse" id="logged-out-navbar">
             <ul className="nav navbar-nav">
@@ -37,12 +39,12 @@ var loggedOutNavBar = React.createClass({
                   <span className="sr-only">(current)</span>
                 </a>
               </li>
-              <li><a href="/splash">Take a Tour</a></li>
+              <li><a href="/welcome">Take a Tour</a></li>
               <li><a href="#">Help & FAQ</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
-              <LoginLink />
-              <SignUpButton />
+              <LoginModal location={this.props.location}/>
+              <SignUpModal location={this.props.location}/>
             </ul>
           </div>
         </div>
