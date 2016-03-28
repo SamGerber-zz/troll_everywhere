@@ -6,6 +6,7 @@ var SessionActions = require('../../../actions/sessionActions');
 
 var SignUpModal = React.createClass({
 
+
     contextTypes: {
       router: React.PropTypes.object.isRequired
     },

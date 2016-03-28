@@ -6,6 +6,7 @@ var SessionActions = require('../../../actions/sessionActions');
 
 var LoginModal = React.createClass({
 
+
     contextTypes: {
       router: React.PropTypes.object.isRequired
     },
