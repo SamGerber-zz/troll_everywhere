@@ -70,7 +70,8 @@ class User < ActiveRecord::Base
   has_many :polls,
     -> { order :ord },
     foreign_key: :author_id,
-    inverse_of: :author
+    inverse_of: :author,
+    dependent: :destroy
 
   has_many :questions,
     through: :polls,
@@ -84,12 +85,12 @@ class User < ActiveRecord::Base
 
   has_many :votes,
     foreign_key: :voter_id,
-    inverse_of: :voter
+    inverse_of: :voter,
+    dependent: :destroy
 
   has_many :others_votes,
     through: :responses,
-    source: :votes,
-    inverse_of: :poll_author
+    source: :votes
 
   belongs_to :active_question,
     class_name: "Question",

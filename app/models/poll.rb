@@ -30,7 +30,8 @@ class Poll < ActiveRecord::Base
 
   has_many :questions,
     -> { order :ord },
-    inverse_of: :poll
+    inverse_of: :poll,
+    dependent: :destroy
 
   accepts_nested_attributes_for :questions, allow_destroy: true
 

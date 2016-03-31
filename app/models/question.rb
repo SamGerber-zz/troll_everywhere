@@ -33,7 +33,8 @@ class Question < ActiveRecord::Base
   has_many :votes,
     through: :responses,
     source: :votes,
-    inverse_of: :question
+    inverse_of: :question,
+    dependent: :destroy
 
   belongs_to :poll,
     inverse_of: :questions
