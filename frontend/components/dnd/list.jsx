@@ -2,6 +2,8 @@ var Container = require('./container');
 var DragDropContext = require('react-dnd').DragDropContext;
 var HTML5Backend = require('react-dnd-html5-backend');
 var React = require('react');
+var ReactTooltip = require("react-tooltip");
+
 
 var SortableCancelOnDropOutside = React.createClass({
   render: function() {
@@ -15,6 +17,7 @@ var SortableCancelOnDropOutside = React.createClass({
           In this example, instead of moving the card inside the drop target's <code>drop()</code> handler, we do it inside the drag source's <code>endDrag()</code> handler. This let us check <code>monitor.didDrop()</code> and revert the drag operation if the card was dropped outside its container.
         </p>
         <Container />
+        <ReactTooltip type="info" delayShow={250}/>
       </div>
     );
   }
