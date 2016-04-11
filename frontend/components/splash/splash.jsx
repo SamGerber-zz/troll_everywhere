@@ -2,7 +2,7 @@ var React = require('react');
 var LoginModal = require('./LoginModal')
 var SignUpModal = require('./SignUpModal')
 var SessionActions = require('../../actions/sessionActions')
-var tour = require('../../tour/tour')
+// var tour = require('../../tour/tour')
 
 var Splash = React.createClass({
   contextTypes: {
