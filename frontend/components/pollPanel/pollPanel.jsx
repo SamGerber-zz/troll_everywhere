@@ -63,7 +63,7 @@ var PollPanel = React.createClass({
 
   _onNewButtonClick: function(e) {
     e.preventDefault();
-    console.log("push");
+    
     this.setState({ modalOpen: true });
   },
 

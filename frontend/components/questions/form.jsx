@@ -21,7 +21,7 @@ var QuestionForm = React.createClass({
 
   createQuestion: function (e) {
     e.preventDefault();
-    console.log("New Question!");
+    
     var question = this.state;
     var pollId = this.props.params.id;
     QuestionActions.createQuestion(pollId, question, function(message){

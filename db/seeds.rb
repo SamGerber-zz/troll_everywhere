@@ -140,7 +140,6 @@ data_structures = [
     responses: [
       "Array",
       "Linked List",
-      "Stack",
       "Binary Search Tree"
     ]
   },
@@ -148,7 +147,6 @@ data_structures = [
     title: "Constant Time Search",
     body: "Which of the following Abstract Data Types have constant time search?",
     responses: [
-      "Linked List",
       "Stack",
       "Hash Table",
       "Binary Search Tree"
@@ -160,7 +158,6 @@ data_structures = [
     responses: [
       "Array",
       "Linked List",
-      "Stack",
       "Binary Search Tree"
     ]
   },
@@ -169,7 +166,6 @@ data_structures = [
     body: "Which of these Abstract Data Types has the worst deletion time complexity?",
     responses: [
       "Array",
-      "Linked List",
       "Stack",
       "Binary Search Tree"
     ]
@@ -178,24 +174,18 @@ data_structures = [
     title: "Max Heap Max",
     body: "What is the time complexity to find the max of a max heap?",
     responses: [
-      "O(1) - Constant",
-      "O(Logn) - Logarithmic",
-      "O(n) - Linear",
-      "O(nLogn) - Linearithmic",
-      "O(n^2) - Polynomial",
-      "O(2^n) - Exponential"
+      "O(1)",
+      "O(Logn)",
+      "O(n)"
     ]
   },
   {
     title: "Max Heap Min",
     body: "What is the time complexity to find the MIN of a max heap?",
     responses: [
-      "O(1) - Constant",
-      "O(Logn) - Logarithmic",
-      "O(n) - Linear",
-      "O(nLogn) - Linearithmic",
-      "O(n^2) - Polynomial",
-      "O(2^n) - Exponential"
+      "O(Logn)",
+      "O(n)",
+      "O(nLogn)"
     ]
   }
 ]

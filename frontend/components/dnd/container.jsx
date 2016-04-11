@@ -70,7 +70,6 @@ var Container = React.createClass({
 
   addResponse: function() {
     var nextOrd = 1 + this.state.responses.reduce(function(maxOrd, response){
-      console.log(maxOrd);
       return Math.max(maxOrd, response.ord);
     }, 0);
     this.setState(update(this.state, {

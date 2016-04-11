@@ -14,7 +14,7 @@ var LockUnlock = React.createClass({
 
   _onLockClick: function(e){
     e.preventDefault();
-    console.log(QuestionFiltersStore.checkedQuestionIds());
+
     QuestionActions.lockQuestions(QuestionFiltersStore.checkedQuestionIds());
   },
   _onUnlockClick: function(e){

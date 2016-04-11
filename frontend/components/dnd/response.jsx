@@ -51,7 +51,6 @@ var responseTarget = {
 
     if (draggedOrd !== overOrd) {
       var overIndex = props.findResponse(overOrd).index;
-      console.log(draggedOrd + "|"+ overIndex);
       props.moveResponse(draggedOrd, overIndex);
     }
   }

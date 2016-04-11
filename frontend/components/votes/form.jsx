@@ -19,7 +19,7 @@ var VoteForm = React.createClass({
 
   createVote: function (direction, e) {
     e.preventDefault();
-    console.log("New Vote!");
+    
     var vote = {is_up_vote: (direction === "up")};
     var responseId = this.props.params.id;
     VoteActions.createVote(responseId, vote, function(message){

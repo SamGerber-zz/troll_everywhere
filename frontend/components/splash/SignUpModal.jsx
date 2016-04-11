@@ -105,7 +105,8 @@ var SignUpModal = React.createClass({
         e.preventDefault();
         var hints = this.state.usernameHints;
         var isOK  = this.state.isUsernameOK;
-        var isBlank = isTaken = true;
+        var isBlank = true;
+        var isTaken = true;
         var foundTakenUsernames  = this.state.foundTakenUsernames;
         if (e.target.value.length){
             hints = hints.filter(function(hint) {
@@ -135,7 +136,9 @@ var SignUpModal = React.createClass({
         var hints = this.state.emailHints;
         var foundTakenEmails = this.state.foundTakenEmails;
         var isOK  = this.state.isEmailOK;
-        var isBlank = isMalformed = isTaken = true;
+        var isBlank = true;
+        var isMalformed = true;
+        var isTaken = true;
         var emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (e.target.value.length){
             hints = hints.filter(function(hint) {

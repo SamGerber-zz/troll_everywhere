@@ -7,7 +7,7 @@ var Response = React.createClass({
 
   createVote: function (direction, e) {
     e.preventDefault();
-    console.log("New Vote!");
+    
     var vote = {is_up_vote: true};
     var responseId = this.props.response.id;
     VoteActions.createVote(responseId, vote);
