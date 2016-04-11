@@ -80,7 +80,7 @@ var Splash = React.createClass({
 
 
         	<div className="container">
-        		<hr>
+        		<footer>
         		<div className="row centered">
         			<div className="col-lg-6 col-lg-offset-3">
                 <LoginModal location={this.props.location}/>
@@ -89,7 +89,7 @@ var Splash = React.createClass({
         			</div>
         			<div className="col-lg-3"></div>
         		</div>{/* /row */}
-          </hr>
+          </footer>
         	</div>{/* /container */}
         </div>
     );
