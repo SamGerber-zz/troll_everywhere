@@ -9,13 +9,7 @@ var browserHistory = require('react-router').browserHistory;
 
 var Splash = require("./components/splash/splash");
 var App = require("./components/app");
-var newPoll = require("./components/polls/pollForm.jsx");
-var newQuestion = require("./components/dnd/newQuestion.jsx");
-var editQuestion = require("./components/dnd/editQuestion.jsx");
-var newResponse = require("./components/responses/form.jsx");
 var newVote = require("./components/votes/form.jsx");
-var LoginForm = require("./components/session/loginForm.jsx");
-var SignUpForm = require("./components/session/signUpForm.jsx");
 var SessionStore = require("./stores/sessionStore");
 var SessionActions = require("./actions/sessionActions");
 var VoteForm = require('./components/votes/voteForm.jsx');
@@ -46,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
           <IndexRedirect to="/welcome" />
           <Route path="welcome" component={Splash}></Route>
           <Route path="polls" component={PollPanel} onEnter={requireAuth}></Route>
-          <Route path="polls/:id/questions/new" component={newQuestion} onEnter={requireAuth}></Route>
           <Route path="questions/:id" component={QuestionView} onEnter={requireAuth}></Route>
           <Route path="responses/:id/votes/new" component={newVote} onEnter={requireAuth}></Route>
         </Route>
