@@ -72,8 +72,8 @@ var LoginModal = React.createClass({
                 <div className="alert alert-danger" role="alert">
                     <h4><span className="glyphicon glyphicon-alert" aria-hidden="true"></span> Errors:</h4>
                     <ul>{
-                        Object.keys(errors).map( function(key) {
-                            return (<li>{errors[key]}</li>);
+                        Object.keys(errors).map( function(key, idx) {
+                            return (<li key={idx}>{errors[key]}</li>);
                         })}
                     </ul>
                 </div>

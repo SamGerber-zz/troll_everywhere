@@ -3,6 +3,7 @@ var SessionStore = require('../stores/sessionStore.js');
 var runAllCallbacks = function (callbacks, response) {
 
   for (var i = 0; i < callbacks.length; i++) {
+    console.log(callbacks);
     callbacks[i] && callbacks[i](response); //TODO this is messy
   }
 };

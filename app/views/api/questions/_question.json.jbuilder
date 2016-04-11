@@ -7,7 +7,9 @@ json.is_locked question.is_locked
 json.is_active !!question.active_user
 json.poll_id question.poll_id
 questions = question.poll.questions
-json.next_id questions[(question.ord + 1)%questions.length].id
-json.prev_id questions[(question.ord - 1)%questions.length].id
+unless questions.empty?
+  json.next_id questions[(question.ord + 1)%questions.length].id
+  json.prev_id questions[(question.ord - 1)%questions.length].id
+end
 json.created_at question.created_at
 json.updated_at question.updated_at
