@@ -46,12 +46,8 @@ document.addEventListener("DOMContentLoaded", function() {
           <IndexRedirect to="/welcome" />
           <Route path="welcome" component={Splash}></Route>
           <Route path="polls" component={PollPanel} onEnter={requireAuth}></Route>
-          <Route path="polls/new" component={newPoll} onEnter={requireAuth}></Route>
           <Route path="polls/:id/questions/new" component={newQuestion} onEnter={requireAuth}></Route>
-          <Route path="polls/:id/questions/:ord" component={QuestionView} onEnter={requireAuth}></Route>
           <Route path="questions/:id" component={QuestionView} onEnter={requireAuth}></Route>
-          <Route path="questions/:id/edit" component={editQuestion} onEnter={requireAuth}></Route>
-          <Route path="questions/:id/responses/new" component={newResponse} onEnter={requireAuth}></Route>
           <Route path="responses/:id/votes/new" component={newVote} onEnter={requireAuth}></Route>
         </Route>
         <Route path="/presentations/:id" component={VoteForm}></Route>
