@@ -19,9 +19,26 @@ var QuestionActions = {
     });
   },
 
+  removeSingleQuestion: function (question) {
+    Dispatcher.dispatch({
+      actionType: QuestionConstants.QUESTION_DELETED,
+      question: question
+    });
+  },
+
   createQuestion: function(pollId, question, callback){
-    var callbacks = [QuestionActions.receiveSingleQuestion, callback];
+    var callbacks = [PollActions.fetchSinglePollForQuestion, callback];
     ApiUtil.createQuestion(pollId, question, callbacks);
+  },
+
+  updateQuestion: function(question, callback){
+    var callbacks = [this.receiveSingleQuestion, callback];
+    ApiUtil.updateQuestion(question, callbacks);
+  },
+
+  deleteQuestion: function(question, callback){
+    var callbacks = [PollActions.fetchSinglePollForQuestion, callback];
+    ApiUtil.deleteQuestion(question, callbacks);
   },
 
   clearResponses: function(question, callback){

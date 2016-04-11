@@ -1,6 +1,7 @@
 /* React Libraries */
 var React = require('react');
 var ReactDOM = require('react-dom');
+var ReactTooltip = require('react-tooltip');
 
 /* React Components */
 var LoggedOutNavBar = require('./navBar/loggedOutNavBar');
@@ -53,6 +54,7 @@ var App = React.createClass({
 
     return (
       <div>
+        <ReactTooltip class="tooltip" type="info" delayShow={250}/>
         {navBar}
         {this.props.children}
       </div>

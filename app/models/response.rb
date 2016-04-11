@@ -22,7 +22,8 @@ class Response < ActiveRecord::Base
   before_validation :ensure_author, :ensure_ord
   after_destroy :mend_ord
 
-  has_many :votes
+  has_many :votes,
+    dependent: :destroy
   accepts_nested_attributes_for :votes, allow_destroy: true
 
   belongs_to :question,
@@ -48,7 +49,7 @@ class Response < ActiveRecord::Base
   def ensure_ord
     responses = question.responses
     self.ord ||= ( responses.map(&:ord).compact.max || -1 ) + 1
-    if self.question_id
+    if self.question_id && self.ord_changed?
       transaction do
         self.class.connection.execute(<<-SQL)
         SET CONSTRAINTS deferred_ord_and_question_id DEFERRED;

@@ -7,6 +7,8 @@ var VoteStore = require('../../stores/voteStore');
 var Response = require('./response');
 var MenuBar = require('./menuBar');
 var NextBack = require('./nextBack');
+var ReactTooltip = require("react-tooltip");
+
 
 var QuestionView = React.createClass({
 
@@ -24,7 +26,8 @@ var QuestionView = React.createClass({
     return {
           question: QuestionStore.find(this.props.params.id),
           showStats: true,
-          fullScreen: false
+          fullScreen: false,
+          showQR: false
     };
   },
 
@@ -32,10 +35,11 @@ var QuestionView = React.createClass({
     this.questionToken = QuestionStore.addListener(this._onQuestionStoreChange);
     this.voteToken = VoteStore.addListener(this._onVoteStoreChange);
     QuestionActions.fetchQuestionWithId(this.props.params.id);
-    setInterval(QuestionActions.fetchQuestionWithId.bind(null, this.props.params.id), 1000);
+    this.intervalId = setInterval(QuestionActions.fetchQuestionWithId.bind(null, this.props.params.id), 1000);
   },
 
   componentWillUnmount: function() {
+    clearInterval(this.intervalId);
     this.questionToken.remove();
     this.voteToken.remove();
   },
@@ -56,19 +60,28 @@ var QuestionView = React.createClass({
 
   _onShowStatsClick: function(e) {
     var newShowStats = !this.state.showStats;
+    ReactTooltip.hide();
     this.setState({showStats: newShowStats});
   },
 
   _onNextClick: function(e) {
     var nextQuestionId = this.state.question.next_id;
+    ReactTooltip.hide();
     QuestionActions.fetchQuestionWithId(nextQuestionId);
     this.context.router.push('/questions/' + nextQuestionId);
   },
 
   _onPrevClick: function(e) {
     var prevQuestionId = this.state.question.prev_id;
+    ReactTooltip.hide();
     QuestionActions.fetchQuestionWithId(prevQuestionId);
     this.context.router.push('/questions/' + prevQuestionId);
+  },
+
+  _onShowQRClick: function(e) {
+    var newShowQR = !this.state.showQR;
+    ReactTooltip.hide();
+    this.setState({showQR: newShowQR});
   },
 
   render: function() {
@@ -85,6 +98,7 @@ var QuestionView = React.createClass({
           <Response key={response.id}
                     response={response}
                     percentage={percentage}
+                    showQR={this.state.showQR}
                     showStats={this.state.showStats}/>
         );
       }, this);
@@ -102,17 +116,19 @@ var QuestionView = React.createClass({
       shareText = (
         <h2>
           <span className="glyphicon glyphicon-blackboard"/>
-          Respond at <strong>trollhere.com/{SessionStore.currentUser().url_suffix}</strong>
+          Respond at <strong><a href={"http://trollhere.com/"+SessionStore.currentUser().url_suffix} target='_blank'>trollhere.com/{SessionStore.currentUser().url_suffix}</a></strong>
         </h2>
       );
     } else if (this.state.question) {
       shareText = (
         <h2>
           <span className="glyphicon glyphicon-share" />
-          When question is active, respond at <strong>trollhere.com/{SessionStore.currentUser().url_suffix}</strong>
+          When question is active, respond at <strong><a href={"http://trollhere.com/"+SessionStore.currentUser().url_suffix} target='_blank'>trollhere.com/{SessionStore.currentUser().url_suffix}</a></strong>
         </h2>
       );
     }
+
+    var hidden = (this.state.showQR) ? '' : 'hide';
 
 
     return (
@@ -151,9 +167,14 @@ var QuestionView = React.createClass({
           <div className="col-xs-2 col-sm-2 col-md-1 col-lg-1">
             <MenuBar question={this.state.question}
                      showStats={this.state.showStats}
-                     onShowStatsClick={this._onShowStatsClick}/>
+                     onShowStatsClick={this._onShowStatsClick}
+                     showQR={this.state.showQR}
+                     onShowQRClick={this._onShowQRClick}/>
           </div>
           <div className="col-xs-0 col-sm-0 col-md-1 col-lg-2"></div>
+          <div className={'qr-code ' + hidden}>
+            <img src={'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=trollhere.com/' + SessionStore.currentUser().url_suffix}/>
+          </div>
         </div>
       </div>
 

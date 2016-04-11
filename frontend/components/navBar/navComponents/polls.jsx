@@ -18,7 +18,7 @@ var pollsLink = React.createClass({
   render: function() {
     return (
       <li>
-        <a href="/polls" onClick={this._pollsIndex} >
+        <a href="/polls" onClick={this._pollsIndex}  data-tip="All your polls.">
           <span className="glyphicon glyphicon-list" />
         </a>
       </li>

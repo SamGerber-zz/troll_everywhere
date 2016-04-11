@@ -16,8 +16,15 @@ var EditableItem = React.createClass({
     }
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      text: nextProps.text
+    })
+  },
+
   makeEditing: function(e) {
     e.preventDefault();
+    e.stopPropagation();
     ReactTooltip.hide();
 
     this.setState({
@@ -29,10 +36,13 @@ var EditableItem = React.createClass({
     e.preventDefault();
     e.stopPropagation();
     ReactTooltip.hide();
+    var text = this.state.text;
+    text = text.length ? text : "Click to add text..."
     this.setState({
-      editing: false
+      editing: false,
+      text: text
     });
-    this.props.updateText(this.state.text);
+    this.props.updateText(text);
   },
 
   cancel: function(e) {
@@ -52,8 +62,8 @@ var EditableItem = React.createClass({
     });
   },
 
-  componentDidUpdate: function(){
-    if (this.state.editing) {
+  componentDidUpdate: function(prevProps, prevState){
+    if (!prevState.editing && this.state.editing) {
       var input = ReactDOM.findDOMNode(this.refs.input);
       input.focus();
       input.value = input.value;
@@ -65,7 +75,7 @@ var EditableItem = React.createClass({
     var editing = this.state.editing;
     var updateText = this.props.updateText;
     var guts = (
-      <span data-tip="Click to edit">
+      <span className='editable-text' data-tip="Click to edit">
         {text}
       </span>
     );
@@ -88,6 +98,8 @@ var EditableItem = React.createClass({
         </span>
       );
     }
+
+    /// <{this.props.fieldType}
 
     return (
       <span className={(editing) ? "" : "editable"}

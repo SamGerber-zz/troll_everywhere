@@ -10,7 +10,8 @@ var browserHistory = require('react-router').browserHistory;
 var Splash = require("./components/splash/splash");
 var App = require("./components/app");
 var newPoll = require("./components/polls/pollForm.jsx");
-var newQuestion = require("./components/questions/form.jsx");
+var newQuestion = require("./components/dnd/newQuestion.jsx");
+var editQuestion = require("./components/dnd/editQuestion.jsx");
 var newResponse = require("./components/responses/form.jsx");
 var newVote = require("./components/votes/form.jsx");
 var LoginForm = require("./components/session/loginForm.jsx");
@@ -21,7 +22,7 @@ var VoteForm = require('./components/votes/voteForm.jsx');
 var QuestionView = require('./components/questions/questionView.jsx');
 var PollPanel = require('./components/pollPanel/pollPanel');
 var Presentation = require('./components/presentation');
-var List = require('./components/dnd/list');
+
 
 var root;
 
@@ -44,13 +45,14 @@ document.addEventListener("DOMContentLoaded", function() {
         <Route path="/" component={App}>
           <IndexRedirect to="/welcome" />
           <Route path="welcome" component={Splash}></Route>
-          <Route path="list" component={List}></Route>
           <Route path="polls" component={PollPanel} onEnter={requireAuth}></Route>
           <Route path="polls/new" component={newPoll} onEnter={requireAuth}></Route>
-          <Route path="polls/:id/questions/new/" component={newQuestion} onEnter={requireAuth}></Route>
-          <Route path="questions/:id" component={QuestionView}></Route>
-          <Route path="questions/:id/responses/new/" component={newResponse} onEnter={requireAuth}></Route>
-          <Route path="responses/:id/votes/new/" component={newVote} onEnter={requireAuth}></Route>
+          <Route path="polls/:id/questions/new" component={newQuestion} onEnter={requireAuth}></Route>
+          <Route path="polls/:id/questions/:ord" component={QuestionView} onEnter={requireAuth}></Route>
+          <Route path="questions/:id" component={QuestionView} onEnter={requireAuth}></Route>
+          <Route path="questions/:id/edit" component={editQuestion} onEnter={requireAuth}></Route>
+          <Route path="questions/:id/responses/new" component={newResponse} onEnter={requireAuth}></Route>
+          <Route path="responses/:id/votes/new" component={newVote} onEnter={requireAuth}></Route>
         </Route>
         <Route path="/presentations/:id" component={VoteForm}></Route>
         <Route path="/questions/:id/vote" component={VoteForm} onEnter={requireAuth}></Route>

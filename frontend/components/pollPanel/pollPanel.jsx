@@ -1,5 +1,7 @@
 /* React Libraries */
 var React = require('react');
+var ReactTooltip = require("react-tooltip");
+
 
 /* React Components */
 var SideBar = require('../sideBar/sideBar');
@@ -75,13 +77,20 @@ var PollPanel = React.createClass({
             <PollMenuBar polls={this.state.polls}/>
 
             <h1 className="page-header">
+              <div className='row'>
+                <div className="col-xs-6">
               Your Polls
+            </div>
+              <div className="col-xs-6">
               <NewPollModal poll={{title: ''}} open={this.state.modalOpen}/>
+            </div>
+              </div>
             </h1>
 
             <PollIndex polls={this.state.polls} />
           </div>
         </div>
+        <ReactTooltip class="tooltip" type="info" delayShow={250}/>
       </div>
     );
   }

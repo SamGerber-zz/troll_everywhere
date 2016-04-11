@@ -2,6 +2,7 @@ var React = require('react');
 var LoginModal = require('./LoginModal')
 var SignUpModal = require('./SignUpModal')
 var SessionActions = require('../../actions/sessionActions')
+var tour = require('../../tour/tour')
 
 var Splash = React.createClass({
   contextTypes: {
@@ -19,6 +20,10 @@ var Splash = React.createClass({
       SessionActions.loginUser(guestUser, this.context.router.replace.bind(null, '/polls/'));
   },
 
+  _startTour: function(e){
+    tour.start();
+  },
+
   render: function() {
     return (
         <div>
@@ -30,7 +35,8 @@ var Splash = React.createClass({
         					<h3>Easy Audience Participation.</h3>
                   <LoginModal location={this.props.location}/>
                   <SignUpModal location={this.props.location}/>
-                  <button type="button" onClick={this.onTryItClick} className="btn btn-info btn-lg">Try it</button>
+                  <button type="button" onClick={this.onTryItClick} className="btn btn-info btn-lg splash-btn">Try it</button>
+                  {/*<button type="button" onClick={this._startTour} className="btn btn-info btn-lg" id='tour-1'>Tour</button>*/}
         				</div>{/* /col-lg-6 */}
         				<div className="col-lg-6">
         					<img className="img-responsive" src="" alt="" />
@@ -79,7 +85,7 @@ var Splash = React.createClass({
         			<div className="col-lg-6 col-lg-offset-3">
                 <LoginModal location={this.props.location}/>
                 <SignUpModal location={this.props.location}/>
-                <button type="button" onClick={this.onTryItClick} className="btn btn-info btn-lg">Try it</button>
+                <button type="button" onClick={this.onTryItClick} className="btn btn-info btn-lg splash-btn">Try it</button>
         			</div>
         			<div className="col-lg-3"></div>
         		</div>{/* /row */}

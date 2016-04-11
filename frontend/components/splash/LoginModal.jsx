@@ -55,6 +55,7 @@ var LoginModal = React.createClass({
 
     showModal: function(e){
         e.preventDefault();
+        this.setState({ errors: [] });
         this.refs.modal.show();
     },
     hideModal: function(e){
@@ -63,14 +64,32 @@ var LoginModal = React.createClass({
     },
 
     render: function() {
+        var errors = this.state.errors;
+        var errorMessage;
+        if (errors.length) {
+            errorMessage = (
+                <div className="alert alert-danger" role="alert">
+                    <h4><span className="glyphicon glyphicon-alert" aria-hidden="true"></span> Errors:</h4>
+                    <ul>{
+                        Object.keys(errors).map( function(key) {
+                            return (<li>{errors[key]}</li>);
+                        })}
+                    </ul>
+                </div>
+            );
+        } else {
+            errorMessage = '';
+        }
+
         return (
             <span>
                 <button type="button"
                         onClick={this.showModal}
-                        className="btn btn-info btn-lg">Login</button>
+                        className="btn btn-info btn-lg splash-btn">Login</button>
                 <Modal ref="modal">
                     <form className="form-signin">
                       <h2 className="form-signin-heading">Please sign in</h2>
+                      {errorMessage}
                       <label htmlFor="inputEmail" className="sr-only">Email or username:</label>
                       <input type="text" ref="username" id="inputUsername" className="form-control" placeholder="Username or Email Address" required autofocus />
                       <label htmlFor="inputPassword" className="sr-only">Password</label>

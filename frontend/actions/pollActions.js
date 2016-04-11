@@ -23,6 +23,16 @@ var ApiActions = {
     ApiUtil.createPoll(poll, callbacks);
   },
 
+  updatePoll: function(poll, callback){
+    var callbacks = [this.receiveSinglePoll, callback];
+    ApiUtil.updatePoll(poll, callbacks);
+  },
+
+  deletePoll: function(poll, callback){
+    var callbacks = [callback];
+    ApiUtil.deletePoll(poll, callbacks);
+  },
+
   fetchAllPolls: function(userId, callback){
     console.log("Fetching Polls...");
     var callbacks = [ApiActions.receiveAllPolls, callback];
@@ -32,6 +42,10 @@ var ApiActions = {
   fetchSinglePoll: function(PollId, callback){
     var callbacks = [ApiActions.receiveSinglePoll, callback];
     ApiUtil.fetchSinglePoll(PollId, callbacks);
+  },
+  fetchSinglePollForQuestion: function(Question, callback){
+    var callbacks = [ApiActions.receiveSinglePoll, callback];
+    ApiUtil.fetchSinglePoll(Question.poll_id, callbacks);
   }
 };
 

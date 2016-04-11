@@ -3,8 +3,8 @@ var React = require('react');
 
 /* React Components */
 var DropDown = require('./navComponents/dropDown.jsx');
-var NewPoll = require('./navComponents/newPoll.jsx');
 var Polls = require('./navComponents/polls.jsx');
+var Presentation = require('./navComponents/presentation.jsx');
 
 
 
@@ -33,10 +33,9 @@ var loggedOutNavBar = React.createClass({
 
           <div className="collapse navbar-collapse" id="logged-in-navbar">
             <ul className="nav navbar-nav">
-              <NewPoll />
               <Polls />
-              <li><a href="/welcome">Take a Tour</a></li>
-              <li><a href="#">Help & FAQ</a></li>
+              <Presentation />
+              <li><a href="/welcome">{/*Take a Tour*/}</a></li>
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <DropDown />

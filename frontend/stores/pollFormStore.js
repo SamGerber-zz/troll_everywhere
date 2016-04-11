@@ -4,11 +4,11 @@ var PollFormConstants = require('../constants/pollFormConstants.js');
 var PollFormStore = new Store(AppDispatcher);
 
 var blankResponse = {
-    questionIndex: 0,
-    responseIndex: 0,
-    body: "",
-    image_url: "",
-    _delete: false
+  questionIndex: 0,
+  responseIndex: 0,
+  body: "",
+  image_url: "",
+  _destroy: false
 };
 
 var blankQuestion = {
@@ -20,7 +20,7 @@ var blankQuestion = {
     blankResponse,
     Object.assign(blankResponse, {responseIndex: 1})
   ],
-  _delete: false
+  _destroy: false
 };
 
 var blankPoll = {
@@ -87,7 +87,7 @@ PollFormStore.__onDispatch = function (payload) {
       PollFormStore.__emitChange();
       break;
     case PollFormConstants.REMOVE_QUESTION:
-      _pollForm.questions[payload.questionIndex]._delete = true;
+      _pollForm.questions[payload.questionIndex]._destroy = true;
       PollFormStore.__emitChange();
       break;
     case PollFormConstants.UPDATE_QUESTION:
@@ -100,7 +100,7 @@ PollFormStore.__onDispatch = function (payload) {
       break;
     case PollFormConstants.REMOVE_RESPONSE:
       _pollForm.questions[payload.questionIndex].responses[payload.responseIndex]
-        ._delete = true;
+        ._destroy = true;
       PollFormStore.__emitChange();
       break;
     case PollFormConstants.UPDATE_RESPONSE:

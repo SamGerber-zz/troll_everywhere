@@ -38,7 +38,6 @@ var DropDown = React.createClass({
           <span className="caret"></span>
         </a>
         <ul className="dropdown-menu">
-          <li><a href="/settings" onClick={this._goToSettings}>Settings</a></li>
           <li role="separator" className="divider"></li>
           <li><a href="/" onClick={this._logOut}>Logout</a></li>
         </ul>

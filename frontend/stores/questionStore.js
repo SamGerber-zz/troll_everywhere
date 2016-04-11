@@ -23,6 +23,16 @@ var resetPresentedQuestion = function (question) {
   _presentedQuestion = question;
 };
 
+var removeQuestion = function (question) {
+  delete _questions[question.id];
+  if (_presentedQuestion.id === question.id) {
+    _presentedQuestion = {};
+  }
+  _selectedQuestionIds = _selectedQuestionIds.filter(function(id){
+    return id != question.id;
+  });
+};
+
 QuestionStore.selectedQuestionIds = function () {
   return _selectedQuestionIds;
 };
@@ -69,6 +79,10 @@ QuestionStore.__onDispatch = function (payload) {
       break;
     case QuestionConstants.QUESTION_RECEIVED:
       resetQuestion(payload.question);
+      QuestionStore.__emitChange();
+      break;
+    case QuestionConstants.QUESTION_DELETED:
+      removeQuestion(payload.question);
       QuestionStore.__emitChange();
       break;
     case QuestionConstants.PRESENTATION_RECEIVED:

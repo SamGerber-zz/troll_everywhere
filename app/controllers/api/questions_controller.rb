@@ -1,7 +1,9 @@
 class Api::QuestionsController < Api::JSONApplicationController
 
   def new
-    @question = Question.new()
+    @question = Question.new(poll_id: params[:poll_id])
+    @question.title = "Title"
+    @question.body = "Body"
     render :new
   end
 
@@ -46,8 +48,11 @@ class Api::QuestionsController < Api::JSONApplicationController
 
   def update
     @questions = get_questions_from_path
-    if @questions.update_all(question_params)
-      render :index
+
+    if @questions.length == 1 && @questions.first.update(question_params)
+        render :index
+    elsif @questions.update_all(question_params)
+        render :index
     else
       render json: { errors: @questions.errors.full_messages }, status: 422
     end
@@ -55,6 +60,7 @@ class Api::QuestionsController < Api::JSONApplicationController
 
   def destroy
     @question = get_question_from_path
+    @question.active_user.update(active_question_id: nil) if @question.is_active?
     if @question.destroy
       render :show
     else
@@ -64,22 +70,26 @@ class Api::QuestionsController < Api::JSONApplicationController
 
     private
     def question_params
-      params.require(:question).permit(
-        :title,
-        :body,
-        :image_url,
-        :is_locked,
-        :ord,
-        responses_attributes: [
-          :id,
+      if params[:question].is_a?(String)
+        JSON.parse(params[:question])
+      else
+        params.require(:question).permit(
+          :title,
           :body,
           :image_url,
-          :author_id,
+          :is_locked,
           :ord,
-          :question_id,
-          :_destroy
-        ]
-      )
+          responses_attributes: [
+            :id,
+            :body,
+            :image_url,
+            :author_id,
+            :ord,
+            :question_id,
+            :_destroy
+          ]
+        )
+      end
     end
 
     def get_question_from_path

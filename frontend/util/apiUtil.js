@@ -39,6 +39,27 @@ module.exports = {
     });
   },
 
+  updatePoll: function (poll, callbacks) {
+    $.ajax({
+      url: "/api/polls/" + poll.id,
+      method: "PATCH",
+      data: {poll: poll},
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
+  deletePoll: function (poll, callbacks) {
+    $.ajax({
+      url: "/api/polls/" + poll.id,
+      method: "DELETE",
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
   fetchAllQuestions: function (pollId, callbacks) {
     $.ajax({
       url: "/api/polls/" + pollId + "/questions/",
@@ -51,6 +72,24 @@ module.exports = {
   fetchAllQuestionsForPollWithId: function (pollId, callbacks) {
     $.ajax({
       url: "/api/polls/" + pollId + "/questions/",
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
+  fetchBlankQuestionFormForPollWithId: function (pollId, callbacks) {
+    $.ajax({
+      url: "/api/polls/" + pollId + "/questions/new",
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
+  fetchQuestionFormForQuestionWithId: function (questionId, callbacks) {
+    $.ajax({
+      url: "/api/questions/" + questionId + "/edit",
       success: function (message) {
         runAllCallbacks(callbacks, message);
       }
@@ -96,11 +135,22 @@ module.exports = {
       }
     });
   },
+
   updateQuestion: function (question, callbacks) {
     $.ajax({
       url: "/api/questions/" + question.id,
       method: "PATCH",
-      data: {question: question},
+      data: {question: JSON.stringify(question)},
+      success: function (message) {
+        runAllCallbacks(callbacks, message);
+      }
+    });
+  },
+
+  deleteQuestion: function (question, callbacks) {
+    $.ajax({
+      url: "/api/questions/" + question.id,
+      method: "DELETE",
       success: function (message) {
         runAllCallbacks(callbacks, message);
       }

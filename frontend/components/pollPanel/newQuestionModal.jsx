@@ -1,5 +1,13 @@
 var React = require('react');
 var Modal = require('boron/DropModal');
+var NewQuestion = require('../dnd/newQuestion')
+var ReactTooltip = require("react-tooltip");
+
+var modalStyle = {
+    width: '80%',
+    padding: '20px'
+};
+
 
 var QuestionActions = require('../../actions/pollActions');
 
@@ -24,6 +32,7 @@ var NewQuestionModal = React.createClass({
     onSave: function(e){
         e.preventDefault();
         QuestionActions.createQuestion(
+          this.props.poll.id,
           this.state,
           this.hideModal
       );
@@ -34,35 +43,17 @@ var NewQuestionModal = React.createClass({
 
     render: function() {
         return (
-            <span>
+            <div >
                 <button className="btn btn-default"
-                        onClick={this.showModal}>
+                        onClick={this.showModal}
+                        data-tip="Add question to this poll">
                   <span className="glyphicon glyphicon-plus" />
                 </button>
-                <Modal ref="newQuestionModal">
-                    <form className="new-poll-form">
-                      <label htmlFor='poll_title'>
-                        <h2>Poll Title:
-                          <input type="text"
-                                 id="poll_title"
-                                 value={this.state.title}
-                                 placeholder="The title for your poll"
-                                 onChange={this._updateTitle}/>
-                        </h2>
-                      </label>
-                      <button type="button"
-                          className="btn btn-danger"
-                          onClick={this.onSave}>
-                          Save
-                      </button>
-                      <button type="button"
-                          className="btn btn-default"
-                          onClick={this.hideModal}>
-                          Cancel
-                      </button>
-                    </form>
+                <Modal ref="newQuestionModal" modalStyle={modalStyle}>
+                    <NewQuestion pollId={this.props.poll.id}
+                                 hideModal={this.hideModal} />
                 </Modal>
-            </span>
+            </div>
         );
     }
 });

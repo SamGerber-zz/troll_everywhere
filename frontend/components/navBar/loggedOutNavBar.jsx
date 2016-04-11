@@ -33,14 +33,14 @@ var loggedOutNavBar = React.createClass({
           </div>
           <div className="collapse navbar-collapse" id="logged-out-navbar">
             <ul className="nav navbar-nav">
-              <li>
+              {/*<li>
                 <a href="#">
                   Plans & Pricing
                   <span className="sr-only">(current)</span>
                 </a>
-              </li>
-              <li><a href="/welcome">Take a Tour</a></li>
-              <li><a href="#">Help & FAQ</a></li>
+              </li>*/}  
+              <li><a href="/welcome">{/*Take a Tour*/}</a></li>
+              {/*<li><a href="#">Help & FAQ</a></li>*/}
             </ul>
             <ul className="nav navbar-nav navbar-right">
               <LoginModal location={this.props.location}/>

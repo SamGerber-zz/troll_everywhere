@@ -28,13 +28,7 @@ var LeftIndex = React.createClass({
     return (
       <ul className="main-navbar-left-menu">
         <li key={2} className="nav-item">
-          <a className="nav-link" href="#">TrollEverywhere</a>
-        </li>
-        <li key={3} className="nav-item" onClick={function(e){
-            e.preventDefault();
-            this.context.router.push("/polls/new/");
-          }.bind(this)}>
-          <a className="nav-link" href="/polls/new">New Poll</a>
+          <a className="nav-link" href="/welcome">TrollEverywhere</a>
         </li>
         <li key={4} className="nav-item" onClick={function(e){
             e.preventDefault();

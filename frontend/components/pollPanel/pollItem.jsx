@@ -1,5 +1,6 @@
 /* React Libraries */
 var React = require('react');
+var ReactTooltip = require('react-tooltip');
 
 /* React Components */
 var Question = require('./question');
@@ -67,11 +68,13 @@ var PollItem = React.createClass({
 
   _onPollClick: function(e) {
     e.preventDefault();
+    ReactTooltip.hide();
     this.setState({ expanded: !this.state.expanded });
   },
 
   _onQuestionClick: function(questionId, e) {
     e.preventDefault();
+    ReactTooltip.hide();
     this.context.router.push("/questions/"+questionId+"/");
   },
 

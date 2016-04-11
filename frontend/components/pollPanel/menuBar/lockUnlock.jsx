@@ -27,9 +27,11 @@ var LockUnlock = React.createClass({
       <div className="btn-group">
         <button type="button"
                 className="btn btn-default"
+                data-tip="Lock selected questions"
                 onClick={this._onLockClick}>🔒Lock</button>
         <button type="button"
                 className="btn btn-default"
+                data-tip="Unlock selected questions"
                 onClick={this._onUnlockClick}>🔓Unlock</button>
       </div>
     );

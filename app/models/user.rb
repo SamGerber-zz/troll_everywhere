@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
 
   validates :password_digest, presence: true
-  validates :password, length: { minimum: 6, allow_nil: true }
+    validates :password, length: { minimum: 6, allow_nil: true }
 
   validates :session_token, presence: true, uniqueness: true
 
@@ -104,11 +104,11 @@ class User < ActiveRecord::Base
   end
 
   def ensure_session_token
-    self.session_token ||= self.reset_session_token!
+    self.session_token ||= self.class.generate_token
   end
 
   def ensure_url_suffix
-    self.url_suffix ||= self.username
+    self.url_suffix ||= self.username.blank? ? self.class.generate_token : self.username
   end
 
   def password=(password)

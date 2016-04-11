@@ -1,4 +1,4 @@
-/*
+  /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
  *
@@ -16,6 +16,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "main";
+@import "shepherd-theme-arrows";
 
 .troll {
   background-image: url("http://media.bizzmarkblog.com/2015/03/troll.jpg");
@@ -262,4 +263,34 @@ body {
   font-family: 'Glyphicons Halflings';
   font-size: 12px;
   content: "\270f";
+}
+
+.question-modal {
+  margin: 0 10%;
+}
+.question-modal .btn{
+  float: none;
+}
+.question-modal .btn-toolbar .btn, .btn-toolbar .btn-group, .btn-toolbar .input-group{
+  float: none;
+}
+
+.editable-text{
+  white-space: pre-wrap;
+}
+.question-modal:focus{
+  outline: none;
+}
+*:focus {
+    outline: none;
+}
+
+.qr-code{
+  position: absolute;
+  top: 100px;
+  right: 100px;
+}
+
+.splash-btn {
+  margin: 20px;
 }

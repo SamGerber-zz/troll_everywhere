@@ -12,107 +12,110 @@ user_attributes[:password] = "asdasdasd"
 user = User.create!(user_attributes)
 poll_attributes = {}
 poll_attributes[:author_id] = user.id
-poll_attributes[:title] = "Would you rather..."
+poll_attributes[:title] = "Sorting Algorithms"
 poll = Poll.create(poll_attributes)
-would_you_rather_questions = [
+sorting_questions = [
   {
-    title: "Secretions",
-    body: "Would you rather only sweat eggnog or only cry spaghetti sauce?",
+    title: "Bubble Sort - Time",
+    body: "What is the TIME complexity of bubble sort?",
     responses: [
-      "sweat eggnog",
-      "cry spaghetti sauce"
+      "O(n)",
+      "O(nLogn)",
+      "O(n^2)"
     ]
   },
   {
-    title: "Dragons",
-    body: "Would you rather be a dragon or own a dragon?",
+    title: "Bubble Sort - Space",
+    body: "What is the SPACE complexity of bubble sort?",
     responses: [
-      "be the dragon",
-      "own the dragon"
+      "O(1)",
+      "O(n)",
+      "O(n^2)"
     ]
   },
   {
-    title: "Cage",
-    body: "Would you rather spend the rest of your life without access to the internet, or perpetually within two feet of Nicolas Cage?",
+    title: "Merge Sort - Time",
+    body: "What is the TIME complexity of merge sort?",
     responses: [
-      "without internet",
-      "with Nic"
+      "O(n)",
+      "O(nLogn)",
+      "O(n^2)",
     ]
   },
   {
-    title: "Recovery",
-    body: "Would you rather find everything you’ve ever lost, or remember everything you’ve ever forgotten?",
+    title: "Merge Sort - Space",
+    body: "What is the SPACE complexity of merge sort?",
     responses: [
-      "find everything",
-      "remember everything"
+      "O(n)",
+      "O(nLogn)",
+      "O(n^2)"
     ]
   },
   {
-    title: "Film Come True",
-    body: "Would you rather be in a real version of The Walking Dead or Jurassic Park?",
+    title: "Insertion Sort - Time",
+    body: "What is the TIME complexity of insertion sort?",
     responses: [
-      "The Walking Dead",
-      "Jurassic Park"
+      "O(n)",
+      "O(nLogn)",
+      "O(n^2)"
     ]
   },
   {
-    title: "Amnesia",
-    body: "Would you rather forget who you were or who everyone else was?",
+    title: "Insertion Sort - Space",
+    body: "What is the SPACE complexity of insertion sort?",
     responses: [
-      "forget who I am",
-      "forget who everyone else is"
+      "O(1)",
+      "O(n)",
+      "O(n^2)"
     ]
   },
   {
-    title: "Remote",
-    body: "Would you rather have a rewind button or a pause button on your life?",
+    title: "Selection Sort - Time",
+    body: "What is the TIME complexity of selection sort?",
     responses: [
-      "rewind",
-      "pause"
+      "O(n)",
+      "O(nLogn)",
+      "O(n^2)",
     ]
   },
   {
-    title: "Babel",
-    body: "Would you rather be able to talk with the animals or speak all foreign languages?",
+    title: "Selection Sort - Space",
+    body: "What is the SPACE complexity of selection sort?",
     responses: [
-      "talk with the animals",
-      "foreign languages"
+      "O(1)",
+      "O(n)",
+      "O(n^2)"
     ]
   },
   {
-    title: "Longevity",
-    body: "Would you rather win the lottery or live twice as long?",
+    title: "Quick Sort - Time Sorted",
+    body: "What is the TIME complexity of quick sort for a sorted array?",
     responses: [
-      "the lottery",
-      "live twice as long"
+      "O(n)",
+      "O(nLogn)",
+      "O(n^2)"
     ]
   },
   {
-    title: "Heroes",
-    body: "Would you rather be Batman or Spiderman?",
+    title: "Quick Sort - Time Unsorted",
+    body: "What is the TIME complexity of quick sort for an unsorted array?",
     responses: [
-      "Batman",
-      "Spiderman"
+      "O(n)",
+      "O(nLogn)",
+      "O(n^2)"
     ]
   },
   {
-    title: "Stuck",
-    body: "Would you rather be stuck on a broken ski lift or in a broken elevator?",
+    title: "Quick Sort - Space",
+    body: "What is the SPACE complexity of quick sort?",
     responses: [
-      "ski lift",
-      "elevator"
+      "O(1)",
+      "O(Logn)",
+      "O(n)"
     ]
-  },
-  {
-    title: "Blurt",
-    body: "Would you rather always say everything on your mind or never speak again?",
-    responses: [
-      "say everything",
-      "never speak"
-    ]
-  },
+  }
 ]
-would_you_rather_questions.each do |question|
+sorting_questions.each do |question|
   question_attributes={}
   question_attributes[:poll_id] = poll.id
   question_attributes[:title] = question[:title]
@@ -128,43 +131,75 @@ would_you_rather_questions.each do |question|
   end
 end
 
-poll_attributes[:title] = "Who would win in a fight..."
+poll_attributes[:title] = "Abstract Data Types"
 poll = Poll.create(poll_attributes)
-who_would_win_in_a_fight = [
+data_structures = [
   {
-    title: "Boxers",
-    body: "Who would win in a fight? Floyd Mayweather or Manny Pacquiao?",
+    title: "Constant Time Access",
+    body: "Which of the following Abstract Data Types have constant time access?",
     responses: [
-      "Floyd Mayweather",
-      "Manny Pacquiao"
+      "Array",
+      "Linked List",
+      "Stack",
+      "Binary Search Tree"
     ]
   },
   {
-    title: "Search Engines",
-    body: "Who would win in a fight? Google or Bing?",
+    title: "Constant Time Search",
+    body: "Which of the following Abstract Data Types have constant time search?",
     responses: [
-      "Google",
-      "Bing"
+      "Linked List",
+      "Stack",
+      "Hash Table",
+      "Binary Search Tree"
     ]
   },
   {
-    title: "Beasts",
-    body: "Who would win in a fight? A gorilla or a polar bear?",
+    title: "Worst Insertion",
+    body: "Which of these Abstract Data Types has the worst insertion time complexity?",
     responses: [
-      "The gorilla",
-      "The polar bear"
+      "Array",
+      "Linked List",
+      "Stack",
+      "Binary Search Tree"
     ]
   },
   {
-    title: "Wizards",
-    body: "Who would win in a fight? Gandalf or Harry Potter?",
+    title: "Worst Deletion",
+    body: "Which of these Abstract Data Types has the worst deletion time complexity?",
     responses: [
-      "Gandalf",
-      "Harry Potter"
+      "Array",
+      "Linked List",
+      "Stack",
+      "Binary Search Tree"
+    ]
+  },
+  {
+    title: "Max Heap Max",
+    body: "What is the time complexity to find the max of a max heap?",
+    responses: [
+      "O(1) - Constant",
+      "O(Logn) - Logarithmic",
+      "O(n) - Linear",
+      "O(nLogn) - Linearithmic",
+      "O(n^2) - Polynomial",
+      "O(2^n) - Exponential"
+    ]
+  },
+  {
+    title: "Max Heap Min",
+    body: "What is the time complexity to find the MIN of a max heap?",
+    responses: [
+      "O(1) - Constant",
+      "O(Logn) - Logarithmic",
+      "O(n) - Linear",
+      "O(nLogn) - Linearithmic",
+      "O(n^2) - Polynomial",
+      "O(2^n) - Exponential"
     ]
   }
 ]
-who_would_win_in_a_fight.each do |question|
+data_structures.each do |question|
   question_attributes={}
   question_attributes[:poll_id] = poll.id
   question_attributes[:title] = question[:title]

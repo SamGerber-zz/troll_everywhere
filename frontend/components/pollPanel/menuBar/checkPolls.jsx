@@ -1,5 +1,6 @@
 /* React Libraries */
 var React = require('react');
+var ReactTooltip = require('react-tooltip');
 
 /* React Flux Action Creators */
 var QuestionFilterActions = require('../../../actions/questionFilterActions.js');
@@ -51,16 +52,25 @@ var NavBar = React.createClass({
                 className="btn btn-default dropdown-toggle"
                 data-toggle="dropdown"
                 aria-haspopup="true"
+                data-tip="Dynamically select questions"
                 aria-expanded="false">
-          <span className="glyphicon glyphicon-check" />
+          <span className="glyphicon glyphicon-check"/>
           Select
           <span className="caret"/>
         </button>
         <ul className="dropdown-menu">
-          <li><a href="#" onClick={this._checkAllPolls}>All</a></li>
-          <li><a href="#" onClick={this._unCheckAllPolls}>None</a></li>
-          <li><a href="#" onClick={this._checkAllLocked}>Locked</a></li>
-          <li><a href="#" onClick={this._checkAllUnlocked}>Unlocked</a></li>
+          <li><a href="#"
+                 onClick={this._checkAllPolls}
+                 data-tip="Select all questions">All</a></li>
+          <li><a href="#"
+                 onClick={this._unCheckAllPolls}
+                 data-tip="Deselect all questions">None</a></li>
+          <li><a href="#"
+                 onClick={this._checkAllLocked}
+                 data-tip="Select all locked questions">Locked</a></li>
+          <li><a href="#"
+                 onClick={this._checkAllUnlocked}
+                 data-tip="Select all unlocked questions">Unlocked</a></li>
         </ul>
       </div>
     );

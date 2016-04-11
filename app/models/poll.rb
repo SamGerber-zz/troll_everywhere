@@ -57,7 +57,7 @@ class Poll < ActiveRecord::Base
   def ensure_ord
     polls = author.polls
     self.ord ||= (polls.map(&:ord).compact.max || -1) + 1
-    if self.author_id
+    if self.author_id && self.ord_changed?
       transaction do
         self.class.connection.execute(<<-SQL)
         SET CONSTRAINTS deferred_ord_and_author_id DEFERRED;

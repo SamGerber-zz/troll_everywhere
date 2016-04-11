@@ -27,14 +27,14 @@ class Question < ActiveRecord::Base
 
   has_many :responses,
     -> { order :ord },
-    inverse_of: :question
+    inverse_of: :question,
+    dependent: :destroy
   accepts_nested_attributes_for :responses, allow_destroy: true
 
   has_many :votes,
     through: :responses,
     source: :votes,
-    inverse_of: :question,
-    dependent: :destroy
+    inverse_of: :question
 
   belongs_to :poll,
     inverse_of: :questions
@@ -57,7 +57,7 @@ class Question < ActiveRecord::Base
   def ensure_ord
     questions = poll.questions
     self.ord ||= ( questions.map(&:ord).compact.max || -1 ) + 1
-    if self.poll_id
+    if self.poll_id && self.ord_changed?
       transaction do
         self.class.connection.execute(<<-SQL)
         SET CONSTRAINTS deferred_ord_and_poll_id DEFERRED;
