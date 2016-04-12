@@ -1,6 +1,7 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher');
 var QuestionFiltersConstants = require('../constants/questionFilterConstants');
+var SessionConstants = require('../constants/sessionConstants.js');
 var QuestionStore = require('./questionStore');
 
 var _questionFilters = {};
@@ -14,6 +15,11 @@ var updateQuestionFilters = function (questionFilters) {
     _questionFilters[key] = questionFilters[key];
   });
 };
+
+var emptyStore = function() {
+  _questionFilters = {};
+  _checkedQuestionIds = {};
+}
 
 var toggleChecks = function (questionIds) {
   questionIds.forEach(function(questionId){
@@ -44,6 +50,10 @@ var checkNothing = function () {
 
 QuestionFiltersStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
+  case SessionConstants.LOGGED_OUT:
+    emptyStore();
+    QuestionFiltersStore.__emitChange();
+    break;
   case QuestionFiltersConstants.QUESTION_FILTERS_RECEIVED:
     updateQuestionFilters(payload.questionFilters);
     QuestionFiltersStore.__emitChange();
@@ -114,7 +124,5 @@ QuestionFiltersStore.filter = function (questions) {
 QuestionFiltersStore.find = function (filterName) {
   return _questionFilters[filterName];
 };
-
-window.QuestionFiltersStore = QuestionFiltersStore;
 
 module.exports = QuestionFiltersStore;

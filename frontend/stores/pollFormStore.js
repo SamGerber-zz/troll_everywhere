@@ -1,6 +1,7 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher.js');
 var PollFormConstants = require('../constants/pollFormConstants.js');
+var SessionConstants = require('../constants/sessionConstants.js');
 var PollFormStore = new Store(AppDispatcher);
 
 var blankResponse = {
@@ -82,6 +83,10 @@ PollFormStore.getResponse = function(questionIndex, responseIndex) {
 
 PollFormStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
+    case SessionConstants.LOGGED_OUT:
+      resetPollForm();
+      PollFormStore.__emitChange();
+      break;
     case PollFormConstants.ADD_QUESTION:
       _pollForm.questions.push(blankQuestion);
       PollFormStore.__emitChange();
@@ -114,7 +119,5 @@ PollFormStore.__onDispatch = function (payload) {
       break;
   }
 };
-
-window.PollFormStore = PollFormStore;
 
 module.exports = PollFormStore;

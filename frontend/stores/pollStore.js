@@ -1,6 +1,7 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher.js');
 var PollConstants = require('../constants/pollConstants.js');
+var SessionConstants = require('../constants/sessionConstants.js');
 var PollStore = new Store(AppDispatcher);
 
 var _polls = {};
@@ -12,6 +13,10 @@ var resetPolls = function (polls) {
     _polls[poll.id] = poll;
   });
 };
+
+var emptyStore = function() {
+  return _polls = {};
+}
 
 var updatePoll = function (poll) {
   _polls[poll.id] = poll;
@@ -31,6 +36,10 @@ PollStore.find = function (id) {
 
 PollStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
+    case SessionConstants.LOGGED_OUT:
+      emptyStore();
+      PollStore.__emitChange();
+      break;
     case PollConstants.POLLS_RECEIVED:
       resetPolls(payload.polls);
       PollStore.__emitChange();
@@ -41,7 +50,5 @@ PollStore.__onDispatch = function (payload) {
       break;
   }
 };
-
-window.PollStore = PollStore;
 
 module.exports = PollStore;

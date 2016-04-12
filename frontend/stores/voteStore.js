@@ -1,6 +1,7 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher.js');
 var VoteConstants = require('../constants/voteConstants.js');
+var SessionConstants = require('../constants/sessionConstants.js');
 var VoteStore = new Store(AppDispatcher);
 
 var _votes = {};
@@ -30,6 +31,10 @@ VoteStore.find = function (id) {
 
 VoteStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
+    case SessionConstants.LOGGED_OUT:
+      resetVotes([]);
+      VoteStore.__emitChange();
+      break;
     case VoteConstants.VOTES_RECEIVED:
       resetVotes(payload.votes);
       VoteStore.__emitChange();

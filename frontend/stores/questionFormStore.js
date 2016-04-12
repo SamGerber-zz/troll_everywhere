@@ -93,6 +93,4 @@ QuestionFormStore.__onDispatch = function (payload) {
   }
 };
 
-window.QuestionFormStore = QuestionFormStore;
-
 module.exports = QuestionFormStore;

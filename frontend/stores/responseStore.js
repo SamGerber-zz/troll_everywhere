@@ -1,6 +1,7 @@
 var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher.js');
 var ResponseConstants = require('../constants/responseConstants.js');
+var SessionConstants = require('../constants/sessionConstants.js');
 var ResponseStore = new Store(AppDispatcher);
 
 var _Responses = {};
@@ -30,6 +31,10 @@ ResponseStore.find = function (id) {
 
 ResponseStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
+    case SessionConstants.LOGGED_OUT:
+      resetResponses([]);
+      ResponseStore.__emitChange();
+      break;
     case ResponseConstants.RESPONSES_RECEIVED:
       resetResponses(payload.Responses);
       ResponseStore.__emitChange();

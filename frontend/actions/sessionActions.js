@@ -66,6 +66,4 @@ var ApiActions = {
   }
 };
 
-window.sessionActions = ApiActions;
-
 module.exports = ApiActions;

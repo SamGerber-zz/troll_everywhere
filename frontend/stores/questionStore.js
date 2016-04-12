@@ -2,6 +2,8 @@ var Store = require('flux/utils').Store;
 var AppDispatcher = require('../dispatcher.js');
 var QuestionConstants = require('../constants/questionConstants.js');
 var PollConstants = require('../constants/pollConstants.js');
+var SessionConstants = require('../constants/sessionConstants.js');
+
 var QuestionStore = new Store(AppDispatcher);
 
 var _questions = {};
@@ -73,6 +75,10 @@ QuestionStore.find = function (id) {
 
 QuestionStore.__onDispatch = function (payload) {
   switch(payload.actionType) {
+    case SessionConstants.LOGGED_OUT:
+      resetQuestions([]);
+      QuestionStore.__emitChange();
+      break;
     case QuestionConstants.QUESTIONS_RECEIVED:
       resetQuestions(payload.questions);
       QuestionStore.__emitChange();
@@ -99,7 +105,5 @@ QuestionStore.__onDispatch = function (payload) {
       break;
   }
 };
-
-window.QuestionStore = QuestionStore;
 
 module.exports = QuestionStore;
