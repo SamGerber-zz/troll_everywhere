@@ -2,7 +2,7 @@
 
 [TrollEverywhere][heroku] is a polling app that allows public speakers to engage their audience for instant feedback.
 
-[heroku]: https://trolleverywhere.com/
+[heroku]: www.trolleverywhere.com/
 
 ## The Stack
 
