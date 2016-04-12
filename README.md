@@ -1,8 +1,31 @@
 # TrollEverywhere
 
-[TrollEverywhere][heroku] is an polling app
+[TrollEverywhere][heroku] is a polling app that allows public speakers to engage their audience for instant feedback.
 
 [heroku]: https://trolleverywhere.com/
+
+## The Stack
+
+The app is being served from **Heroku**. Data is stored in a **Postgres** DB, with large assets being hosted on Cloudinary.
+
+A **Rails API** exposes several endpoints, supporting the front end.
+
+Dependencies are managed with Bundler, npm and Webpack.
+
+The front end is built with **ReactJS**, loosely following Facebook's **Flux** pattern.
+
+## A Nested Schema
+
+The schema comprises nested one-to-many relationships:
+
+Users -> Polls -> Questions -> Responses -> Votes
+Users -> Cast Votes
+
+This proved to be an interesting challenge and afforded me the chance to get my hands dirty with Rails' `accepts_nested_attributes_for`.
+
+## Ordered Sublists
+
+I wanted to give users the ability to maintain a specific order to their data.
 
 ## Minimum Viable Product
 
