@@ -2,6 +2,8 @@
 
 [TrollEverywhere][heroku] is a polling app that allows public speakers to engage their audience for instant feedback.
 
+![voting](./docs/voting.gif)
+
 [heroku]: http://www.trolleverywhere.com/
 
 ## The Stack
@@ -79,6 +81,9 @@ end
 
 By deferring the constraints, we're able to hit the database a single time, updating all the indices in one go.
 
+The end result is having reorderable responses for questions:
+![editing a question](./docs/edit_question.gif)
+
 ## React Editable Item
 
 With the data nested the way it is, most of our input fields were small phrases of text, so I implemented a simple reusable React component that wraps input fields, allowing it to toggle between display and editing modes:
@@ -90,3 +95,17 @@ The component takes as props the text to display, and a callback which is passed
 ```html
 <EditableItem updateText={this.updateTitle} text={poll.title} />
 ```
+
+## AJAX Polling
+
+Participant voting pages are kept synchronized with the presentation through AJAX polling. This works, but it's a high priority to migrate to a websockets setup to make this more scaleable.
+
+In the gif below, we can see three voting panes keeping in step with the presentation.
+
+![synchronous voting](./docs/synchronous_voting.gif)
+
+## Question Filter
+
+A question filter store holds various filters and when passed an array of questions, returns only those that meet the criteria. This lets us do a simple search of questions by keyword:
+
+![question filter](./docs/filter.gif)
