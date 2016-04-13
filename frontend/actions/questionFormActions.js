@@ -27,7 +27,7 @@ var QuestionFormActions = {
     delete question['responses'];
     question['responses_attributes'].forEach(function(ra){delete ra['votes'];});
 
-    var callbacks = [QuestionFormActions.receiveSingleQuestion, callback];
+    var callbacks = [PollActions.fetchSinglePollForQuestion, callback];
     ApiUtil.updateQuestion(question, callbacks);
     question['responses'] = question['responses_attributes'];
     delete question['responses_attributes'];
