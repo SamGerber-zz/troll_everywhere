@@ -27,7 +27,6 @@ var QuestionActions = {
   },
 
   createQuestion: function(pollId, question, callback){
-    debugger;
     var callbacks = [PollActions.fetchSinglePollForQuestion, callback];
     ApiUtil.createQuestion(pollId, question, callbacks);
   },
