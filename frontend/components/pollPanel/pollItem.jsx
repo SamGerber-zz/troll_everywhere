@@ -89,7 +89,7 @@ var PollItem = React.createClass({
       }
       Questions = this.state.questions.map(function(question, i){
         isActive = question.is_active ? " list-group-item-success" : "";
-        isLocked = question.is_locked && !question.is_active ? " disabled" : "";
+        isLocked = question.is_locked && !question.is_active ? " locked-poll" : "";
         return (
           <li key={question.id}
               className={className+isActive+isLocked}>
