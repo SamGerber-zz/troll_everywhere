@@ -1,21 +1,23 @@
 var Dispatcher = require('../dispatcher');
 var QuestionConstants = require('../constants/questionConstants.js');
 var ApiUtil = require('../util/apiUtil.js');
+
 var PollActions = require('./pollActions.js');
-var SessionStore = require('../stores/sessionStore.js');
 
 var QuestionActions = {
-  receiveAllQuestions: function (questions) {
-    Dispatcher.dispatch({
-      actionType: QuestionConstants.QUESTIONS_RECEIVED,
-      questions: questions
-    });
-  },
 
+  // Callbacks
   receiveSingleQuestion: function (question) {
     Dispatcher.dispatch({
       actionType: QuestionConstants.QUESTION_RECEIVED,
       question: question
+    });
+  },
+
+  receiveAllQuestions: function (questions) {
+    Dispatcher.dispatch({
+      actionType: QuestionConstants.QUESTIONS_RECEIVED,
+      questions: questions
     });
   },
 
@@ -26,28 +28,16 @@ var QuestionActions = {
     });
   },
 
+  // Create
   createQuestion: function(pollId, question, callback){
     var callbacks = [PollActions.fetchSinglePollForQuestion, callback];
     ApiUtil.createQuestion(pollId, question, callbacks);
   },
 
-  updateQuestion: function(question, callback){
-    var callbacks = [this.receiveSingleQuestion, callback];
-    ApiUtil.updateQuestion(question, callbacks);
-  },
-
-  deleteQuestion: function(question, callback){
-    var callbacks = [PollActions.fetchSinglePollForQuestion, callback];
-    ApiUtil.deleteQuestion(question, callbacks);
-  },
-
-  clearResponses: function(question, callback){
+  // Read
+  fetchQuestionWithId: function(questionId, callback) {
     var callbacks = [QuestionActions.receiveSingleQuestion, callback];
-      question.responses.forEach(function(response){
-      response["_destroy"] = true;
-    });
-    question['responses_attributes'] = question['responses'];
-    ApiUtil.updateQuestion(question, callbacks);
+    ApiUtil.fetchQuestionWithId(questionId, callbacks);
   },
 
   fetchAllQuestionsForPollWithId: function(pollId, callback) {
@@ -55,9 +45,26 @@ var QuestionActions = {
     ApiUtil.fetchAllQuestionsForPollWithId(pollId, callbacks);
   },
 
-  fetchQuestionWithId: function(questionId, callback) {
+  // Update
+  updateQuestion: function(question, callback){
+    var callbacks = [this.receiveSingleQuestion, callback];
+    ApiUtil.updateQuestion(question, callbacks);
+  },
+
+  // Destroy
+  deleteQuestion: function(question, callback){
+    var callbacks = [PollActions.fetchSinglePollForQuestion, callback];
+    ApiUtil.deleteQuestion(question, callbacks);
+  },
+
+  // Miscellaneous
+  clearResponses: function(question, callback){
     var callbacks = [QuestionActions.receiveSingleQuestion, callback];
-    ApiUtil.fetchQuestionWithId(questionId, callbacks);
+      question.responses.forEach(function(response){
+      response["_destroy"] = true;
+    });
+    question['responses_attributes'] = question['responses'];
+    ApiUtil.updateQuestion(question, callbacks);
   },
 
   updateActiveQuestion: function(question, callback) {

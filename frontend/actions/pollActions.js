@@ -3,6 +3,22 @@ var PollConstants = require('../constants/pollConstants.js');
 var ApiUtil = require('../util/apiUtil.js');
 
 var PollActions = {
+
+  // Callbacks
+  receiveSinglePoll: function (poll) {
+    Dispatcher.dispatch({
+      actionType: PollConstants.POLL_RECEIVED,
+      poll: poll
+    });
+  },
+
+  receiveAllPolls: function (polls) {
+    Dispatcher.dispatch({
+      actionType: PollConstants.POLLS_RECEIVED,
+      polls: polls
+    });
+  },
+
   // Create
   createPoll: function(poll, callback){
     var callbacks = [this.receiveSinglePoll, callback];
@@ -20,23 +36,9 @@ var PollActions = {
     ApiUtil.fetchSinglePoll(Question.poll_id, callbacks);
   },
 
-  receiveSinglePoll: function (poll) {
-    Dispatcher.dispatch({
-      actionType: PollConstants.POLL_RECEIVED,
-      poll: poll
-    });
-  },
-
   fetchAllPolls: function(userId, callback){
     var callbacks = [PollActions.receiveAllPolls, callback];
     ApiUtil.fetchAllPolls(userId, callbacks);
-  },
-
-  receiveAllPolls: function (polls) {
-    Dispatcher.dispatch({
-      actionType: PollConstants.POLLS_RECEIVED,
-      polls: polls
-    });
   },
 
   // Update
