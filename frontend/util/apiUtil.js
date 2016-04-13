@@ -142,7 +142,9 @@ module.exports = {
       method: "PATCH",
       data: {question: JSON.stringify(question)},
       success: function (message) {
-        message = message[0];
+        if (message.constructor === Array) {
+          message = message[0];
+        }
         runAllCallbacks(callbacks, message);
       }
     });
