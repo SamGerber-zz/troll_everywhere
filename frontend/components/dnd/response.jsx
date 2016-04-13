@@ -28,7 +28,6 @@ var responseSource = {
   },
 
   endDrag: function(props, monitor) {
-    // debugger;
     var item = monitor.getItem();
     var droppedOrd = item.ord;
     var originalIndex = item.originalIndex;

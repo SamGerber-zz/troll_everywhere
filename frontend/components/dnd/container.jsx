@@ -9,6 +9,7 @@ var EditableItem = require('./editableItem');
 var ReactTooltip = require("react-tooltip");
 var QuestionFormStore = require('../../stores/questionFormStore');
 var QuestionFormActions = require('../../actions/questionFormActions');
+var PollActions = require('../../actions/pollActions');
 
 
 var style = {
