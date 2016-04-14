@@ -1,5 +1,4 @@
 var React = require('react');
-var VoteActions = require('../../actions/voteActions');
 var QuestionActions = require('../../actions/questionActions');
 var QuestionStore = require('../../stores/questionStore');
 var SessionStore = require('../../stores/sessionStore');
