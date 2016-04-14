@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
         </Route>
         <Route path="/presentations/:id" component={VoteForm}></Route>
         <Route path="/questions/:id/vote" component={VoteForm} onEnter={requireAuth}></Route>
+        <Route path="*" component={Splash}/>
       </Router>
     ), root);
   });
