@@ -10,7 +10,7 @@ var ReactTooltip = require("react-tooltip");
 var QuestionFormStore = require('../../stores/questionFormStore');
 var QuestionFormActions = require('../../actions/questionFormActions');
 var PollActions = require('../../actions/pollActions');
-
+var Mediator = require("../../tour/mediator");
 
 var style = {
   // width: 400
@@ -132,6 +132,7 @@ var Container = React.createClass({
   },
 
   updateTitle: function(text){
+    Mediator.trigger('edit-question');
     this.setState({
       title: text
     });
@@ -152,6 +153,7 @@ var Container = React.createClass({
     if (question.id) {
       QuestionFormActions.updateQuestion(question.id, question)
     } else {
+      Mediator.trigger('save-new-question');
       QuestionFormActions.createQuestion(question.poll_id, question)
     }
     ReactTooltip.hide();
@@ -212,7 +214,8 @@ var Container = React.createClass({
           <button type="button"
                   className="btn btn-info"
                   onClick={this.saveQuestion}
-                  data-tip="Save Question">Save Question</button>
+                  data-tip="Save Question"
+                  id="tour-11">Save Question</button>
           <button type="button"
                   className="btn btn-danger"
                   onClick={this.cancelQuestion}

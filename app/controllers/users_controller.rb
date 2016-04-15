@@ -11,6 +11,7 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  active_question_id :integer
+#  is_guest           :boolean          not null
 #
 
 class UsersController < ApplicationController

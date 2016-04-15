@@ -3,10 +3,9 @@ var SessionConstants = require('../constants/sessionConstants.js');
 var ApiUtil = require('../util/apiUtil.js');
 var SessionStore = require('../stores/sessionStore.js');
 
-var ApiActions = {
+var SessionActions = {
 
-  // Inbound from API, out to dispatcher
-
+  // Callbacks
   clearCurrentUser: function () {
     Dispatcher.dispatch({
       actionType: SessionConstants.LOGGED_OUT,
@@ -29,8 +28,7 @@ var ApiActions = {
 
 
 
-  // Outbound to API
-
+  // Create
   registerUser: function(user, callback){
     var currentUser = SessionStore.currentUser();
     if (currentUser && !currentUser.is_guest) {
@@ -41,11 +39,6 @@ var ApiActions = {
     }
     var callbacks = [this.receiveCurrentUser, callback];
     ApiUtil.createUser(user, callbacks);
-  },
-
-  getCurrentUser: function(callback){
-    var callbacks = [this.receiveCurrentUser, callback];
-    ApiUtil.getCurrentUser(callbacks);
   },
 
   loginUser: function(user, callback){
@@ -60,10 +53,19 @@ var ApiActions = {
     user && ApiUtil.loginUser(user, callbacks);
   },
 
+  // Read
+  getCurrentUser: function(callback){
+    var callbacks = [this.receiveCurrentUser, callback];
+    ApiUtil.getCurrentUser(callbacks);
+  },
+
+  // Update
+
+  //Destroy
   logout: function(callback){
     var callbacks = [this.clearCurrentUser, callback];
     ApiUtil.logout(callbacks);
   }
 };
 
-module.exports = ApiActions;
+module.exports = SessionActions;

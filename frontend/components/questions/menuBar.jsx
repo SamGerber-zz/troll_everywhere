@@ -2,12 +2,14 @@ var React = require('react');
 // var ConfirmClearModal = require('./confirmClearModal');
 var QuestionActions = require('../../actions/questionActions');
 var ReactTooltip = require("react-tooltip");
+var Mediator = require('../../tour/mediator');
 
 
 var NavBar = React.createClass({
 
   _onShareClick: function(e) {
     e.preventDefault();
+    Mediator.trigger('activate-question');
     ReactTooltip.hide();
     QuestionActions.updateActiveQuestion(this.props.question);
   },
@@ -16,6 +18,7 @@ var NavBar = React.createClass({
     e.preventDefault();
     ReactTooltip.hide();
     if (this.props.question.is_locked) {
+      Mediator.trigger('unlock-question');
       QuestionActions.unlockQuestions([this.props.question.id]);
     } else {
       QuestionActions.lockQuestions([this.props.question.id]);
@@ -58,6 +61,7 @@ var NavBar = React.createClass({
           <div className="btn-group-vertical btn-group-lg">
             <button type="button"
                     className={"btn btn-"+shareColor}
+                    id="activate-question"
                     onClick={this._onShareClick}
                     data-tip={shareTip}>
               <span className={"glyphicon glyphicon-" + shareIcon} />
@@ -70,6 +74,7 @@ var NavBar = React.createClass({
             </button>
             <button type="button"
                     className={"btn btn-"+lockColor}
+                    id="unlock-question"
                     onClick={this._onLockClick}
                     data-tip={lockTip}>
               <span className="glyphicon glyphicon-lock" />

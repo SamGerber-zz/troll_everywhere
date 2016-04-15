@@ -11,7 +11,7 @@ var SortableCancelOnDropOutside = React.createClass({
     var pollId = this.props.pollId || parseInt(this.props.params['id']);
     var hideModal = this.props.hideModal;
     return (
-      <div className='question-modal'>
+      <div className='question-modal' id="tour-10">
         <header>
           <h1>New Question!</h1>
         </header>

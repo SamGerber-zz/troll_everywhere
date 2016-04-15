@@ -3,6 +3,8 @@ var VoteConstants = require('../constants/voteConstants.js');
 var ApiUtil = require('../util/apiUtil.js');
 
 var VoteActions = {
+
+  // Callbacks
   receiveAllVotes: function (votes) {
     Dispatcher.dispatch({
       actionType: VoteConstants.VOTES_RECEIVED,
@@ -17,6 +19,7 @@ var VoteActions = {
     });
   },
 
+  // Create
   createVote: function(responseId, vote, callback){
     var callbacks = [this.receiveSingleVote, callback];
     ApiUtil.createVote(responseId, vote, callbacks);

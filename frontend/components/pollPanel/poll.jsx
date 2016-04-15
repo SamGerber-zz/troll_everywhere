@@ -13,6 +13,7 @@ var EditableItem = require('../dnd/editableItem');
 var Modal = require('boron/DropModal');
 var NewQuestion = require('../dnd/newQuestion');
 var ReactTooltip = require("react-tooltip");
+var Mediator = require("../../tour/mediator");
 
 
 var modalStyle = {
@@ -66,6 +67,7 @@ var Poll = React.createClass({
   },
 
   showModal: function(){
+      Mediator.trigger('show-question-modal');
       this.refs.newQuestionModal.show();
   },
   hideModal: function(){
@@ -111,7 +113,7 @@ var Poll = React.createClass({
             </div>
           </div>
           <div className="col-xs-2 col-s-2 col-md-2">
-            <button className="btn btn-default"
+            <button className="btn btn-default new-question"
                     onClick={this.showModal}
                     data-tip="Add question to this poll">
               <span className="glyphicon glyphicon-plus" />

@@ -7,8 +7,6 @@ var SessionStore = require('../../stores/sessionStore');
 var VoteStore = require('../../stores/voteStore');
 var LoggedInNavBar = require('../navBar/loggedInNavBar');
 var LoggedOutNavBar = require('../navBar/loggedOutNavBar');
-var VoteNavBar = require('../navBar/voteNavBar');
-var Response = require('./response');
 var QuestionDisplay = require('./questionDisplay');
 var QuestionComingSoon = require('./questionComingSoon');
 
@@ -49,7 +47,7 @@ var VoteForm = React.createClass({
 
   createVote: function (direction, e) {
     e.preventDefault();
-    
+
     var vote = {is_up_vote: (direction === "up")};
     var responseId = this.props.params.id;
     VoteActions.createVote(responseId, vote, function(message){
@@ -60,7 +58,7 @@ var VoteForm = React.createClass({
   },
 
   render: function() {
-    var responses, nav, questionDisplay;
+    var nav, questionDisplay;
     if(this.state.question.responses) {
       questionDisplay = <QuestionDisplay question={this.state.question}/> ;
     } else {

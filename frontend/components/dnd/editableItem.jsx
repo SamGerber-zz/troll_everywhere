@@ -90,7 +90,7 @@ var EditableItem = React.createClass({
                     onClick={this.cancel} data-tip="Cancel">
               <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
-            <button className="btn btn-default" type="button"
+            <button className="btn btn-default editable-save" type="button"
                     onClick={this.save} data-tip="Save">
               <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </button>

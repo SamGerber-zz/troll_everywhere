@@ -14,6 +14,7 @@ var QuestionFilterStore = require('../../stores/questionFilterStore.js');
 /* React Flux Action Creators */
 var QuestionActions = require('../../actions/questionActions.js');
 var PollActions = require('../../actions/pollActions.js');
+var Mediator = require('../../tour/mediator');
 
 
 
@@ -74,7 +75,10 @@ var PollItem = React.createClass({
 
   _onQuestionClick: function(questionId, e) {
     e.preventDefault();
-    ReactTooltip.hide();
+    Mediator.trigger('click-question-title');
+    // if (ReactTooltip.isMounted()) {
+    //   ReactTooltip.hide();
+    // }
     this.context.router.push("/questions/"+questionId+"/");
   },
 
@@ -83,7 +87,7 @@ var PollItem = React.createClass({
     var Questions = [],
         isActive, isLocked;
     if (this.state.questions) {
-      var className = "btn list-group-item";
+      var className = "btn list-group-item poll-question";
       if (!this.state.expanded) {
         className += " hide";
       }
@@ -105,7 +109,7 @@ var PollItem = React.createClass({
     }
 
     return (
-      <li className="list-group-item">
+      <li className="list-group-item tour-4">
         <ul className="list-group">
           <li className="list-group-item">
             <Poll poll={this.state.poll}

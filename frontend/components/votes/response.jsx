@@ -1,13 +1,12 @@
 var React = require('react');
 var VoteActions = require('../../actions/voteActions');
-var ResponseStore = require('../../stores/responseStore');
 var QuestionStore = require('../../stores/questionStore');
 
 var Response = React.createClass({
 
   createVote: function (direction, e) {
     e.preventDefault();
-    
+
     var vote = {is_up_vote: true};
     var responseId = this.props.response.id;
     VoteActions.createVote(responseId, vote);
