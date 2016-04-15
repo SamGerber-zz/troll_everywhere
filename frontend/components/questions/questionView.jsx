@@ -7,6 +7,7 @@ var Response = require('./response');
 var MenuBar = require('./menuBar');
 var NextBack = require('./nextBack');
 var ReactTooltip = require("react-tooltip");
+var Mediator = require('../../tour/mediator');
 
 
 var QuestionView = React.createClass({
@@ -33,6 +34,7 @@ var QuestionView = React.createClass({
   componentWillMount: function() {
     this.questionToken = QuestionStore.addListener(this._onQuestionStoreChange);
     this.voteToken = VoteStore.addListener(this._onVoteStoreChange);
+    this.sessionToken = SessionStore.addListener(this._onSessionStoreChange);
     QuestionActions.fetchQuestionWithId(this.props.params.id);
     this.intervalId = setInterval(QuestionActions.fetchQuestionWithId.bind(null, this.props.params.id), 1000);
   },
@@ -41,6 +43,7 @@ var QuestionView = React.createClass({
     clearInterval(this.intervalId);
     this.questionToken.remove();
     this.voteToken.remove();
+    this.sessionToken.remove();
   },
 
   componentWillReceiveProps: function(newProps) {
@@ -55,6 +58,10 @@ var QuestionView = React.createClass({
 
   _onVoteStoreChange: function() {
     QuestionActions.fetchQuestionWithId(this.props.params.id);
+  },
+
+  _onSessionStoreChange: function() {
+    clearInterval(this.intervalId);
   },
 
   _onShowStatsClick: function(e) {
@@ -91,6 +98,9 @@ var QuestionView = React.createClass({
       question.responses.forEach(function(response){
         maxVotes = Math.max(response.votes.length, maxVotes);
       });
+      if (maxVotes > 0) {
+        Mediator.trigger('vote-cast');
+      }
       responses = question.responses.map(function(response){
         percentage = Math.round(100 * response.votes.length / maxVotes);
         return(
@@ -103,7 +113,8 @@ var QuestionView = React.createClass({
       }, this);
 
     }
-
+    var currentUser = SessionStore.currentUser();
+    var url_suffix = currentUser ? currentUser.url_suffix : '';
     if (this.state.question && this.state.question.is_locked) {
       shareText = (
         <h2>
@@ -114,15 +125,15 @@ var QuestionView = React.createClass({
     } else if (this.state.question && this.state.question.is_active) {
       shareText = (
         <h2>
-          <span className="glyphicon glyphicon-blackboard"/>
-          Respond at <strong><a href={"http://trollhere.com/"+SessionStore.currentUser().url_suffix} target='_blank'>trollhere.com/{SessionStore.currentUser().url_suffix}</a></strong>
+          <span className="polling-url glyphicon glyphicon-blackboard"/>
+          Respond at <strong><a href={"http://trollhere.com/"+url_suffix} target='_blank'>trollhere.com/{url_suffix}</a></strong>
         </h2>
       );
     } else if (this.state.question) {
       shareText = (
         <h2>
           <span className="glyphicon glyphicon-share" />
-          When question is active, respond at <strong><a href={"http://trollhere.com/"+SessionStore.currentUser().url_suffix} target='_blank'>trollhere.com/{SessionStore.currentUser().url_suffix}</a></strong>
+          When question is active, respond at <strong><a href={"http://trollhere.com/"+url_suffix} target='_blank'>trollhere.com/{url_suffix}</a></strong>
         </h2>
       );
     }
@@ -172,7 +183,7 @@ var QuestionView = React.createClass({
           </div>
           <div className="col-xs-0 col-sm-0 col-md-1 col-lg-2"></div>
           <div className={'qr-code ' + hidden}>
-            <img src={'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=trollhere.com/' + SessionStore.currentUser().url_suffix}/>
+            <img src={'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=trollhere.com/' + url_suffix}/>
           </div>
         </div>
       </div>

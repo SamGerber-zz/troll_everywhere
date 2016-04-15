@@ -16,6 +16,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "main";
+@import "shepherd-theme-arrows";
+
 
 .troll {
   background-image: url("http://media.bizzmarkblog.com/2015/03/troll.jpg");
@@ -291,9 +293,13 @@ body {
 }
 
 .splash-btn {
-  margin: 20px;
+  margin: 10px;
 }
 
 .locked-poll {
   background-color: #F5F5F5;
+}
+
+.on-top-of-modal {
+  z-index: 1051;
 }
