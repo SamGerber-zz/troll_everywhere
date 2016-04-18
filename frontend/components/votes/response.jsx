@@ -18,8 +18,8 @@ var Response = React.createClass({
       <a href="#" className={"list-group-item voting-btn btn-lg"+locked}
                   onClick={this.createVote.bind(this, "up")}
                   style={{textAlign: 'left'}}>
-        <h2>{this.props.response.body}<span className="label label-info pull-right">{this.props.response && this.props.response.votes.length}</span>
-        </h2>
+        <h3>{this.props.response.body}<span className="label label-info pull-right">{this.props.response && this.props.response.votes.length}</span>
+        </h3>
       </a>
     );
   }
