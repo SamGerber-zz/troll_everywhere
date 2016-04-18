@@ -80,7 +80,7 @@ var Splash = React.createClass({
         			</div>{/*/col-lg-4 */}
 
         			<div className="col-lg-3">
-                <img className="img-responsive center-block" src="http://res.cloudinary.com/samgerber/image/upload/b_rgb:eee,c_lpad,h_300,w_310/v1461003844/voting_mobile_tp6lpu.gif" alt="" />
+                <img className="img-responsive center-block" src="http://res.cloudinary.com/samgerber/image/upload/c_limit,h_300,w_310/v1461009218/voting_mobile_mdpq3g.gif" alt="" />
                 <h4>3 - Your Audience Votes</h4>
         				<p>People can cast their votes on their phones or computers using your unique link.</p>
 
