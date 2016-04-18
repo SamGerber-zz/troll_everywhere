@@ -66,22 +66,28 @@ var Splash = React.createClass({
         		</div>{/* /row */}
 
         		<div className="row mt centered">
-        			<div className="col-lg-4">
-                <img className="img-responsive center-block" src="http://res.cloudinary.com/samgerber/image/upload/v1459129088/ask_question_sf1jjl.gif" alt="" />
+        			<div className="col-lg-3">
+                <img className="img-responsive center-block" src="http://res.cloudinary.com/samgerber/image/upload/b_rgb:eee,c_lpad,h_300,w_310/v1461003839/question_oyba8f.gif" alt="" />
         				<h4>1 - Write a Question</h4>
         				<p>Write out your question and give people a few options to choose between.</p>
         			</div>{/*/col-lg-4 */}
 
-        			<div className="col-lg-4">
-                <img className="img-responsive center-block" src="http://res.cloudinary.com/samgerber/image/upload/v1459129088/audience_answers_ee6ou0.gif" alt="" />
+        			<div className="col-lg-3">
+                <img className="img-responsive center-block" src="http://res.cloudinary.com/samgerber/image/upload/b_rgb:eee,c_mpad,h_300,w_310/v1461003856/opening_question_qjd0ds.gif" alt="" />
         				<h4>2 - Share a Link</h4>
-        				<p>People can cast their votes on their phones or computers using your unique link.</p>
+        				<p>Share your unique link or QR code.</p>
 
         			</div>{/*/col-lg-4 */}
 
-        			<div className="col-lg-4">
-                <img className="img-responsive center-block" src="http://res.cloudinary.com/samgerber/image/upload/v1459129088/see_response_vrrotz.gif" alt="" />
-                <h4>3 - There is no step 3!</h4>
+        			<div className="col-lg-3">
+                <img className="img-responsive center-block" src="http://res.cloudinary.com/samgerber/image/upload/b_rgb:eee,c_lpad,h_300,w_310/v1461003844/voting_mobile_tp6lpu.gif" alt="" />
+                <h4>3 - Your Audience Votes</h4>
+        				<p>People can cast their votes on their phones or computers using your unique link.</p>
+
+        			</div>{/*/col-lg-4 */}
+        			<div className="col-lg-3">
+                <img className="img-responsive center-block" src="http://res.cloudinary.com/samgerber/image/upload/b_rgb:eee,c_lpad,h_300,w_310/v1461003848/votes_in_n46lxh.gif" alt="" />
+                <h4>4 - Get Results!</h4>
         				<p>Watch the results start to roll in!</p>
 
         			</div>{/*/col-lg-4 */}
