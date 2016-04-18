@@ -15,11 +15,11 @@ var Response = React.createClass({
   render: function() {
     var locked = this.props.locked ? " disabled" : "";
     return (
-      <a href="#" className={"list-group-item btn"+locked}
+      <a href="#" className={"list-group-item voting-btn btn-lg"+locked}
                   onClick={this.createVote.bind(this, "up")}
                   style={{textAlign: 'left'}}>
-        <span className="badge">{this.props.response && this.props.response.votes.length}</span>
-        {this.props.response.body}
+        <h2>{this.props.response.body}<span className="label label-info pull-right">{this.props.response && this.props.response.votes.length}</span>
+        </h2>
       </a>
     );
   }

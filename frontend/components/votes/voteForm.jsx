@@ -71,11 +71,18 @@ var VoteForm = React.createClass({
       <div>
         {nav}
         <div className="row">
-          <div className="col-xs-0 col-sm-0 col-md-2 col-lg-3"></div>
-          <div className="col-xs-12 col-sm-12 col-md-8 col-lg-6">
+          <div className="col-xs-1 col-sm-1 col-md-2 col-lg-3"></div>
+          <div className="col-xs-10 col-sm-10 col-md-8 col-lg-6">
+            <h2>{this.props.params.id}&#39;s Active Question:</h2>
+          </div>
+          <div className="col-xs-1 col-sm-1 col-md-2 col-lg-3"></div>
+        </div>
+        <div className="row">
+          <div className="col-xs-1 col-sm-1 col-md-2 col-lg-3"></div>
+          <div className="col-xs-10 col-sm-10 col-md-8 col-lg-6">
             {questionDisplay}
           </div>
-          <div className="col-xs-0 col-sm-0 col-md-2 col-lg-3"></div>
+          <div className="col-xs-1 col-sm-1 col-md-2 col-lg-3"></div>
         </div>
       </div>
 

@@ -23,9 +23,10 @@ var QuestionDisplay = React.createClass({
 
     return (
       <div>
-        <h3>{this.props.question && this.props.question.title}</h3>
-        <p>{this.props.question && this.props.question.body}</p>
+        <h1>{this.props.question && this.props.question.title}</h1>
+        <h2>{this.props.question && this.props.question.body}</h2>
         <ul className="list-group">
+          <p>Click a response to cast your vote:</p>
           {responses}
         </ul>
       </div>
