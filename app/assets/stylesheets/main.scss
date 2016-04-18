@@ -138,10 +138,15 @@ i {
 	margin-top: 60px;
 	margin-bottom: 15px;
 	color: white;
-	font-size: 55px;
+	font-size: 38px;
 	font-weight: 400;
 	letter-spacing: 1px;
   text-shadow: 1px 1px 5px black;
+}
+@media (min-width: 768px) {
+  #headerwrap h1 {
+  	font-size: 55px;
+  }
 }
 
 #headerwrap h3 {
