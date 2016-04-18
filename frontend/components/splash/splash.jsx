@@ -28,20 +28,32 @@ var Splash = React.createClass({
     return (
         <div>
         	<div id="headerwrap">
-        		<div className="container">
-        			<div className="row">
-        				<div className="col-lg-6 landing-header">
-        					<h1>TrollEverywhere</h1>
-        					<h3>Easy Audience Participation.</h3>
-                  <LoginModal location={this.props.location}/>
-                  <SignUpModal location={this.props.location}/>
-                  <button type="button" onClick={this.onTryItClick} className="btn btn-info btn-lg splash-btn" id='tour-2'>Try it</button>
-                  <button type="button" onClick={this._startTour} className="btn btn-info btn-lg splash-btn" id='tour-1'>Tour</button>
-        				</div>{/* /col-lg-6 */}
-        				<div className="col-lg-6">
-        				</div>{/* /col-lg-6 */}
-        			</div>{/* /row */}
-        		</div>{/* /container */}
+                <ul className="splash-slideshow">
+                  <li>
+                    <span>Image 01</span>
+                  </li>
+                  <li>
+                    <span>Image 02</span>
+                  </li>
+                  <li>
+                    <span>Image 03</span>
+                  </li>
+                </ul>
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-lg-6 landing-header">
+                        <h1>TrollEverywhere</h1>
+                        <h3>Easy Audience Participation.</h3>
+                        <LoginModal location={this.props.location}/>
+                        <SignUpModal location={this.props.location}/>
+                        <button type="button" onClick={this.onTryItClick} className="btn btn-info btn-lg splash-btn" id='tour-2'>Try it</button>
+                        <button type="button" onClick={this._startTour} className="btn btn-info btn-lg splash-btn" id='tour-1'>Tour</button>
+                      </div>{/* /col-lg-6 */}
+                      <div className="col-lg-6">
+                    </div>{/* /col-lg-6 */}
+                  </div>{/* /row */}
+                </div>{/* /container */}
+
         	</div>{/* /headerwrap */}
 
 

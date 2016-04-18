@@ -114,12 +114,10 @@ i {
 
 /* HeaderWrap */
 #headerwrap {
-	background: url(http://res.cloudinary.com/samgerber/image/upload/v1459101806/audience-3_vxolyy.jpg) no-repeat center top;
-	background-color: #3498db;
-  // opacity: .4;
-  // filter: alpha(opacity=40); /* msie */
+	background-color: black;
+  position: relative;
+  overflow: hidden;
 	margin-top: -20px;
-	padding-top:200px;
 	background-attachment: relative;
 	background-position: center center;
 	min-height: 650px;
@@ -152,6 +150,7 @@ i {
   font-weight: 400;
   letter-spacing: 1px;
   text-shadow: 1px 1px 3px black;
+  margin-left: 10px;
 }
 
 .glyphicon-none:before {
@@ -169,4 +168,85 @@ i {
 
 .__react_component_tooltip{
   z-index: 1051 !important;
+}
+
+.splash-slideshow,
+.splash-slideshow:after {
+    position: absolute;
+    min-height: 650px;
+    width: 100%;
+    left: 0px;
+    z-index: 0;
+}
+.splash-slideshow:after {
+    content: '';
+    background: transparent url(../images/pattern.png) repeat top left;
+    position: absolute;
+    z-index: 10;
+}
+.splash-slideshow {
+  list-style: none;
+}
+
+.splash-slideshow li span {
+    padding-top:200px;
+    width: 100%;
+    min-height: 650px;
+    position: absolute;
+    left: 0px;
+    color: black;
+    color: transparent;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: none;
+    opacity: 0;
+    z-index: 0;
+    animation: imageAnimation 36s linear infinite 0s;
+}
+.splash-slideshow div {
+    z-index: 1000;
+    position: absolute;
+    bottom: 30px;
+    left: 0px;
+    width: 100%;
+    height: 650px;
+    text-align: center;
+    opacity: 0;
+    color: #fff;
+    animation: titleAnimation 18s linear infinite 0s;
+}
+.splash-slideshow li:nth-child(1) span {
+    background-image: url(http://res.cloudinary.com/samgerber/image/upload/v1459101805/audience-1_gq9qk7.jpg)
+}
+.splash-slideshow li:nth-child(2) span {
+    background-image: url(http://res.cloudinary.com/samgerber/image/upload/v1459101804/audience-2_jmvxrf.jpg);
+    animation-delay: 12s;
+}
+.splash-slideshow li:nth-child(3) span {
+    background-image: url(http://res.cloudinary.com/samgerber/image/upload/v1459101806/audience-3_vxolyy.jpg);
+    animation-delay: 24s;
+}
+@keyframes imageAnimation {
+	0% {
+	    opacity: 0;
+	    animation-timing-function: ease-in;
+	}
+	16% {
+	    opacity: 1;
+	    transform: scale(1.05);
+	    animation-timing-function: ease-out;
+	}
+	33% {
+	    opacity: 1;
+	    transform: scale(1.1);
+	}
+	50% {
+	    opacity: 0;
+	    transform: scale(1.1);
+	}
+	100% { opacity: 0 }
+}
+
+.landing-header {
+  margin-top: 300px;
 }
